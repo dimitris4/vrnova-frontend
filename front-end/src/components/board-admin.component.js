@@ -10,7 +10,7 @@ export default class BoardAdmin extends Component {
       content: ""
     };
   }
-
+  
   componentDidMount() {
     UserService.getAdminBoard().then(
       response => {
