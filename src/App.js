@@ -58,7 +58,14 @@ class App extends Component {
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
-              bezKoder
+              <img
+                alt=""
+                src="logo1_transparent.png"
+                width=""
+                height="30"
+                className="d-inline-block align-top"
+              />{' '}
+              VRnova
             </Link>
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
