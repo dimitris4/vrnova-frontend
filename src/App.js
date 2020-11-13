@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
+import {ReactNavbar} from "react-responsive-animate-navbar";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -50,17 +51,21 @@ class App extends Component {
     this.props.dispatch(logout());
   }
 
+ 
+
   render() {
+    
     const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
 
     return (
+    
       <Router history={history}>
         <div>
-          <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <Link to={"/"} className="navbar-brand">
+          <nav className="navbar navbar-expand-sm">
+            <Link to={"/"} className="navbar-brand" >
               <img
                 alt=""
-                src="logo1_transparent_white.png"
+                src="logo1_transparent.png"
                 width=""
                 height="30"
                 className="d-inline-block align-top"
@@ -84,7 +89,7 @@ class App extends Component {
               {showAdminBoard && (
                 <li className="nav-item">
                   <Link to={"/admin"} className="nav-link">
-                    Admin Board
+                    Management
                   </Link>
                 </li>
               )}
@@ -107,7 +112,7 @@ class App extends Component {
                 </li>
                 <li className="nav-item">
                   <a href="/login" className="nav-link" onClick={this.logOut}>
-                    LogOut
+                    Log Out
                   </a>
                 </li>
               </div>
@@ -142,6 +147,7 @@ class App extends Component {
         </div>
       </Router>
     );
+    
   }
 }
 

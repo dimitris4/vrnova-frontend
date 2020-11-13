@@ -29,7 +29,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #24b7f8;
+  background-color: #ffffff;
 }
 
 #main {
@@ -110,13 +110,28 @@ img {
 
 .title {
   position: absolute;
+  z-index: 50;
+  top: 30px;
+  right: 0;
+  left: 0;
+  margin: 0px 0px;
   padding-top: 1.2em;
-  width: 100%;
+  width: auto;
   height: auto;
   z-index: 70;
-  color: #24b7f8;
-  font-size: 6.125rem;
+  color: white;
+  font-size: 2.125rem;
   padding-left: 3.7em;
+}
+
+#particle-canvas {
+  /* position: fixed !important; */
+  left: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .line_1,
@@ -139,7 +154,7 @@ img {
 	top:670px;*/
   left: 630px;
   top: 610px; /*change back*/
-  color: #fefdfd;
+  color: purple;
 
   -webkit-transition: color 0.5s;
   -moz-transition: color 0.5s;
@@ -156,7 +171,7 @@ img {
   height: 100%;
   border-radius: 15px;
   opacity: 0.3;
-  background: #fefdfd;
+  background: purple;
   z-index: -1;
   -webkit-transform: scaleX(0);
   -moz-transform: scaleX(0);
@@ -179,7 +194,7 @@ img {
 
 #showBtn a {
   text-decoration: none;
-  color: #fefdfd;
+  color: purple;
   opacity: 0.9;
   text-align: center;
   font-family: Aller, Arial, "Helvetica Neue", sans-serif;
@@ -322,7 +337,7 @@ img {
 /*________________________________________LETTER ANIMATION__________________________________________*/
 
 .letter-V {
-  color: #fefdfd;
+  color: purple;
 
   animation: textShadow;
   animation-name: V;
@@ -400,95 +415,9 @@ img {
   }
 }
 
-/*.letter-R{
-	color: #FEFDFD;
-	
-	animation: textShadow;
-	animation-name: R;
-    animation-iteration-count: 1;
-    animation-timing-function: cubic-bezier(0.345, 0.005, 0.07, 1);
-    animation-duration: 3s;
-	
-	-webkit-animation: textShadow;
-	-webkit-animation-name: R;
-	-webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: cubic-bezier(0.345, 0.005, 0.07, 1);
-    -webkit-animation-duration: 3s;
-	-webkit-transform: translate(0px,0px);
-	
-	-moz-animation: textShadow;
-	-moz-animation-name: R;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: cubic-bezier(0.345, 0.005, 0.07, 1);
-    -moz-animation-duration: 3s;
-	-moz-transform: translate(0px,0px);
-}
-
-@-moz-keyframes R {
-    0% {
-		-moz-transform: translate(0px, 700px);
-		-moz-text-shadow: 0 0 0 transparent;
-		-moz-opacity:0;
-    }
-	50% { 
-		-moz-transform: translate(0px, 700px);
-	}
-	75% { 
-		-moz-opacity:1;
-    }
-    100% {
-		-moz-transform: translate(0px,0px);
-		-moz-opacity:1;
-		-moz-text-shadow: 6px 6px 10px #888888; 
-    }
-}
-@-webkit-keyframes R {
-    0% {
-		-webkit-transform: translate(0px, 700px);
-		-webkit-text-shadow: 0 0 0 transparent;
-		-webkit-opacity:0;
-    }
-	50% {
-		-webkit-transform: translate(0px, 700px);	
-	}
-	75% { 
-		-webkit-opacity:1;
-	}
-    100% {
-		-webkit-transform: translate(0px,0px);
-		-webkit-opacity:1;
-		-webkit-text-shadow: 6px 6px 10px #888888; 
-    }
-}
-@keyframes R {
-    0% {
-		transform: translate(0px, 700px);
-		text-shadow: 0 0 0 transparent;
-		opacity:0;
-    }
-	
-	50% { 
-		transform: translate(0px, 700px);
-		
-    }
-	 75% { 
-	 	opacity:1;
-		transform:rotate(15deg);
-    }
-	85% { 
-	 	opacity:1;
-		transform:rotate(-7deg);
-    }
-    100% {
-		transform: translate(0px,0px);
-		opacity:1;
-		text-shadow: 6px 6px 10px #888888;
-    }
-}
-
 /*_______________________________Letter-0________________________*/
 .letter-0 {
-  color: #fefdfd;
+  color: purple;
 
   animation: textShadow;
   animation-name: zero;
@@ -513,7 +442,7 @@ img {
 
 @-moz-keyframes zero {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(200px, -100px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -521,17 +450,17 @@ img {
     -moz-transform: translate(0px, -100px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-text-shadow: 6px 6px 10px #888888;
   }
 }
 @-webkit-keyframes zero {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(200px, -100px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -539,29 +468,29 @@ img {
     -webkit-transform: translate(0px, -100px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-text-shadow: 6px 6px 10px #888888;
   }
 }
 @keyframes zero {
   0% {
     transform: translate(200px, -100px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, -100px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 6px 6px 10px #888888;
   }
 }
@@ -665,7 +594,7 @@ img {
 
 @-moz-keyframes two {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(100px, 0px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -673,7 +602,7 @@ img {
     -moz-transform: translate(0px, 0px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
@@ -683,7 +612,7 @@ img {
 }
 @-webkit-keyframes two {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(100px, 0px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -691,7 +620,7 @@ img {
     -webkit-transform: translate(0px, 0px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
@@ -702,14 +631,14 @@ img {
 @keyframes two {
   0% {
     transform: translate(100px, 0px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, 0px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
@@ -720,7 +649,7 @@ img {
 
 /*_______________________________Letter-3________________________*/
 .letter-3 {
-  color: #fefdfd;
+  color: purple;
 
   animation: textShadow;
   animation-name: three;
@@ -745,7 +674,7 @@ img {
 
 @-moz-keyframes three {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(200px, 100px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -753,17 +682,17 @@ img {
     -moz-transform: translate(0px, 100px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-text-shadow: 6px 6px 10px #888888;
   }
 }
 @-webkit-keyframes three {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(200px, 100px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -771,29 +700,29 @@ img {
     -webkit-transform: translate(0px, 100px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-text-shadow: 6px 6px 10px #888888;
   }
 }
 @keyframes three {
   0% {
     transform: translate(200px, 100px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, 100px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 6px 6px 10px #888888;
   }
 }
@@ -827,13 +756,13 @@ img {
   0% {
     -moz-transform: translate(100px, 0px);
     -moz-text-shadow: 0 0 0 transparent;
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   50% {
     -moz-transform: translate(100px, 0px);
   }
   75% {
-    moz-webkit-color: #fefdfd;
+    moz-webkit-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
@@ -845,13 +774,13 @@ img {
   0% {
     -webkit-transform: translate(100px, 0px);
     -webkit-text-shadow: 0 0 0 transparent;
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   50% {
     -webkit-transform: translate(100px, 0px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
@@ -863,13 +792,13 @@ img {
   0% {
     transform: translate(100px, 0px);
     text-shadow: 0 0 0 transparent;
-    color: #fefdfd;
+    color: purple;
   }
   50% {
     transform: translate(100px, 0px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
@@ -903,7 +832,7 @@ img {
 
 @-moz-keyframes five {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(0px, -270px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -911,7 +840,7 @@ img {
     -moz-transform: translate(0px, -270px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
@@ -921,7 +850,7 @@ img {
 }
 @-webkit-keyframes five {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(0px, -270px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -929,7 +858,7 @@ img {
     -webkit-transform: translate(0px, -270px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
@@ -940,14 +869,14 @@ img {
 @keyframes five {
   0% {
     transform: translate(0px, -270px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, -270px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
@@ -958,7 +887,7 @@ img {
 
 /*_______________________________Letter-6________________________*/
 .letter-6 {
-  color: #fefdfd;
+  color: purple;
 
   animation: textShadow;
   animation-name: six;
@@ -997,7 +926,7 @@ img {
   100% {
     -moz-transform: translate(0px, 0px);
     -moz-text-shadow: 6px 6px 10px #888888;
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
 }
 @-webkit-keyframes six {
@@ -1016,7 +945,7 @@ img {
   100% {
     -webkit-transform: translate(0px, 0px);
     -webkit-text-shadow: 6px 6px 10px #888888;
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
 }
 @keyframes six {
@@ -1035,7 +964,7 @@ img {
   100% {
     transform: translate(0px, 0px);
     text-shadow: 6px 6px 10px #888888;
-    color: #fefdfd;
+    color: purple;
   }
 }
 
@@ -1064,7 +993,7 @@ img {
 
 @-moz-keyframes seven {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(200px, -150px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -1072,7 +1001,7 @@ img {
     -moz-transform: translate(0px, -150px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
@@ -1082,7 +1011,7 @@ img {
 }
 @-webkit-keyframes seven {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(200px, -150px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -1090,7 +1019,7 @@ img {
     -webkit-transform: translate(0px, -150px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
@@ -1101,7 +1030,7 @@ img {
 @keyframes seven {
   0% {
     transform: translate(200px, -150px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
 
@@ -1109,7 +1038,7 @@ img {
     transform: translate(0px, -150px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
@@ -1143,7 +1072,7 @@ img {
 
 @-moz-keyframes eight {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(-200px, -100px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -1151,7 +1080,7 @@ img {
     -moz-transform: translate(0px, -100px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
@@ -1161,7 +1090,7 @@ img {
 }
 @-webkit-keyframes eight {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(-200px, -100px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -1169,7 +1098,7 @@ img {
     -webkit-transform: translate(0px, -100px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
@@ -1180,14 +1109,14 @@ img {
 @keyframes eight {
   0% {
     transform: translate(-200px, -100px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, -100px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
@@ -1199,7 +1128,7 @@ img {
 /*______________________________LETTER-9________________________*/
 
 .letter-9 {
-  color: #fefdfd;
+  color: purple;
 
   animation-name: nine;
   animation-iteration-count: 1;
@@ -1221,7 +1150,7 @@ img {
 
 @-moz-keyframes nine {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(-100px, 170px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -1229,17 +1158,17 @@ img {
     -moz-transform: translate(0px, 170px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-text-shadow: 6px 6px 10px #888888;
   }
 }
 @-webkit-keyframes nine {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(-100px, 170px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -1247,29 +1176,29 @@ img {
     -webkit-transform: translate(0px, 170px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-text-shadow: 6px 6px 10px #888888;
   }
 }
 @keyframes nine {
   0% {
     transform: translate(-100px, 170px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, 170px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 6px 6px 10px #888888;
   }
 }
@@ -1424,7 +1353,7 @@ img {
 /*______________________________LETTER-12________________________*/
 
 .letter-12 {
-  color: #fefdfd;
+  color: purple;
 
   animation-name: twelve;
   animation-iteration-count: 1;
@@ -1446,7 +1375,7 @@ img {
 
 @-moz-keyframes twelve {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(-100px, 80px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -1454,17 +1383,17 @@ img {
     -moz-transform: translate(0px, 80px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-text-shadow: 6px 6px 10px #888888;
   }
 }
 @-webkit-keyframes twelve {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(-100px, 80px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -1472,29 +1401,29 @@ img {
     -webkit-transform: translate(0px, 80px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-text-shadow: 6px 6px 10px #888888;
   }
 }
 @keyframes twelve {
   0% {
     transform: translate(-100px, 80px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, 80px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 6px 6px 10px #888888;
   }
 }
@@ -1524,7 +1453,7 @@ img {
 
 @-moz-keyframes thirteen {
   0% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
     -moz-transform: translate(100px, 170px);
     -moz-text-shadow: 0 0 0 transparent;
   }
@@ -1532,7 +1461,7 @@ img {
     -moz-transform: translate(0px, 170px);
   }
   75% {
-    -moz-color: #fefdfd;
+    -moz-color: purple;
   }
   100% {
     -moz-transform: translate(0px, 0px);
@@ -1542,7 +1471,7 @@ img {
 }
 @-webkit-keyframes thirteen {
   0% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
     -webkit-transform: translate(100px, 170px);
     -webkit-text-shadow: 0 0 0 transparent;
   }
@@ -1550,7 +1479,7 @@ img {
     -webkit-transform: translate(0px, 170px);
   }
   75% {
-    -webkit-color: #fefdfd;
+    -webkit-color: purple;
   }
   100% {
     -webkit-transform: translate(0px, 0px);
@@ -1561,14 +1490,14 @@ img {
 @keyframes thirteen {
   0% {
     transform: translate(100px, 170px);
-    color: #fefdfd;
+    color: purple;
     text-shadow: 0 0 0 transparent;
   }
   50% {
     transform: translate(0px, 170px);
   }
   75% {
-    color: #fefdfd;
+    color: purple;
   }
   100% {
     transform: translate(0px, 0px);
@@ -1621,7 +1550,7 @@ img {
     -moz-text-shadow: 0 0 0 transparent;
   }
   70% {
-    -moz-background: #fefdfd;
+    -moz-background: purple;
     -moz-opacity: 0;
   }
   100% {
@@ -1635,7 +1564,7 @@ img {
     -webkit-text-shadow: 0 0 0 transparent;
   }
   70% {
-    -webkit-background: #fefdfd;
+    -webkit-background: purple;
     -webkit-opacity: 0;
   }
   100% {
@@ -1649,7 +1578,7 @@ img {
     text-shadow: 0 0 0 transparent;
   }
   70% {
-    background: #fefdfd;
+    background: purple;
     opacity: 0;
   }
   100% {
