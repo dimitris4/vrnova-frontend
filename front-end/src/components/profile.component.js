@@ -4,6 +4,45 @@ import { connect } from "react-redux";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
 
 class Profile extends Component {
+  
+  showCourses(user) {
+    if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
+      return <div class="col-md-12">
+              <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> My Courses</h5>
+              <table class="table table-sm table-hover table-striped">
+                <tbody>                                    
+                  <tr>
+                    <td>
+                      <strong>VR for Beginners (Instructor: Anastasia Andreasen)</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Photoshop for Advanced Learners (Instructor: Anastasia Andreasen)</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>; 
+    }
+  }
+
+  showDeactivate(user) {
+    if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
+      return <div class="tab-content py-4">
+              <div class="tab-pane active" id="profile">
+                <h5 class="mb-3">By clicking deactivate your profile will be deleted.</h5>
+                <div class="row">
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-danger" style={{"margin-top": 10}}>Deactivate</button>
+                  </div>
+                </div>
+                </div>
+              </div>;
+    } else {
+      return <h6 style={{"margin-top": 20}}>Admins and Moderators are not allowed to deactivate their profiles.</h6>
+    }
+  }
 
   render() {
     const { user: currentUser } = this.props;
@@ -28,26 +67,11 @@ class Profile extends Component {
                         <h6>Email</h6>
                           <p>{currentUser.email}</p>
                     </div>
-                    <div class="col-md-12">
-                        <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> My Courses</h5>
-                        <table class="table table-sm table-hover table-striped">
-                            <tbody>                                    
-                                <tr>
-                                    <td>
-                                      <strong>VR for Beginners (Instructor: Anastasia Andreasen)</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <strong>Photoshop for Advanced Learners (Instructor: Anastasia Andreasen)</strong>
-                                  </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    {this.showCourses(currentUser)}
+              </div>
             </div>
           </div>
+                    
         </Tab>
 
         <Tab label="Update">
@@ -108,19 +132,7 @@ class Profile extends Component {
               </div>
             </div>
           </Tab>
-        
-          <Tab label="Deactivate">
-            <div class="tab-content py-4">
-              <div class="tab-pane active" id="profile">
-                  <h5 class="mb-3">By clicking deactivate your profile will be deleted.</h5>
-                    <div class="row">
-                      <div class="col-md-6">
-                      <button type="button" class="btn btn-danger" style={{"margin-top": 10}}>Deactivate</button>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </Tab>
+          <Tab label="Deactivate">{this.showDeactivate(currentUser)}</Tab>            
         </Tabs>
       </div>
     </div>    
