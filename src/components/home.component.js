@@ -47,7 +47,8 @@ render() {
               "value": "#000000"
             },
             "shape": {
-              "type": "polygon",
+              "type": "circle",
+              // "type": "images",
               "stroke": {
                 "width": 0,
                 "color": "#000000"
@@ -56,13 +57,14 @@ render() {
                 "nb_sides": 5
               },
               "image": {
-                "src": "img/github.svg",
+                // "src": "1.png",
                 "width": 100,
                 "height": 100
               }
             },
             "opacity": {
               "value": 0.5,
+              "value": 1,
               "random": false,
               "anim": {
                 "enable": false,
@@ -155,8 +157,10 @@ render() {
                      <div class="letter letter-3">R</div> 
                      <div class="letter letter-4">N</div>  	
                      <div class="letter letter-5"> </div>
-                     <div class="letter letter-6">A</div>
-                     <div class="letter letter-7">T</div>
+                     <div class="letter letter-6">W</div>
+                     <div class="letter letter-7">I</div>
+                     <div class="letter letter-8">T</div>
+                     <div class="letter letter-9">H</div>
             </div>
                 
             <div class="line_2"> 
