@@ -18,6 +18,7 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 
 import { history } from './helpers/history';
+import Footer from "./components/footer";
 
 class App extends Component {
   constructor(props) {
@@ -60,8 +61,7 @@ class App extends Component {
     return (
     
       <Router history={history}>
-        <div>
-          <nav className="navbar navbar-expand-sm">
+          <nav className="navbar navbar-expand-sm container-fluid" >
             <Link to={"/"} className="navbar-brand" >
               <img
                 alt=""
@@ -74,7 +74,7 @@ class App extends Component {
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link to={"/home"} className="nav-link">
-                  Home
+                  {/* Home */}
                 </Link>
               </li>
 
@@ -133,7 +133,7 @@ class App extends Component {
             )}
           </nav>
 
-          <div className="container mt-3">
+          <div className="container-fluid" style={{padding:0}}>
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
@@ -144,7 +144,6 @@ class App extends Component {
               <Route path="/admin" component={BoardAdmin} />
             </Switch>
           </div>
-        </div>
       </Router>
     );
     
