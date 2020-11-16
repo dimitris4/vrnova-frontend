@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Particles, { HoverMode } from 'react-particles-js'; 
-
+import Footer from "./footer";
 import UserService from "../services/user.service";
 
 export default class Home extends Component {
@@ -32,7 +32,7 @@ export default class Home extends Component {
 
 render() { 
   return ( 
-    <div class="intro" id="particle-canvas"> 
+    <div className="intro container-fluid" id="particle-canvas"> 
         <Particles 
         params={{
           "particles": {
@@ -172,6 +172,8 @@ render() {
                      <div class="letter letter-13">A</div>
             </div>
         </div>
+        <Footer />
+        
   </div> 
 
   ); 

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import React, { Component, useState} from "react";
+import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
 import axios from "axios";
@@ -8,7 +8,7 @@ import authHeader from "../services/auth-header";
 const API_URL = "http://localhost:8080/";
 
 class Profile extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = { firstName : this.props.user.firstName, lastName : this.props.user.lastName, address : this.props.user.username };
@@ -56,7 +56,8 @@ class Profile extends Component {
                 <h5 class="mb-3">By clicking deactivate your profile will be deleted.</h5>
                 <div class="row">
                   <div class="col-md-6">
-                    <button type="button" class="btn btn-danger" style={{"margin-top": 10}}>Deactivate</button>
+                  
+                     <button type="button" class="btn btn-danger" style={{"margin-top": 10}}>Deactivate</button>
                   </div>
                 </div>
                 </div>
@@ -74,11 +75,12 @@ class Profile extends Component {
     }
 
     return (
+      
       <div class="container">
       <div class="row my-2">
         <div class="col-lg-8 order-lg-2"></div>
       <Tabs onSelect={(index, label) => console.log(label + ' selected')}>
-        <Tab label="Profile">
+        <Tab label={"Profile"}>
           <div class="tab-content py-4">
             <div class="tab-pane active" id="profile">
                 <h5 class="mb-3">User Profile</h5>

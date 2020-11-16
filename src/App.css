@@ -27,10 +27,13 @@ img.d-inline-block {
 }
 
 a.nav-link {
-  font-family: cursive;
-  color: gray;
-  border-radius: 50px;
-  border: 5px solid black;
+  font-family: helvetica;
+  font-weight: bold;
+  color: black;
+}
+
+a.nav-link:hover {
+  color: #24b7f8;
 }
 
 a.navbar {
