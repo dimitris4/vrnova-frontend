@@ -1,9 +1,15 @@
-import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import React, { Component, useState} from "react";
+import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-modal';
+
 
 class Profile extends Component {
+
+
+
   
   showCourses(user) {
     if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
@@ -34,7 +40,8 @@ class Profile extends Component {
                 <h5 class="mb-3">By clicking deactivate your profile will be deleted.</h5>
                 <div class="row">
                   <div class="col-md-6">
-                    <button type="button" class="btn btn-danger" style={{"margin-top": 10}}>Deactivate</button>
+                  
+                     <button type="button" class="btn btn-danger" style={{"margin-top": 10}}>Deactivate</button>
                   </div>
                 </div>
                 </div>
@@ -52,11 +59,12 @@ class Profile extends Component {
     }
 
     return (
+      
       <div class="container">
       <div class="row my-2">
         <div class="col-lg-8 order-lg-2"></div>
       <Tabs onSelect={(index, label) => console.log(label + ' selected')}>
-        <Tab label="Profile">
+        <Tab label={"Profile"}>
           <div class="tab-content py-4">
             <div class="tab-pane active" id="profile">
                 <h5 class="mb-3">User Profile</h5>
@@ -100,7 +108,7 @@ class Profile extends Component {
                   <div class="form-group row">
                       <label class="col-md-4 col-form-label form-control-label">Address</label>
                       <div class="col-md-8">
-                          <input class="form-control" type="text" value="" placeholder="Street"></input>
+                          <input class="form-control" type="text" placeholder="Street"></input>
                       </div>
                   </div>
                   <div class="form-group row">
