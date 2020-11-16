@@ -2,9 +2,31 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
+import axios from "axios";
+import authHeader from "../services/auth-header";
+
+const API_URL = "http://localhost:8080/";
 
 class Profile extends Component {
   
+  constructor(props) {
+    super(props);
+    this.state = { firstName : this.props.user.firstName, lastName : this.props.user.lastName, address : this.props.user.username };
+    this.setState();
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = ({ target }) => {
+    this.setState({ [target.name] : target.value });
+  }
+
+  handleSubmit() {
+    const data = {userId: this.props.user.id, firstName: "asd", lastName: this.props.lastName, address: this.props.address} 
+    this.setState();
+    return axios.put(API_URL + "profile/update", data, { headers: authHeader() } )
+  };
+
   showCourses(user) {
     if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
       return <div class="col-md-12">
@@ -45,9 +67,9 @@ class Profile extends Component {
   }
 
   render() {
-    const { user: currentUser } = this.props;
+    const { user } = this.props;
 
-    if (!currentUser) {
+    if (!user) {
       return <Redirect to="/login" />;
     }
 
@@ -63,11 +85,11 @@ class Profile extends Component {
                 <div class="row">
                     <div class="col-md-6">
                         <h6>Username</h6>
-                          <p>{currentUser.username}</p>
+                          <p>{user.username}</p>
                         <h6>Email</h6>
-                          <p>{currentUser.email}</p>
+                          <p>{user.email}</p>
                     </div>
-                    {this.showCourses(currentUser)}
+                    {this.showCourses(user)}
               </div>
             </div>
           </div>
@@ -78,61 +100,42 @@ class Profile extends Component {
           <div class="tab-content py-4">
             <div class="tab-pane active" id="profile">
               <h5 class="mb-3">Update</h5>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                   <div class="form-group row">
-                      <label class="col-md-4 col-form-label form-control-label">First name</label>
+                    <label class="col-md-4 col-form-label form-control-label"> First Name:
                       <div class="col-md-8">
-                          <input class="form-control" type="text" value="Jane"></input>
+                        <input 
+                          type="text" 
+                          name="firstName" 
+                          value={this.state.firstName} 
+                          onChange={this.handleChange} 
+                          
+                        />
                       </div>
+                    </label>
                   </div>
                   <div class="form-group row">
-                      <label class="col-md-4 col-form-label form-control-label">Last name</label>
+                    <label class="col-md-4 col-form-label form-control-label"> Last Name:
                       <div class="col-md-8">
-                          <input class="form-control" type="text" value="Bishop"></input>
+                        <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange}  />
                       </div>
+                    </label>
                   </div>
                   <div class="form-group row">
-                      <label class="col-md-4 col-form-label form-control-label">Email</label>
+                    <label class="col-md-4 col-form-label form-control-label"> Address:
                       <div class="col-md-8">
-                          <input class="form-control" type="email" value="email@gmail.com"></input>
+                        <input type="text" name="address" value={this.state.address} onChange={this.handleChange}  />
                       </div>
+                    </label>
                   </div>
-                  <div class="form-group row">
-                      <label class="col-md-4 col-form-label form-control-label">Address</label>
-                      <div class="col-md-8">
-                          <input class="form-control" type="text" value="" placeholder="Street"></input>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label class="col-md-4 col-form-label form-control-label">Username</label>
-                      <div class="col-md-8">
-                          <input class="form-control" type="text" value="janeuser"></input>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label class="col-md-4 col-form-label form-control-label">Password</label>
-                      <div class="col-md-8">
-                          <input class="form-control" type="password" value="11111122333"></input>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <label class="col-md-4 col-form-label form-control-label">Confirm password</label>
-                      <div class="col-md-8">
-                          <input class="form-control" type="password" value="11111122333"></input>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-4 col-form-label form-control-label"></label>
-                    <div class="col-md-8">
-                        <input type="reset" class="btn btn-secondary" value="Cancel"></input>
-                        <input type="button" class="btn btn-primary" value="Save Changes" style={{"margin-left": 10}}></input>
-                    </div>
-                  </div>
+                  <input type="submit" value="Submit" />
                 </form>
-              </div>
             </div>
-          </Tab>
-          <Tab label="Deactivate">{this.showDeactivate(currentUser)}</Tab>            
+          </div>
+        </Tab>
+
+        <Tab label="Deactivate">{this.showDeactivate(user)}</Tab> 
+
         </Tabs>
       </div>
     </div>    
