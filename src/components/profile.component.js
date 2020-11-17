@@ -7,25 +7,36 @@ import authHeader from "../services/auth-header";
 
 const API_URL = "http://localhost:8080/";
 
+const validEmailRegex = 
+  RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+
+const validateForm = (errors) => {
+  let valid = true;
+  Object.values(errors).forEach(
+    // if we have an error string set valid to false
+    (val) => val.length > 0 && (valid = false)
+  );
+  return valid;
+}
+
 class Profile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { firstName : this.props.user.firstName, lastName : this.props.user.lastName, address : this.props.user.username };
-    this.setState();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { email : null, password : null,  errors : { email: '', password : '', } };
   }
 
-  handleChange = ({ target }) => {
-    this.setState({ [target.name] : target.value });
+  handleSubmit = event => {
+    event.preventDefault();
+    if (validateForm(this.state.errors)) {
+      console.info('Valid form')
+      alert("Your changes have been saved. Log out and log in again to view them.")
+      const data = {userId: this.props.user.id, email : this.email.value, password : this.password.value };
+      return axios.put(API_URL + "profile/update", data, { headers: authHeader() } )
+    } else {
+      console.error('Invalid form')
+    }
   }
-
-  handleSubmit() {
-    const data = {userId: this.props.user.id, firstName: "asd", lastName: this.props.lastName, address: this.props.address} 
-    this.setState();
-    return axios.put(API_URL + "profile/update", data, { headers: authHeader() } )
-  };
 
   showCourses(user) {
     if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
@@ -67,15 +78,43 @@ class Profile extends Component {
     }
   }
 
-  render() {
-    const { user } = this.props;
+  handleChange = (event) => {
+    event.preventDefault();
+    // destructuring
+    const { name, value } = event.target;
+    let errors = this.state.errors;
 
-    if (!user) {
+    switch (name) {
+      case 'email':
+        errors.email = 
+          validEmailRegex.test(value)
+            ? ''
+            : 'Email is not valid!';
+        break;
+      case 'password':
+        errors.password = 
+          value.length < 6
+          ? 'Password must be 6 characters long!'
+          : '';
+        break;
+      default:
+        break;
+    }
+
+    this.setState( { errors, [name]: value } );
+  }
+
+  render() {
+    const { user : currentUser } = this.props;
+    
+    if (!currentUser) {
       return <Redirect to="/login" />;
     }
 
+    const {errors} = this.state;
+
     return (
-      
+
       <div class="container">
       <div class="row my-2">
         <div class="col-lg-8 order-lg-2"></div>
@@ -87,11 +126,11 @@ class Profile extends Component {
                 <div class="row">
                     <div class="col-md-6">
                         <h6>Username</h6>
-                          <p>{user.username}</p>
+                          <p>{currentUser.username}</p>
                         <h6>Email</h6>
-                          <p>{user.email}</p>
+                          <p>{currentUser.email}</p>
                     </div>
-                    {this.showCourses(user)}
+                    {this.showCourses(currentUser)}
               </div>
             </div>
           </div>
@@ -99,44 +138,49 @@ class Profile extends Component {
         </Tab>
 
         <Tab label="Update">
-          <div class="tab-content py-4">
-            <div class="tab-pane active" id="profile">
-              <h5 class="mb-3">Update</h5>
-                <form onSubmit={this.handleSubmit}>
-                  <div class="form-group row">
-                    <label class="col-md-4 col-form-label form-control-label"> First Name:
-                      <div class="col-md-8">
-                        <input 
-                          type="text" 
-                          name="firstName" 
-                          value={this.state.firstName} 
-                          onChange={this.handleChange} 
-                          
-                        />
-                      </div>
-                    </label>
+          <div className="tab-content py-4">
+            <div className="tab-pane active" id="profile">
+              <div className="wrap">
+                <h5>Update your email address or password.</h5>
+                <form onSubmit={this.handleSubmit} noValidate >
+                  <div>
+                    <label for="email"> Email</label>
+                      <input 
+                        type="text"
+                        id="email" 
+                        name="email" 
+                        className="cool"
+                        defaultValue={currentUser.email} 
+                        onChange={this.handleChange}
+                        ref={ (input) => this.email = input }
+                        noValidate />  
+                        {errors.email.length > 0 && 
+                        <span className='error'>{errors.email}</span>}                  
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-4 col-form-label form-control-label"> Last Name:
-                      <div class="col-md-8">
-                        <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange}  />
-                      </div>
-                    </label>
+                  <div>
+                    <label for="password"> Password</label>
+                      <input 
+                        type="password"
+                        id="password"
+                        className="cool" 
+                        name="password" 
+                        // defaultValue={this.state.user.password}
+                        onChange={this.handleChange}
+                        ref={ (input) => this.password = input }
+                        noValidate />   
+                        {errors.password.length > 0 && 
+                        <span className='error'>{errors.password}</span>}   
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-4 col-form-label form-control-label"> Address:
-                      <div class="col-md-8">
-                        <input type="text" name="address" value={this.state.address} onChange={this.handleChange}  />
-                      </div>
-                    </label>
-                  </div>
-                  <input type="submit" value="Submit" />
+                  <div>
+                    <input type="submit" value="Save" />
+                  </div> 
                 </form>
+              </div>
             </div>
           </div>
         </Tab>
 
-        <Tab label="Deactivate">{this.showDeactivate(user)}</Tab> 
+        <Tab label="Deactivate">{this.showDeactivate(currentUser)}</Tab> 
 
         </Tabs>
       </div>
