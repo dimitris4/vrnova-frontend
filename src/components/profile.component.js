@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
 import axios from "axios";
 import authHeader from "../services/auth-header";
+import App from "../App";
+import { logout } from "../actions/auth";
 
 const API_URL = "http://localhost:8080/";
 
@@ -23,6 +25,7 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
+    this.logOut = this.logOut.bind(this);
     this.state = { email : null, password : null,  errors : { email: '', password : '', } };
   }
 
@@ -30,12 +33,23 @@ class Profile extends Component {
     event.preventDefault();
     if (validateForm(this.state.errors)) {
       console.info('Valid form')
-      alert("Your changes have been saved. Log out and log in again to view them.")
+      alert("Your changes have been saved. Log out and log in again to view them.");
       const data = {userId: this.props.user.id, email : this.email.value, password : this.password.value };
       return axios.put(API_URL + "profile/update", data, { headers: authHeader() } )
     } else {
       console.error('Invalid form')
     }
+  }
+
+  logOut(){
+    this.props.dispatch(logout());
+  }
+
+  handleDeactivation = event => {
+      event.preventDefault();
+      alert("Profile deleted! You will be logged out!");
+      axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } );
+      this.logOut();
   }
 
   showCourses(user) {
@@ -68,7 +82,7 @@ class Profile extends Component {
                 <div class="row">
                   <div class="col-md-6">
                   
-                     <button type="button" class="btn btn-danger" style={{"margin-top": 10}}>Deactivate</button>
+                     <button type="button" class="btn btn-danger" style={{"margin-top": 10}} onClick={this.handleDeactivation}>Deactivate</button>
                   </div>
                 </div>
                 </div>
