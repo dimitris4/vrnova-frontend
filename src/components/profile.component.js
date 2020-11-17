@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
 import axios from "axios";
 import authHeader from "../services/auth-header";
-import App from "../App";
 import { logout } from "../actions/auth";
 
 const API_URL = "http://localhost:8080/";
@@ -47,31 +46,10 @@ class Profile extends Component {
 
   handleDeactivation = event => {
       event.preventDefault();
-      alert("Profile deleted! You will be logged out!");
-      axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } );
-      this.logOut();
-  }
-
-  showCourses(user) {
-    if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
-      return <div class="col-md-12">
-              <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> My Courses</h5>
-              <table class="table table-sm table-hover table-striped">
-                <tbody>                                    
-                  <tr>
-                    <td>
-                      <strong>VR for Beginners (Instructor: Anastasia Andreasen)</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>Photoshop for Advanced Learners (Instructor: Anastasia Andreasen)</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>; 
-    }
+      if(window.confirm('Are you sure you want to deactivate your account? \n WARNING: Your account will be deleted and you will be logged out!')){
+          axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } );
+          this.logOut();
+      }    
   }
 
   showDeactivate(user) {
@@ -144,7 +122,6 @@ class Profile extends Component {
                         <h6>Email</h6>
                           <p>{currentUser.email}</p>
                     </div>
-                    {this.showCourses(currentUser)}
               </div>
             </div>
           </div>

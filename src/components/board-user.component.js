@@ -11,6 +11,8 @@ export default class BoardUser extends Component {
     };
   }
 
+  
+
   componentDidMount() {
     UserService.getUserBoard().then(
       response => {
@@ -30,14 +32,35 @@ export default class BoardUser extends Component {
       }
     );
   }
+  
+  showCourses(user) {
+    console.log(user);
+    // if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')) {
+      return <div class="col-md-12">
+              <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> My Courses</h5>
+              <table class="table table-sm table-hover table-striped">
+                <tbody>                                    
+                  <tr>
+                    <td>
+                      <strong>VR for Beginners (Instructor: Anastasia Andreasen)</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Photoshop for Advanced Learners (Instructor: Anastasia Andreasen)</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>; 
+    // }
+  }
 
   render() {
+    const { user : currentUser } = this.props;
     return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-        </header>
-      </div>
+        this.showCourses(currentUser)
+        // <h3>{this.state.content}</h3>
     );
   }
 }
