@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import UserService from "../services/user.service";
+import Footer from "./footer";
 
 export default class BoardAdmin extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ export default class BoardAdmin extends Component {
         <header className="jumbotron">
           <h3>Reports</h3>
         </header>
+        <Footer/>
       </div>
     );
   }

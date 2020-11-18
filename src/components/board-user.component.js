@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import UserService from "../services/user.service";
+import Footer from "./footer";
 
 export default class BoardUser extends Component {
   constructor(props) {
@@ -57,7 +58,11 @@ export default class BoardUser extends Component {
   render() {
     const { user : currentUser } = this.props;
     return (
-        this.showCourses(currentUser)
+      <div>
+        <Footer/>
+        {this.showCourses(currentUser)}
+        </div>
     );
+    
   }
 }
