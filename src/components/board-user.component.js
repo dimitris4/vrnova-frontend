@@ -35,7 +35,6 @@ export default class BoardUser extends Component {
   
   showCourses(user) {
     console.log(user);
-    // if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')) {
       return <div class="col-md-12">
               <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> My Courses</h5>
               <table class="table table-sm table-hover table-striped">
@@ -53,14 +52,12 @@ export default class BoardUser extends Component {
                 </tbody>
               </table>
             </div>; 
-    // }
   }
 
   render() {
     const { user : currentUser } = this.props;
     return (
         this.showCourses(currentUser)
-        // <h3>{this.state.content}</h3>
     );
   }
 }

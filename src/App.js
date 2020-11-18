@@ -44,6 +44,7 @@ class App extends Component {
         currentUser: user,
         showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        showUserBoard: user.roles.includes("ROLE_USER")
       });
     }
   }
@@ -56,7 +57,7 @@ class App extends Component {
 
   render() {
     
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    const { currentUser, showModeratorBoard, showAdminBoard, showUserBoard } = this.state;
 
     return (
     
@@ -94,13 +95,14 @@ class App extends Component {
                 </li>
               )}
 
-              {currentUser && (
+              {showUserBoard && (
                 <li className="nav-item upper-link">
                   <Link to={"/user"} className="nav-link">
                     My Courses
                   </Link>
                 </li>
               )}
+
             </div>
 
             {currentUser ? (
