@@ -64,25 +64,21 @@ class App extends Component {
       <Router history={history}>
           <nav className="navbar navbar-expand-sm container-fluid" >
             <Link to={"/"} className="navbar-brand" >
-              <img
-                alt=""
-                src="logo1_transparent.png"
-                width=""
-                height="30"
-                className="d-inline-block align-top"
-              />{' '}
+              <img src="logo1_transparent.png" className="d-inline-block align-top"/>{' '}
             </Link>
             <div className="navbar-nav mr-auto">
+            {currentUser && (
               <li className="nav-item upper-link">
                 <Link to={"/home"} className="nav-link">
-                  Home
+                  HOME
                 </Link>
               </li>
+              )}
 
               {showModeratorBoard && (
                 <li className="nav-item upper-link">
                   <Link to={"/mod"} className="nav-link">
-                    Moderator Board
+                    MODERATOR
                   </Link>
                 </li>
               )}
@@ -90,7 +86,7 @@ class App extends Component {
               {showAdminBoard && (
                 <li className="nav-item upper-link">
                   <Link to={"/admin"} className="nav-link">
-                    Management
+                    MANAGEMENT
                   </Link>
                 </li>
               )}
@@ -98,7 +94,7 @@ class App extends Component {
               {showUserBoard && (
                 <li className="nav-item upper-link">
                   <Link to={"/user"} className="nav-link">
-                    My Courses
+                    MY COURSES
                   </Link>
                 </li>
               )}
@@ -109,12 +105,12 @@ class App extends Component {
               <div className="navbar-nav ml-auto">
                 <li className="nav-item upper-link">
                   <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
+                    {currentUser.username.toUpperCase()}
                   </Link>
                 </li>
                 <li className="nav-item upper-link">
                   <a href="/login" className="nav-link" onClick={this.logOut}>
-                    Log Out
+                    LOGOUT
                   </a>
                 </li>
               </div>
@@ -122,13 +118,13 @@ class App extends Component {
               <div className="navbar-nav ml-auto">
                 <li className="nav-item upper-link">
                   <Link to={"/login"} className="nav-link">
-                    Login
+                    LOGIN
                   </Link>
                 </li>
 
                 <li className="nav-item upper-link">
                   <Link to={"/register"} className="nav-link">
-                    Sign Up
+                    SIGN UP
                   </Link>
                 </li>
               </div>

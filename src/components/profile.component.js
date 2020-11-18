@@ -58,11 +58,11 @@ class Profile extends Component {
     if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
       return <div class="tab-content py-4">
               <div class="tab-pane active" id="profile">
-                <h5 class="mb-3">By clicking deactivate your profile will be deleted.</h5>
+                <h5 style={{fontWeight: 'bold', fontSize:"80%"}} class="mb-3">By clicking deactivate your profile will be deleted.</h5>
                 <div class="row">
                   <div class="col-md-6">
                   
-                     <button type="button" class="btn btn-danger" style={{"margin-top": 10}} onClick={this.handleDeactivation}>Deactivate</button>
+                     <button type="button" class="btn btn-danger" style={{fontWeight: 'bold', fontSize:"80%"}} onClick={this.handleDeactivation}>Deactivate</button>
                   </div>
                 </div>
                 </div>
@@ -113,17 +113,17 @@ class Profile extends Component {
       <div className="row my-2">
         <div className="col-lg-8 order-lg-2"></div>
       <Tabs onSelect={(index, label) => console.log(label + ' selected')}>
-        <Tab label={"Profile"}>
-          <div className="tab-content py-4">
+        <Tab label={"PROFILE"}>
+          <div className="tab-content py-2">
             <div className="tab-pane active" id="profile">
                 <div className="row">
                     <div className="col-md-6">
-                        <h6>Username</h6>
-                          <p>{currentUser.username}</p>
-                        <h6>Email</h6>
-                          <p>{currentUser.email}</p>
-                        <h6>Courses bought:</h6>
-                          <p>{currentUser.email}</p>
+                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>USERNAME</h6>
+                        <p style={{fontSize:"80%"}}>{currentUser.username}</p>
+                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>E-MAIL</h6>
+                          <p style={{fontSize:"80%"}}>{currentUser.email}</p>
+                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>COURSES PURCHASED</h6>
+                          <p style={{fontSize:"80%"}}>2</p>
                     </div>
               </div>
             </div>
@@ -131,15 +131,15 @@ class Profile extends Component {
                     
         </Tab>
 
-        <Tab label="Update">
-          <div className="tab-content py-4">
+        <Tab label="UPDATE">
+          <div className="tab-content py-2">
             <div className="tab-pane active" id="profile">
               <div className="wrap">
-                <h5>Update your email address or password.</h5>
+                <h8 style={{fontWeight: 'bold', fontSize:"80%"}}>Update your email address or password.</h8>
                 <form onSubmit={this.handleSubmit} noValidate >
                   <div>
-                    <label for="email"> Email</label>
-                      <input 
+                    <label for="email" style={{fontWeight: 'bold', fontSize:"80%"}}> E-MAIL</label>
+                      <input style={{fontSize:"80%"}}
                         type="text"
                         id="email" 
                         name="email" 
@@ -152,8 +152,8 @@ class Profile extends Component {
                         <span className='error'>{errors.email}</span>}                  
                   </div>
                   <div>
-                    <label for="password"> Password</label>
-                      <input 
+                    <label for="password" style={{fontWeight: 'bold', fontSize:"80%"}}> PASSWORD</label>
+                      <input style={{fontSize:"80%"}}
                         type="password"
                         id="password"
                         className="cool" 
@@ -166,7 +166,7 @@ class Profile extends Component {
                         <span className='error'>{errors.password}</span>}   
                   </div>
                   <div>
-                    <input type="submit" value="Save" />
+                    <input type="submit" value="SAVE" style={{fontWeight: 'bold', fontSize:"80%"}} />
                   </div> 
                 </form>
               </div>
@@ -174,7 +174,7 @@ class Profile extends Component {
           </div>
         </Tab>
 
-        <Tab label="Deactivate">{this.showDeactivate(currentUser)}</Tab> 
+        <Tab label="DEACTIVATE">{this.showDeactivate(currentUser)}</Tab> 
 
         </Tabs>
       </div>

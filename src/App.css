@@ -8,9 +8,10 @@ label {
   padding: 40px 40px;
 }
 
+/* Logo picture */
 img.d-inline-block {
-  height: 70px;
-  width: 120px;
+  height: 60px;
+  width: 100px;
 }
 
 nav.myFooter {
@@ -31,8 +32,9 @@ div.container-fluid {
   height: 100%;
 }
 
+/* header menu links */
 .upper-link {
-  padding-top: 24.5% !important;
+  padding-top: 23% !important;
 }
 
 .card {
@@ -51,6 +53,7 @@ div.container-fluid {
 a.nav-link {
   font-family: helvetica;
   font-weight: bold;
+  font-size: 80%;
   color: black;
   cursor: pointer;
   background: linear-gradient(currentColor, currentColor) bottom / 0 0.1em
@@ -66,6 +69,15 @@ a.nav-link:hover {
 
 a.navbar {
   background-color: white;
+}
+
+Tab.tabs {
+  font-size: 10%;
+}
+
+.nav-tabs > li.active > a {
+  color: #3c5a78;
+  font-size: 16px;
 }
 
 .profile-img-card {
