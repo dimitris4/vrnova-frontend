@@ -72,14 +72,14 @@ class App extends Component {
               />{' '}
             </Link>
             <div className="navbar-nav mr-auto">
-              <li className="nav-item">
+              <li className="nav-item upper-link">
                 <Link to={"/home"} className="nav-link">
-                  {/* Home */}
+                  Home
                 </Link>
               </li>
 
               {showModeratorBoard && (
-                <li className="nav-item">
+                <li className="nav-item upper-link">
                   <Link to={"/mod"} className="nav-link">
                     Moderator Board
                   </Link>
@@ -87,7 +87,7 @@ class App extends Component {
               )}
 
               {showAdminBoard && (
-                <li className="nav-item">
+                <li className="nav-item upper-link">
                   <Link to={"/admin"} className="nav-link">
                     Management
                   </Link>
@@ -95,7 +95,7 @@ class App extends Component {
               )}
 
               {currentUser && (
-                <li className="nav-item">
+                <li className="nav-item upper-link">
                   <Link to={"/user"} className="nav-link">
                     My Courses
                   </Link>
@@ -105,13 +105,13 @@ class App extends Component {
 
             {currentUser ? (
               <div className="navbar-nav ml-auto">
-                <li className="nav-item">
+                <li className="nav-item upper-link">
                   <Link to={"/profile"} className="nav-link">
                  
                     {currentUser.username}
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item upper-link">
                   <a href="/login" className="nav-link" onClick={this.logOut}>
                     Log Out
                   </a>
@@ -119,13 +119,13 @@ class App extends Component {
               </div>
             ) : (
               <div className="navbar-nav ml-auto">
-                <li className="nav-item">
+                <li className="nav-item upper-link">
                   <Link to={"/login"} className="nav-link">
                     Login
                   </Link>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item upper-link">
                   <Link to={"/register"} className="nav-link">
                     Sign Up
                   </Link>

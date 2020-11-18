@@ -13,6 +13,28 @@ img.d-inline-block {
   width: 120px;
 }
 
+nav.myFooter {
+  position: fixed;
+  bottom: 0;
+}
+
+html,
+body,
+.container,
+.main-container,
+div#root {
+  min-height: 100%;
+}
+
+div.container-fluid {
+  position: fixed;
+  height: 100%;
+}
+
+.upper-link {
+  padding-top: 24.5% !important;
+}
+
 .card {
   background-color: #f7f7f7;
   padding: 20px 25px 30px;
@@ -30,10 +52,16 @@ a.nav-link {
   font-family: helvetica;
   font-weight: bold;
   color: black;
+  cursor: pointer;
+  background: linear-gradient(currentColor, currentColor) bottom / 0 0.1em
+    no-repeat;
+  transition: 0.5s background-size;
 }
 
 a.nav-link:hover {
   color: #24b7f8;
+  /*  */
+  background-size: 100% 0.1em;
 }
 
 a.navbar {

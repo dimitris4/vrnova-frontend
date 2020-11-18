@@ -149,6 +149,7 @@ render() {
     
         }
       /> 
+      <img class="learning-pc" src="./pc.png"></img>
         <div class="title" >
             <div class="line_1">      
                      <div class="letter letter-0">L</div>  

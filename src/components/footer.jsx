@@ -21,7 +21,7 @@ export default class Footer extends Component {
     render() { 
         return (
            
-                <nav className="navbar navbar-expand-sm container-fluid" style={this.styles} >
+                <nav className="navbar navbar-expand-sm container-fluid myFooter" style={this.styles} >
                         <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-3" ><img src="./email.jpg" style={this.styles.image}></img>vrnova@vrnova.dk</li>
                         <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-3" ><img src="./phone.png" style={this.styles.image}></img> +45 50227000</li>
                         <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-3" > CVR: 37874620</li>

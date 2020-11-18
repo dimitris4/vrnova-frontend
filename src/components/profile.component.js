@@ -5,6 +5,8 @@ import {Tabs, Tab} from 'react-bootstrap-tabs';
 import axios from "axios";
 import authHeader from "../services/auth-header";
 import { logout } from "../actions/auth";
+import "../App.css";
+import Footer from "./footer";
 
 const API_URL = "http://localhost:8080/";
 
@@ -106,20 +108,21 @@ class Profile extends Component {
     const {errors} = this.state;
 
     return (
-
-      <div class="container">
-      <div class="row my-2">
-        <div class="col-lg-8 order-lg-2"></div>
+      <div className='main-container'>
+      <div className="container">
+      <div className="row my-2">
+        <div className="col-lg-8 order-lg-2"></div>
       <Tabs onSelect={(index, label) => console.log(label + ' selected')}>
         <Tab label={"Profile"}>
-          <div class="tab-content py-4">
-            <div class="tab-pane active" id="profile">
-                <h5 class="mb-3">User Profile</h5>
-                <div class="row">
-                    <div class="col-md-6">
+          <div className="tab-content py-4">
+            <div className="tab-pane active" id="profile">
+                <div className="row">
+                    <div className="col-md-6">
                         <h6>Username</h6>
                           <p>{currentUser.username}</p>
                         <h6>Email</h6>
+                          <p>{currentUser.email}</p>
+                        <h6>Courses bought:</h6>
                           <p>{currentUser.email}</p>
                     </div>
               </div>
@@ -175,7 +178,10 @@ class Profile extends Component {
 
         </Tabs>
       </div>
-    </div>    
+      
+    </div>   
+    <Footer/>
+    </div> 
     );
   }
 }

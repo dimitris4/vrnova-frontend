@@ -134,6 +134,14 @@ img {
   padding-left: 3.7em;
 }
 
+.learning-pc {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  right: 0;
+  top: 10%;
+}
+
 #particle-canvas {
   /* position: fixed !important; */
   left: 0;
