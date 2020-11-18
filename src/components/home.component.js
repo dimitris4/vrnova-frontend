@@ -8,7 +8,8 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      content: ""
+      content: "",
+      started: false
     };
   }
 
@@ -30,7 +31,23 @@ export default class Home extends Component {
     );
   }
 
+
+
+
+imagesPath = {
+  on: "./pc-on.png",
+  off: "./pc-off.png"
+}
+
+  
+  changeImage = () => {
+    this.setState(state => ({ started: !state.started }))
+  }
+
+  getImageName = () => this.state.started ? 'on' : 'off';
+
 render() { 
+  const imageName = this.getImageName();
   return ( 
     <div className="intro container-fluid" id="particle-canvas"> 
         <Particles 
@@ -149,7 +166,7 @@ render() {
     
         }
       /> 
-      <img class="learning-pc" src="./pc.png"></img>
+      <img id="learning-pc" src={this.imagesPath[imageName]} onClick={this.changeImage}></img>
         <div class="title" >
             <div class="line_1">      
                      <div class="letter letter-0">L</div>  
