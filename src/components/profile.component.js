@@ -76,7 +76,7 @@ class Profile extends Component {
   }
 
   validatePassword(x) {
-    return x.length > 6 && x === this.password.value;
+    return x.length > 5 && x === this.password.value;
   }
 
   handleChange = (event) => {
@@ -88,9 +88,9 @@ class Profile extends Component {
     switch (name) {
       case 'password':
         errors.password = 
-            value.length > 6
+            value.length > 5
             ? ''
-            : 'Password must be 6 characters long!';
+            : 'Password must be at least 6 characters long!';
         break;
       case 'password2':
         errors.password2 = 
