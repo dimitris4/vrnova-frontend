@@ -32,6 +32,9 @@ class Profile extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    if (!this.password.value) {
+      this.state.errors.password = 'Required'
+    }
     if (validateForm(this.state.errors)) {
       console.info('Valid form')
       alert("An email has been sent to you with the new password.");
@@ -170,7 +173,7 @@ class Profile extends Component {
                         <span className='error'>{errors.password2}</span>}   
                   </div>
                   <div>
-                    <input type="submit" value="SAVE" style={{fontWeight: 'bold', fontSize:"80%", marginTop: 10}} />
+                    <input type="submit" value="SAVE" class="btn btn-primary" style={{fontWeight: 'bold', fontSize:"80%"}}style={{fontWeight: 'bold', fontSize:"80%", marginTop: 10, marginLeft:43}} />
                   </div> 
                 </form>
               </div>
