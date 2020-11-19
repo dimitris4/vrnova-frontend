@@ -32,8 +32,9 @@ class Profile extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!this.password.value) {
-      this.state.errors.password = 'Required'
+    if (!this.password2.value) {
+      this.state.errors.password2 = 'Required'
+      alert("Required field!")
     }
     if (validateForm(this.state.errors)) {
       console.info('Valid form')
