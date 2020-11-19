@@ -10,8 +10,8 @@ import Footer from "./footer";
 
 const API_URL = "http://localhost:8080/";
 
-const validEmailRegex = 
-  RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+// const validEmailRegex = 
+//   RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
 const validateForm = (errors) => {
   let valid = true;
@@ -27,15 +27,15 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
-    this.state = { email : null, password : null,  errors : { email: '', password : '', } };
+    this.state = { password : null, password2 : null,  errors : { password: '', password2 : '', } };
   }
 
   handleSubmit = event => {
     event.preventDefault();
     if (validateForm(this.state.errors)) {
       console.info('Valid form')
-      alert("Your changes have been saved. Log out and log in again to view them.");
-      const data = {userId: this.props.user.id, email : this.email.value, password : this.password.value };
+      alert("An email has been sent to you with the new password.");
+      const data = {userId: this.props.user.id, password : this.password.value };
       return axios.put(API_URL + "profile/update", data, { headers: authHeader() } )
     } else {
       console.error('Invalid form')
@@ -72,6 +72,10 @@ class Profile extends Component {
     }
   }
 
+  validatePassword(x) {
+    return x.length > 6 && x === this.password.value;
+  }
+
   handleChange = (event) => {
     event.preventDefault();
     // destructuring
@@ -79,17 +83,17 @@ class Profile extends Component {
     let errors = this.state.errors;
 
     switch (name) {
-      case 'email':
-        errors.email = 
-          validEmailRegex.test(value)
-            ? ''
-            : 'Email is not valid!';
-        break;
       case 'password':
         errors.password = 
-          value.length < 6
-          ? 'Password must be 6 characters long!'
-          : '';
+            value.length > 6
+            ? ''
+            : 'Password must be 6 characters long!';
+        break;
+      case 'password2':
+        errors.password2 = 
+          this.validatePassword(value)
+          ? ''
+          : 'Password must be the same!';
         break;
       default:
         break;
@@ -135,38 +139,38 @@ class Profile extends Component {
           <div className="tab-content py-2">
             <div className="tab-pane active" id="profile">
               <div className="wrap">
-                <h8 style={{fontWeight: 'bold', fontSize:"80%"}}>Update your email address or password.</h8>
+                <h8 style={{fontWeight: 'bold', fontSize:"80%"}}>Change your password.</h8>
                 <form onSubmit={this.handleSubmit} noValidate >
                   <div>
-                    <label for="email" style={{fontWeight: 'bold', fontSize:"80%"}}> E-MAIL</label>
-                      <input style={{fontSize:"80%"}}
-                        type="text"
-                        id="email" 
-                        name="email" 
-                        className="cool"
-                        defaultValue={currentUser.email} 
-                        onChange={this.handleChange}
-                        ref={ (input) => this.email = input }
-                        noValidate />  
-                        {errors.email.length > 0 && 
-                        <span className='error'>{errors.email}</span>}                  
-                  </div>
-                  <div>
-                    <label for="password" style={{fontWeight: 'bold', fontSize:"80%"}}> PASSWORD</label>
+                    <label for="email" style={{fontWeight: 'bold', fontSize:"80%"}}> NEW PASSWORD</label>
                       <input style={{fontSize:"80%"}}
                         type="password"
-                        id="password"
-                        className="cool" 
+                        id="password" 
                         name="password" 
-                        // defaultValue={this.state.user.password}
+                        className="cool"
+                        // defaultValue={currentUser.email} 
                         onChange={this.handleChange}
                         ref={ (input) => this.password = input }
-                        noValidate />   
+                        noValidate />  
                         {errors.password.length > 0 && 
-                        <span className='error'>{errors.password}</span>}   
+                        <span className='error'>{errors.password}</span>}                  
                   </div>
                   <div>
-                    <input type="submit" value="SAVE" style={{fontWeight: 'bold', fontSize:"80%"}} />
+                    <label for="password2" style={{fontWeight: 'bold', fontSize:"80%"}}> RE-ENTER NEW PASSWORD</label>
+                      <input style={{fontSize:"80%"}}
+                        type="password"
+                        id="password2"
+                        className="cool" 
+                        name="password2" 
+                        // defaultValue={this.state.user.password}
+                        onChange={this.handleChange}
+                        ref={ (input) => this.password2 = input }
+                        noValidate />   
+                        {errors.password2.length > 0 && 
+                        <span className='error'>{errors.password2}</span>}   
+                  </div>
+                  <div>
+                    <input type="submit" value="SAVE" style={{fontWeight: 'bold', fontSize:"80%", marginTop: 10}} />
                   </div> 
                 </form>
               </div>
