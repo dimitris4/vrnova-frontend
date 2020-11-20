@@ -7,11 +7,19 @@ import authHeader from "../services/auth-header";
 import { logout } from "../actions/auth";
 import "../App.css";
 import Footer from "./footer";
+import BootBox from 'react-bootbox';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+
+
 
 const API_URL = "http://localhost:8080/";
 
+
+
 // const validEmailRegex = 
 //   RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+
 
 const validateForm = (errors) => {
   let valid = true;
@@ -22,41 +30,52 @@ const validateForm = (errors) => {
   return valid;
 }
 
+   
+
 class Profile extends Component {
 
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
-    this.state = { password : null, password2 : null,  errors : { password: '', password2 : '', } };
+    this.state = { password : null, password2 : null, showDeactivateDialog: false, showUpdateDialog: false,  errors : { password: '', password2 : ''} };
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    if (!this.password2.value) {
-      this.state.errors.password2 = 'Required'
-      alert("Required field!")
-    }
-    if (validateForm(this.state.errors)) {
-      console.info('Valid form')
-      alert("An email has been sent to you with the new password.");
-      const data = {userId: this.props.user.id, password : this.password.value };
-      return axios.put(API_URL + "profile/update", data, { headers: authHeader() } )
-    } else {
-      console.error('Invalid form')
-    }
+  showAlert = () => {
+    alert('Yes is clicked');
+  }
+
+  handleClose = () => {
+    this.setState({showDeactivateDialog:false});
+    this.setState({showUpdateDialog:false});
   }
 
   logOut(){
     this.props.dispatch(logout());
   }
 
-  handleDeactivation = event => {
-      event.preventDefault();
-      if(window.confirm('Are you sure you want to deactivate your account? \n WARNING: Your account will be deleted and you will be logged out!')){
-          axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } );
-          this.logOut();
-      }    
+  handleSubmit = event => {
+    if(event) event.preventDefault();
+    if (!this.password2.value) {
+      this.state.errors.password2 = 'Required'
+      alert("Required field!")
+    }
+    if (validateForm(this.state.errors)) {
+      console.info('Valid form');
+      const data = {userId: this.props.user.id, password : this.password.value };
+      axios.put(API_URL + "profile/update", data, { headers: authHeader() } );
+      return this.setState({showUpdateDialog:true});
+
+    } else {
+      console.error('Invalid form')
+    }
   }
+
+  handleDeactivation=event=>{
+      if(event) event.preventDefault();
+      axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } );
+      this.logOut();      
+  }
+
 
   showDeactivate(user) {
     if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
@@ -65,8 +84,15 @@ class Profile extends Component {
                 <h5 style={{fontWeight: 'bold', fontSize:"80%"}} class="mb-3">By clicking deactivate your profile will be deleted.</h5>
                 <div class="row">
                   <div class="col-md-6">
-                  
-                     <button type="button" class="btn btn-danger" style={{fontWeight: 'bold', fontSize:"80%"}} onClick={this.handleDeactivation}>Deactivate</button>
+                     <button type="button" class="btn btn-danger" style={{fontWeight: 'bold', fontSize:"80%"}} onClick={()=>{this.setState({showDeactivateDialog:true})}}>Deactivate</button>
+                     <BootBox show={this.state.showDeactivateDialog} 
+                        message="Are you sure you want to deactivate your account?
+                         WARNING: Your account will be deleted and you will be logged out!"
+                        onYesClick = {this.handleDeactivation}
+                        onNoClick = {this.handleClose}
+                        onClose = {this.handleClose}
+                    />
+                     
                   </div>
                 </div>
                 </div>
@@ -109,6 +135,10 @@ class Profile extends Component {
   render() {
     const { user : currentUser } = this.props;
     
+
+    
+    
+    
     if (!currentUser) {
       return <Redirect to="/login" />;
     }
@@ -145,6 +175,16 @@ class Profile extends Component {
               <div className="wrap">
                 <h8 style={{fontWeight: 'bold', fontSize:"80%"}}>Change your password.</h8>
                 <form onSubmit={this.handleSubmit} noValidate >
+                <Alert show={this.state.showUpdateDialog} variant="success">
+                  <Alert.Heading>Password changed successfully!</Alert.Heading>
+                       <p>
+                        We have sent a confirmation to your e-mail address.
+                      </p>
+                      <hr />
+                        <div className="d-flex justify-content-end">
+                        <Button onClick={() => this.setState({showUpdateDialog:false})} variant="outline-success">CLOSE</Button>
+                        </div>
+                </Alert>
                   <div>
                     <label for="email" style={{fontWeight: 'bold', fontSize:"80%"}}> NEW PASSWORD</label>
                       <input style={{fontSize:"80%"}}
