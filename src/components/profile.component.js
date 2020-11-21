@@ -87,7 +87,7 @@ class Profile extends Component {
                      <button type="button" class="btn btn-danger" style={{fontWeight: 'bold', fontSize:"80%"}} onClick={()=>{this.setState({showDeactivateDialog:true})}}>Deactivate</button>
                      <BootBox show={this.state.showDeactivateDialog} 
                         message="Are you sure you want to deactivate your account?
-                         WARNING: Your account will be deleted and you will be logged out!"
+                          WARNING: Your account will be deleted and you will be logged out!"
                         onYesClick = {this.handleDeactivation}
                         onNoClick = {this.handleClose}
                         onClose = {this.handleClose}
@@ -175,14 +175,14 @@ class Profile extends Component {
               <div className="wrap">
                 <h8 style={{fontWeight: 'bold', fontSize:"80%"}}>Change your password.</h8>
                 <form onSubmit={this.handleSubmit} noValidate >
-                <Alert show={this.state.showUpdateDialog} variant="success">
-                  <Alert.Heading>Password changed successfully!</Alert.Heading>
+                <Alert show={this.state.showUpdateDialog} variant="success" style={{height: "30%", width: "70%", fontSize:"80%"}}>
+                  <Alert.Heading style={{fontSize:"80%", fontWeight: 'bold'}}>Password changed successfully!</Alert.Heading>
                        <p>
                         We have sent a confirmation to your e-mail address.
                       </p>
                       <hr />
                         <div className="d-flex justify-content-end">
-                        <Button onClick={() => this.setState({showUpdateDialog:false})} variant="outline-success">CLOSE</Button>
+                        <Button onClick={() => this.setState({showUpdateDialog:false})} variant="outline-success" style={{height: "30%", width: "30%", fontWeight: 'bold', fontSize:"80%"}}>CLOSE</Button>
                         </div>
                 </Alert>
                   <div>
