@@ -5,12 +5,18 @@ import "../index.css";
 import CourseList from './course-list.component';
 import Filter from './filter';
 import Cart from './cart';
+import 'react-credit-cards/es/styles-compiled.css';
 
 
 export default class Courses extends Component {
    constructor(props){
       super(props);
       this.state = {courses: data.courses, cartItems:JSON.parse(localStorage.getItem("cartItems"))? JSON.parse(localStorage.getItem("cartItems")):[], teacher:"", sort:""};
+   }
+
+   createOrder =(order)=>{
+       //order.name
+       alert("Need to save order for " + order.cartItems);
    }
 
    removeFromCart=(course)=>{
@@ -84,7 +90,7 @@ export default class Courses extends Component {
                             <CourseList 
                                 courses={this.state.courses} 
                                 addToCart={this.addToCart}
-                            ></CourseList>
+                            ></CourseList>        
                         </div>
                         <div className="sidebar">
                             <Cart 
