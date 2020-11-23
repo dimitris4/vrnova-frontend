@@ -6,7 +6,7 @@ export default class Footer extends Component {
     {
         color : 'gray',
         fontSize: '12px',
-        backgroundColor:'black', 
+        backgroundColor:'black',
         padding:0,
         image: {
             width: '5%',

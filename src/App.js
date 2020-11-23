@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
-import {ReactNavbar} from "react-responsive-animate-navbar";
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -13,12 +13,12 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
+import Courses from "./components/courses.component";
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 
 import { history } from './helpers/history';
-import Footer from "./components/footer";
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class App extends Component {
     this.state = {
       showModeratorBoard: false,
       showAdminBoard: false,
-      currentUser: undefined,
+      currentUser: undefined
     };
 
     history.listen((location) => {
@@ -92,11 +92,18 @@ class App extends Component {
               )}
 
               {showUserBoard && (
-                <li className="nav-item upper-link">
-                  <Link to={"/user"} className="nav-link">
-                    MY COURSES
-                  </Link>
-                </li>
+                <>
+                  <li className="nav-item upper-link">
+                    <Link to={"/user"} className="nav-link">
+                      MY COURSES
+                    </Link>
+                  </li>
+                  <li className="nav-item upper-link">
+                    <Link to={"/courses"} className="nav-link">
+                      BUY COURSES
+                    </Link>
+                  </li>
+                </>
               )}
 
             </div>
@@ -108,6 +115,11 @@ class App extends Component {
                     {currentUser.username.toUpperCase()}
                   </Link>
                 </li>
+
+                {/* <li className="nav-item upper-link">
+                <Link to={'/cart'} className="nav-link"> Cart (0)</Link>
+                </li> */}
+
                 <li className="nav-item upper-link">
                   <a href="/login" className="nav-link" onClick={this.logOut}>
                     LOGOUT
@@ -138,6 +150,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route path="/user" component={BoardUser} />
+              <Route path="/courses" component={Courses} />
               <Route path="/mod" component={BoardModerator} />
               <Route path="/admin" component={BoardAdmin} />
             </Switch>
