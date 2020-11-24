@@ -57,6 +57,15 @@ export default class CourseList extends Component {
                                     {course.description}
                                 </p>
                                 <p>
+                                    Category:{" "}
+                                    {course.categories.map((x)=>(
+                                        <span>
+                                            {" "}
+                                            <button className="button">{x}</button>
+                                        </span>
+                                    ))}
+                                </p>
+                                <p>
                                     Your teacher:{" "}
                                     {course.teacher}
                                 </p>

@@ -11,7 +11,7 @@ import 'react-credit-cards/es/styles-compiled.css';
 export default class Courses extends Component {
    constructor(props){
       super(props);
-      this.state = {courses: data.courses, cartItems:JSON.parse(localStorage.getItem("cartItems"))? JSON.parse(localStorage.getItem("cartItems")):[], teacher:"", sort:""};
+      this.state = {courses: data.courses, cartItems:JSON.parse(localStorage.getItem("cartItems"))? JSON.parse(localStorage.getItem("cartItems")):[], teacher:"", sort:"", categories:""};
    }
 
    createOrder =(order)=>{
@@ -73,6 +73,15 @@ export default class Courses extends Component {
         } 
    };
 
+   filterCourses2=(event)=>{
+    console.log(event.target.value);
+    if(event.target.value===""||event.target.value==="ALL"){
+        this.setState({categories: event.target.value, courses:data.courses});
+    } else{
+        this.setState({categories: event.target.value, courses: data.courses.filter(course=>course.categories.indexOf(event.target.value)>=0)});
+    } 
+};
+
     render() {
         
         
@@ -83,8 +92,10 @@ export default class Courses extends Component {
                         <div className="main">
                             <Filter count={this.state.courses.length}
                             teacher={this.state.teacher}
+                            categories={this.state.categories}
                             sort={this.state.sort}
                             filterCourses={this.filterCourses}
+                            filterCourses2={this.filterCourses2}
                             sortCourses={this.sortCourses}
                             ></Filter>
                             <CourseList 

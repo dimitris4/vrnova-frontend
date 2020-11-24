@@ -14,8 +14,24 @@ export default class Filter extends Component {
                         <option value="highest">Highest price</option>
                     </select>
                 </div>
+                <div className="filter-category">
+                    Category{" "} 
+                    <select value={this.props.categories} onChange={this.props.filterCourses2}>
+                        <option value="ALL">ALL</option>
+                        <option value="AR">AR</option>
+                        <option value="VR">VR</option>
+                        <option value="IoT">IoT</option>
+                        <option value="AI">AI</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Data Visualization">Data Visualization</option>
+                        <option value="Front End">Front End</option>
+                        <option value="Back End">Front End</option>
+                        <option value="Version Control">Version Control</option>
+                    </select>
+                </div>
                 <div className="filter-price">
-                    Filter by teacher{" "} 
+                    Teacher{" "} 
                     <select value={this.props.teacher} onChange={this.props.filterCourses}>
                     <option value="ALL">ALL</option>
                         <option value="Anna Andreasen">Anna Andreasen</option>
