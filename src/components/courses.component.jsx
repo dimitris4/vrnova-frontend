@@ -8,20 +8,22 @@ import Cart from './cart';
 import 'react-credit-cards/es/styles-compiled.css';
 import axios from "axios";
 import authHeader from "../services/auth-header";
-
 const API_URL = "http://localhost:8080/";
 
 
 export default class Courses extends Component {
    constructor(props){
       super(props);
-      this.state = { courses: axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => {this.state.courses = resp.data;}),
+      this.state = { 
+          
+                    courses: [],
                     // courses: data.courses, 
                     cartItems:JSON.parse(localStorage.getItem("cartItems"))? JSON.parse(localStorage.getItem("cartItems")):[], 
                     teacher:"", 
                     sort:"", 
                     categories:"", 
                     query:""};
+                    axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({courses: resp.data}));
    }
 
    createOrder =(order)=>{
