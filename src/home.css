@@ -2,7 +2,7 @@
 /* CSS Document */
 
 body {
-  font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+  font-family: "Font Awesome 5 Free", "Myriad Pro", Helvetica, Arial, sans-serif;
   font-size: 100%;
   color: #ffffff;
   background: black;
@@ -215,7 +215,7 @@ img {
   color: purple;
   opacity: 0.9;
   text-align: center;
-  font-family: Aller, Arial, "Helvetica Neue", sans-serif;
+  font-family: "Font Awesome 5 Free", Aller, Arial, "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   font-size: 1.1em;
   letter-spacing: 1.5px;
@@ -325,7 +325,7 @@ img {
   display: inline-block;
   position: relative;
 
-  font-family: Abel, Arial, sans-serif;
+  font-family: "Font Awesome 5 Free", Abel, Arial, sans-serif;
   font-size: 1.4em;
   font-weight: bolder;
   text-shadow: 6px 6px 10px #888888;

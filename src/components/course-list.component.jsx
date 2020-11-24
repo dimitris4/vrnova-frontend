@@ -38,6 +38,7 @@ export default class CourseList extends Component {
                                     <div className="course-price">
                                         <div>{formatCurrency(course.price)}</div>
                                         <button onClick={()=>this.props.addToCart(course)} className="button primary">Buy course</button>
+                                        {/* <button onClick={()=>this.props.disableBuyButton(course)} className="button primary">Buy course</button> */}
                                     </div>
                                 </div>
                             </li>
@@ -50,7 +51,7 @@ export default class CourseList extends Component {
                         <div className="course-details">
                             <img src={course.image} alt={course.title}></img>
                             <div className="course-details-description">
-                                <p>
+                                <p className="modal-course-title">
                                     <strong>{course.title}</strong>
                                 </p>
                                 <p>

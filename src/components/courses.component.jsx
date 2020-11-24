@@ -6,12 +6,22 @@ import CourseList from './course-list.component';
 import Filter from './filter';
 import Cart from './cart';
 import 'react-credit-cards/es/styles-compiled.css';
+import axios from "axios";
+import authHeader from "../services/auth-header";
+
+const API_URL = "http://localhost:8080/";
 
 
 export default class Courses extends Component {
    constructor(props){
       super(props);
-      this.state = {courses: data.courses, cartItems:JSON.parse(localStorage.getItem("cartItems"))? JSON.parse(localStorage.getItem("cartItems")):[], teacher:"", sort:"", categories:"", query:""};
+      this.state = { courses: axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => {this.state.courses = resp.data;}),
+                    // courses: data.courses, 
+                    cartItems:JSON.parse(localStorage.getItem("cartItems"))? JSON.parse(localStorage.getItem("cartItems")):[], 
+                    teacher:"", 
+                    sort:"", 
+                    categories:"", 
+                    query:""};
    }
 
    createOrder =(order)=>{
@@ -21,14 +31,14 @@ export default class Courses extends Component {
 
    removeFromCart=(course)=>{
     const cartItems = this.state.cartItems.slice();
-    this.setState({
-        cartItems: cartItems.filter(x=>x._id !== course._id),
-    });
+    this.setState({cartItems: cartItems.filter(x=>x._id !== course._id)});
     localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(x=>x._id !== course._id)));
+
    };
    
    addToCart = (course)=>{
        const cartItems = this.state.cartItems.slice();
+
        let alreadyInCart = false;
        cartItems.forEach(item=>{
            if(item._id===course._id)
@@ -36,9 +46,11 @@ export default class Courses extends Component {
        });
        if(!alreadyInCart){
            cartItems.push({...course, count:1})
+       
        }
        this.setState({cartItems});
        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
    }
 
    sortCourses=(event)=>{
@@ -86,9 +98,12 @@ handleOnInputChange = (event) =>{
     this.setState({query: event.target.value, courses: data.courses.filter(course=>course.title.toLowerCase().includes(event.target.value.toLowerCase()))});
 }
 
+// disableBuyButton = (course) =>{
+
+
+// }
+
     render() {
-        
-        
         return (
             <div className="grid-container">
                 <main>
@@ -106,6 +121,7 @@ handleOnInputChange = (event) =>{
                             <CourseList 
                                 courses={this.state.courses} 
                                 addToCart={this.addToCart}
+                                disableBuyButton={this.disableBuyButton}
                             ></CourseList>        
                         </div>
                         <div className="sidebar">
