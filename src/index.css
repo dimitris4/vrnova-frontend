@@ -127,7 +127,7 @@ p {
 
 .filter {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 1rem;
   margin: 1rem;
   border-bottom: 0.1rem #c0c0c0 solid;
@@ -138,6 +138,27 @@ p {
 
 .filter div {
   flex: 1;
+}
+
+.search-label {
+  margin-right: 4rem;
+}
+
+.search-input {
+  margin-top: 0.5rem;
+  width: 100%;
+  font-style: italic;
+  font-size: 80%;
+  color: #444;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  color: #555;
+  right: 73.7%;
+  top: 7.5%;
 }
 
 /* Cart */

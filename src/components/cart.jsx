@@ -15,7 +15,7 @@ export default class Cart extends Component {
         const{cartItems}=this.props;
         return (
             
-            <div>
+            <div><br></br> 
                 {cartItems.length===0 ? (
                     <div className="cart cart-header">Cart is empty</div>
                 ) : (
