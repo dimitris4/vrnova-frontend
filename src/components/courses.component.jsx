@@ -14,7 +14,7 @@ const API_URL = "http://localhost:8080/";
 export default class Courses extends Component {
    constructor(props){
       super(props);
-      this.state = { 
+      this.state = {
                     courses: [],
                     allCourses:[],
                     // courses: data.courses, 
@@ -23,10 +23,14 @@ export default class Courses extends Component {
                     sort:"", 
                     categories:"", 
                     query:""};
+
+
+
                     axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({courses: resp.data}));
                     axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({allCourses: resp.data}));
 
    }
+
 
    createOrder =(order)=>{
        //order.name
@@ -45,7 +49,7 @@ export default class Courses extends Component {
 
        let alreadyInCart = false;
        cartItems.forEach(item=>{
-           if(item._id===course._id)
+           if(item.id===course.id)
                alreadyInCart=true;
        });
        if(!alreadyInCart){
@@ -97,7 +101,7 @@ export default class Courses extends Component {
     if(event.target.value===""||event.target.value==="ALL"){
         this.setState({categories: event.target.value, courses:data.allCourses});
     } else{
-        this.setState({categories: event.target.value, courses: allCourses.filter(course=>course.categories.indexOf(event.target.value)>=0)});
+        this.setState({categories: event.target.value, courses: allCourses.filter(course=>course.categoryNames.indexOf(event.target.value)>=0)});
     } 
 };
 
