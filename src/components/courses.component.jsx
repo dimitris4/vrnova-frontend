@@ -8,20 +8,24 @@ import Cart from './cart';
 import 'react-credit-cards/es/styles-compiled.css';
 import axios from "axios";
 import authHeader from "../services/auth-header";
-
 const API_URL = "http://localhost:8080/";
 
 
 export default class Courses extends Component {
    constructor(props){
       super(props);
-      this.state = { courses: axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => {this.state.courses = resp.data;}),
+      this.state = { 
+                    courses: [],
+                    allCourses:[],
                     // courses: data.courses, 
                     cartItems:JSON.parse(localStorage.getItem("cartItems"))? JSON.parse(localStorage.getItem("cartItems")):[], 
                     teacher:"", 
                     sort:"", 
                     categories:"", 
                     query:""};
+                    axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({courses: resp.data}));
+                    axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({allCourses: resp.data}));
+
    }
 
    createOrder =(order)=>{
@@ -77,20 +81,23 @@ export default class Courses extends Component {
    };
    
    filterCourses=(event)=>{
+
+    const allCourses = this.state.allCourses.slice();
         console.log(event.target.value);
         if(event.target.value===""||event.target.value==="ALL"){
-            this.setState({teacher: event.target.value, courses:data.courses});
+            this.setState({teacher: event.target.value, courses:allCourses});
         } else{
-            this.setState({teacher: event.target.value, courses: data.courses.filter(course=>course.teacher.indexOf(event.target.value)>=0)});
+            this.setState({teacher: event.target.value, courses: allCourses.filter(course=>course.teacher.indexOf(event.target.value)>=0)});
         } 
    };
 
    filterCourses2=(event)=>{
+    const allCourses = this.state.allCourses.slice();
     console.log(event.target.value);
     if(event.target.value===""||event.target.value==="ALL"){
-        this.setState({categories: event.target.value, courses:data.courses});
+        this.setState({categories: event.target.value, courses:data.allCourses});
     } else{
-        this.setState({categories: event.target.value, courses: data.courses.filter(course=>course.categories.indexOf(event.target.value)>=0)});
+        this.setState({categories: event.target.value, courses: allCourses.filter(course=>course.categories.indexOf(event.target.value)>=0)});
     } 
 };
 
