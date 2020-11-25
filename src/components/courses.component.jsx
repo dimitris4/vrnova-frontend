@@ -99,7 +99,7 @@ export default class Courses extends Component {
     const allCourses = this.state.allCourses.slice();
     console.log(event.target.value);
     if(event.target.value===""||event.target.value==="ALL"){
-        this.setState({categories: event.target.value, courses:data.allCourses});
+        this.setState({categories: event.target.value, courses:allCourses});
     } else{
         this.setState({categories: event.target.value, courses: allCourses.filter(course=>course.categoryNames.indexOf(event.target.value)>=0)});
     } 
