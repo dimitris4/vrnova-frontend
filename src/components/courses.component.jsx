@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from "./footer";
-import data from "../data.json";
+// import data from "../data.json";
 import "../index.css";
 import CourseList from './course-list.component';
 import Filter from './filter';

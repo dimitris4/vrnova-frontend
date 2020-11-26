@@ -6,6 +6,8 @@ import formatCurrency from "../utils";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
+import axios from "axios";
+import authHeader from "../services/auth-header";
 // import SupportedCards from "./cards";
 import {
   formatCreditCardNumber,
@@ -14,7 +16,7 @@ import {
   formatFormData
 } from "../utils";
 
-
+const API_URL = "http://localhost:8080/";
 
 export default class PaymentForm extends Component {
 
@@ -72,17 +74,17 @@ export default class PaymentForm extends Component {
     this.form.reset();
   };
 
-  openModal=(course)=>{
-    this.setState({course});
- };
-
  closeModal=()=>{
+  const data = {userId: this.props.user.id, items : this.props.items };
+  console.log(data.userId);
+  axios.put(API_URL + "courses/order", data, { headers: authHeader() } );
     this.setState({isPaid:false});
  };
 
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData, isPaid } = this.state;
   const {items, user }= this.props;
+  // console.log(user.use)
 
     return (
       <div>
@@ -153,19 +155,19 @@ export default class PaymentForm extends Component {
               <button className="btn btn-primary btn-block">PAY</button>
             </div>
           </form>
-          {formData && (
+          {/* {formData && (
             <div className="App-highlight">
               {formatFormData(formData).map((d, i) => (
                 <div key={i}>{d}</div>
               ))}
             </div>
-          )}
+          )} */}
           {/* <SupportedCards/> */}
         </div>
       </div>
       </Fade>
       {isPaid && <Modal className={"pay-conf-modal"} isOpen={true} onRequestClose={this.closeModal}>
-                    {/* <Zoom> */}
+                    <Zoom>
                       <div className="bg">
                         <div className="card1">
                           <h1 className="card__msg">Payment Complete</h1>
@@ -193,7 +195,7 @@ export default class PaymentForm extends Component {
                               <span>{" "}<button className="button" onClick={this.closeModal}>Close</button></span>
                          </div>
                       </div>
-                    {/* </Zoom> */}
+                    </Zoom>
                 </Modal>}
       </div>
     );
