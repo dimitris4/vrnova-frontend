@@ -77,8 +77,12 @@ export default class PaymentForm extends Component {
  closeModal=()=>{
   const data = {userId: this.props.user.id, items : this.props.items };
   console.log(data.userId);
+
+  //sending data to backend
   axios.put(API_URL + "courses/order", data, { headers: authHeader() } );
-    this.setState({isPaid:false});
+
+  //Closing the modal
+  this.setState({isPaid:false});
  };
 
   render() {
