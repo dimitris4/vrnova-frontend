@@ -35,7 +35,6 @@ export default class BoardUser extends Component {
   }
   
   showCourses(user) {
-    console.log(user);
       return <div class="col-md-12">
               <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> My Courses</h5>
               <table class="table table-sm table-hover table-striped">

@@ -150,7 +150,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route path="/user" component={BoardUser} />
-              <Route path="/courses" component={Courses} />
+              <Route path="/courses" render={currentUser => <Courses user={this.state.currentUser} />} />
               <Route path="/mod" component={BoardModerator} />
               <Route path="/admin" component={BoardAdmin} />
             </Switch>

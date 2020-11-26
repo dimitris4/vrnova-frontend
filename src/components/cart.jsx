@@ -12,7 +12,7 @@ export default class Cart extends Component {
 
 
     render() {
-        const{cartItems}=this.props;
+        const{cartItems, user}=this.props;
         return (
             
             <div><br></br> 
@@ -28,7 +28,7 @@ export default class Cart extends Component {
                     <Fade left cascade>
                     <ul className="cart-items">
                         {cartItems.map(item=>(
-                            <li key={item._id}>
+                            <li key={item.id}>
                                 <div>
                                     <img src={item.image} alt={item.title}></img>
                                 </div>
@@ -57,7 +57,7 @@ export default class Cart extends Component {
                         <button onClick={()=>this.setState({showCheckout:true})} className="button primary">Proceed</button>        
                     </div>
                 </div>
-                    {this.state.showCheckout && (<PaymentForm/>)}
+                    {this.state.showCheckout && (<PaymentForm user={user} items={cartItems} />)}
                 </div>
                 )}
              </div>

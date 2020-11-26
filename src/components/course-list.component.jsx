@@ -3,6 +3,7 @@ import formatCurrency from "../utils";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
+import "../index.css";
 
 export default class CourseList extends Component {
 
@@ -29,9 +30,9 @@ export default class CourseList extends Component {
                 <Fade bottom cascade>
                     <ul className="courses">
                         {this.props.courses.map(course =>(
-                            <li key={course._id}>
+                            <li key={course.id}>
                                 <div className="course">
-                                    <a href={"#"+course._id} onClick={()=>this.openModal(course)}>
+                                    <a href={"#"+course.id} onClick={()=>this.openModal(course)}>
                                         <img src={course.image} alt="course image"></img>
                                         <p>{course.title}</p>
                                     </a>
