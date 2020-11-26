@@ -1,9 +1,14 @@
 import React,{Component} from "react";
 import Card from "react-credit-cards";
 import "../cards.css";
+import "react-credit-cards/es/styles-compiled.css";
+import formatCurrency from "../utils";
 import Fade from "react-reveal/Fade";
+import Modal from "react-modal";
+import Zoom from "react-reveal/Zoom";
+import axios from "axios";
+import authHeader from "../services/auth-header";
 // import SupportedCards from "./cards";
-
 import {
   formatCreditCardNumber,
   formatCVC,
@@ -11,18 +16,23 @@ import {
   formatFormData
 } from "../utils";
 
-import "react-credit-cards/es/styles-compiled.css";
+const API_URL = "http://localhost:8080/";
 
 export default class PaymentForm extends Component {
-  state = {
+
+  constructor(props) {
+    super(props);
+  this.state = {
     number: "",
     name: "",
     expiry: "",
     cvc: "",
     issuer: "",
     focused: "",
-    formData: null
+    formData: null,
+    isPaid: false
   };
+}
 
   handleCallback = ({ issuer }, isValid) => {
     if (isValid) {
@@ -50,20 +60,35 @@ export default class PaymentForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    
     const { issuer } = this.state;
     const formData = [...e.target.elements]
       .filter(d => d.name)
       .reduce((acc, d) => {
         acc[d.name] = d.value;
         return acc;
-      }, {});
+      }, {}); 
 
-    this.setState({ formData });
+    this.setState({ isPaid:true});
+    this.setState({ formData});
     this.form.reset();
   };
 
+ closeModal=()=>{
+  const data = {userId: this.props.user.id, items : this.props.items };
+  console.log(data.userId);
+
+  //sending data to backend
+  axios.put(API_URL + "courses/order", data, { headers: authHeader() } );
+
+  //Closing the modal
+  this.setState({isPaid:false});
+ };
+
   render() {
-    const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
+    const { name, number, expiry, cvc, focused, issuer, formData, isPaid } = this.state;
+  const {items, user }= this.props;
+  // console.log(user.use)
 
     return (
       <div>
@@ -134,17 +159,48 @@ export default class PaymentForm extends Component {
               <button className="btn btn-primary btn-block">PAY</button>
             </div>
           </form>
-          {formData && (
+          {/* {formData && (
             <div className="App-highlight">
               {formatFormData(formData).map((d, i) => (
                 <div key={i}>{d}</div>
               ))}
             </div>
-          )}
+          )} */}
           {/* <SupportedCards/> */}
         </div>
       </div>
       </Fade>
+      {isPaid && <Modal className={"pay-conf-modal"} isOpen={true} onRequestClose={this.closeModal}>
+                    <Zoom>
+                      <div className="bg">
+                        <div className="card1">
+                          <h1 className="card__msg">Payment Complete</h1>
+                           <h2 className="card__submsg">Thank you for your transfer</h2>
+                               <div className="card__body">
+                                  <img src="./logo1_transparent.png" class="card__avatar"/>
+                                   <div className="card__recipient-info">
+                                 <p className="card__recipient">{this.state.name}</p>
+                                         <p className="card__email">{user.email}</p>
+                                  </div>
+                                  <h1 className="card__price">{formatCurrency(items.reduce((a,c) => a + c.price*c.count,0))}</h1>
+                                  <p className="card__method">Payment method</p>
+                                  <div className="card__payment">
+                                      <img src="./credit.png" class="card__credit-card"/>
+                                      <div className="card__card-details">
+                                        <p className="card__card-type">Credit / debit card</p>
+                                        <p className="card__card-number">Card ending in **{this.state.number.slice(-2)}</p>          
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card__tags">
+                              <span className="card__tag">completed</span>
+                              <span className="card__tag">#123456789</span>        
+                          </div>
+                              <span>{" "}<button className="button" onClick={this.closeModal}>Close</button></span>
+                         </div>
+                      </div>
+                    </Zoom>
+                </Modal>}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from "./footer";
-import data from "../data.json";
+// import data from "../data.json";
 import "../index.css";
 import CourseList from './course-list.component';
 import Filter from './filter';
@@ -39,8 +39,8 @@ export default class Courses extends Component {
 
    removeFromCart=(course)=>{
     const cartItems = this.state.cartItems.slice();
-    this.setState({cartItems: cartItems.filter(x=>x._id !== course._id)});
-    localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(x=>x._id !== course._id)));
+    this.setState({cartItems: cartItems.filter(x=>x.id !== course.id)});
+    localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(x=>x.id !== course.id)));
 
    };
    
@@ -77,7 +77,7 @@ export default class Courses extends Component {
             ? a.price < b.price
               ? 1 
               : -1
-            : a._id < b._id
+            : a.id < b.id
             ? 1
             : -1
           ),
@@ -106,7 +106,8 @@ export default class Courses extends Component {
 };
 
 handleOnInputChange = (event) =>{
-    this.setState({query: event.target.value, courses: data.courses.filter(course=>course.title.toLowerCase().includes(event.target.value.toLowerCase()))});
+    const allCourses = this.state.allCourses.slice();
+    this.setState({query: event.target.value, courses: allCourses.filter(course=>course.title.toLowerCase().includes(event.target.value.toLowerCase()))});
 }
 
 // disableBuyButton = (course) =>{
@@ -130,13 +131,15 @@ handleOnInputChange = (event) =>{
                             handleOnInputChange={this.handleOnInputChange}
                             ></Filter>
                             <CourseList 
+                                user={this.props.user} 
                                 courses={this.state.courses} 
                                 addToCart={this.addToCart}
                                 disableBuyButton={this.disableBuyButton}
                             ></CourseList>        
                         </div>
                         <div className="sidebar">
-                            <Cart 
+                            <Cart
+                                user={this.props.user} 
                                 cartItems={this.state.cartItems}
                                 removeFromCart={this.removeFromCart}
                             />
