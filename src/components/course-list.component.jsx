@@ -59,7 +59,7 @@ export default class CourseList extends Component {
                                 </p>
                                 <p>
                                     Category:{" "}
-                                    {course.categories.map((x)=>(
+                                    {course.categoryNames.map((x)=>(
                                         <span>
                                             {" "}
                                             <button className="button">{x}</button>
