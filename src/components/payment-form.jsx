@@ -79,7 +79,7 @@ export default class PaymentForm extends Component {
   console.log(data.userId);
 
   //sending data to backend
-  axios.put(API_URL + "courses/order", data, { headers: authHeader() } );
+  axios.post(API_URL + "orders/save", data, { headers: authHeader() } );
 
   //Closing the modal
   this.setState({isPaid:false});
