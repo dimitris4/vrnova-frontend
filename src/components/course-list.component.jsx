@@ -11,25 +11,31 @@ export default class CourseList extends Component {
         super(props);
         this.state = {
             course: null,
-            bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[] 
+            bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[],
+            cartItems: JSON.parse(localStorage.getItem('cartItems'))? JSON.parse(localStorage.getItem('cartItems')):[],
+            disabled: [],
+            label: ''
         };
      }
-    
-     openModal=(course)=>{
-        this.setState({course});
-     };
 
-     closeModal=()=>{
-        this.setState({course:null});
-     };
+    
+     openModal = (course) => this.setState({course});
+
+     closeModal= () => this.setState({course:null});
+     
+     text =(id)=> this.state.disabled.indexOf(id)!==-1 ? "In cart": "Add to cart"; 
+
+     styling =(id)=> this.state.disabled.indexOf(id)!==-1 
+        ? "in-cart-course"
+        : "ghghg"; 
+          
+
 
     render() {
-        const{course, bought}=this.state;
-        const filtered = this.props.courses.filter(e => bought.filter(e2 =>e.id == e2.id).length == 0);
+        const{course, bought, cartItems, disabled, label}=this.state;
         return (
             <div>
                 <Fade bottom cascade>
-                    {bought.length===0 ? 
                         <ul className="courses">
                             {this.props.courses.map(course =>(
                                 <li key={course.id}>
@@ -40,53 +46,19 @@ export default class CourseList extends Component {
                                         </a>
                                         <div className="course-price">
                                             <div>{formatCurrency(course.price)}</div>
-                                            <button onClick={()=>this.props.addToCart(course)} className="button primary">Buy course</button>
+                                            {bought.some(e => e.id === course.id)
+                                                ?   <button className="button primary" disabled={true} id="bought-course">Bought</button>
+                                                :   <>{cartItems.some(e => e.id === course.id)
+                                                        ? <button className="button primary" disabled={true} id="in-cart-course">In cart</button> 
+                                                : <button id={this.styling(course.id)} onClick={()=>{this.props.addToCart(course); this.text(course.id); this.setState({disabled:[...disabled, course.id]}); }} disabled={disabled.indexOf(course.id)!==-1} className="button primary">{this.text(course.id)}</button>}</>}
                                         </div>
                                     </div>
                                 </li>
                             ))}
                         </ul>
-                    : <>
-                        <ul className="courses">
-                            {bought.map(course =>(
-                                <li key={course.id}>
-                                    <div className="course">
-                                        <a href={"#"+course.id} onClick={()=>this.openModal(course)}>
-                                            <img src={course.image} alt="course image"></img>
-                                            <p>{course.title}</p>
-                                        </a>
-                                        <div className="course-price">
-                                            <div>{formatCurrency(course.price)}</div>
-                                            <button onClick={()=>this.props.addToCart(course)} disabled={true} id="bought-course" className="button primary">Bought</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                        <ul className="courses">
-                            {filtered.map(course =>(
-                                <li key={course.id}>
-                                    <div className="course">
-                                        <a href={"#"+course.id} onClick={()=>this.openModal(course)}>
-                                            <img src={course.image} alt="course image"></img>
-                                            <p>{course.title}</p>
-                                        </a>
-                                        <div className="course-price">
-                                            <div>{formatCurrency(course.price)}</div>
-                                            <button onClick={()=>this.props.addToCart(course)} className="button primary">Buy course</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>        
-                    </>
-
-                    
                 
                 
-                }
-                    
-
+        
                     
                 </Fade>
                 {course && <Modal isOpen={true} onRequestClose={this.closeModal}>
@@ -118,12 +90,12 @@ export default class CourseList extends Component {
                                     <div>
                                         {formatCurrency(course.price)}
                                     </div>
-                                    <button className="button primary" onClick={()=>{
-                                        this.props.addToCart(course);
-                                        this.closeModal();
-                                    }}>Buy Course</button>
-
-                                </div>
+                                    {bought.some(e => e.id === course.id)
+                                                ?   <button className="button primary" disabled={true} id="bought-course">Bought</button>
+                                                :   <>{cartItems.some(e => e.id === course.id)
+                                                        ? <button className="button primary" disabled={true} id="in-cart-course">In cart</button> 
+                                                : <button id={this.styling(course.id)} onClick={()=>{this.props.addToCart(course); this.text(course.id); this.setState({disabled:[...disabled, course.id]}); }} disabled={disabled.indexOf(course.id)!==-1} className="button primary">{this.text(course.id)}</button>}</>}
+                                        </div>
                             </div>
                         </div>
                     </Zoom>

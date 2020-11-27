@@ -24,11 +24,8 @@ export default class Courses extends Component {
                     categories:"", 
                     query:""};
 
-
-
                     axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({courses: resp.data}));
                     axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({allCourses: resp.data}));
-
    }
 
 
@@ -41,7 +38,7 @@ export default class Courses extends Component {
     const cartItems = this.state.cartItems.slice();
     this.setState({cartItems: cartItems.filter(x=>x.id !== course.id)});
     localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(x=>x.id !== course.id)));
-
+    window.location.reload();
    };
    
    addToCart = (course)=>{
@@ -58,7 +55,6 @@ export default class Courses extends Component {
        }
        this.setState({cartItems});
        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
    }
 
    sortCourses=(event)=>{

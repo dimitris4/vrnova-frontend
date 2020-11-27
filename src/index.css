@@ -115,6 +115,7 @@ p {
   border: 0.1rem #c0c0c0 solid;
   background-color: #f0f0f0;
   cursor: pointer;
+  outline: none;
 }
 
 .button:hover {
@@ -123,9 +124,17 @@ p {
 
 .button.primary {
   background-color: #f0c040;
+  outline: none;
 }
 
 #bought-course {
+  background-color: blue;
+  color: white;
+  cursor: default;
+  border: none;
+}
+
+#in-cart-course {
   background-color: greenyellow;
   cursor: default;
   border: none;
