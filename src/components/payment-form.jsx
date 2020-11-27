@@ -76,13 +76,23 @@ export default class PaymentForm extends Component {
 
  closeModal=()=>{
   const data = {userId: this.props.user.id, items : this.props.items };
-  console.log(data.userId);
+  const bought = this.props.items;
+  const existingBought = JSON.parse(localStorage.getItem('bought'))?JSON.parse(localStorage.getItem('bought')):[];
+  existingBought.push(...bought);
+  localStorage.setItem("bought", JSON.stringify(existingBought));
+  
+  // existingBought.push({...bought});
+  // localStorage.setItem("bought", JSON.stringify(existingBought));
+
 
   //sending data to backend
   axios.post(API_URL + "orders/save", data, { headers: authHeader() } );
 
-  //Closing the modal
-  this.setState({isPaid:false});
+  localStorage.setItem("cartItems", null);
+  window.location.reload();
+
+  //Closing the modal (not needed anymore as the page refreshes above, but keep for future reference)
+  // this.setState({isPaid:false});
  };
 
   render() {

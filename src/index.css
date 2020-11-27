@@ -125,6 +125,12 @@ p {
   background-color: #f0c040;
 }
 
+#bought-course {
+  background-color: greenyellow;
+  cursor: default;
+  border: none;
+}
+
 .filter,
 .cart-header {
   display: flex;

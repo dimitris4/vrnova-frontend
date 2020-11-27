@@ -11,7 +11,7 @@ export default class CourseList extends Component {
         super(props);
         this.state = {
             course: null,
-
+            bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[] 
         };
      }
     
@@ -24,27 +24,70 @@ export default class CourseList extends Component {
      };
 
     render() {
-        const{course}=this.state;
+        const{course, bought}=this.state;
+        const filtered = this.props.courses.filter(e => bought.filter(e2 =>e.id == e2.id).length == 0);
         return (
             <div>
                 <Fade bottom cascade>
-                    <ul className="courses">
-                        {this.props.courses.map(course =>(
-                            <li key={course.id}>
-                                <div className="course">
-                                    <a href={"#"+course.id} onClick={()=>this.openModal(course)}>
-                                        <img src={course.image} alt="course image"></img>
-                                        <p>{course.title}</p>
-                                    </a>
-                                    <div className="course-price">
-                                        <div>{formatCurrency(course.price)}</div>
-                                        <button onClick={()=>this.props.addToCart(course)} className="button primary">Buy course</button>
-                                        {/* <button onClick={()=>this.props.disableBuyButton(course)} className="button primary">Buy course</button> */}
+                    {bought.length===0 ? 
+                        <ul className="courses">
+                            {this.props.courses.map(course =>(
+                                <li key={course.id}>
+                                    <div className="course">
+                                        <a href={"#"+course.id} onClick={()=>this.openModal(course)}>
+                                            <img src={course.image} alt="course image"></img>
+                                            <p>{course.title}</p>
+                                        </a>
+                                        <div className="course-price">
+                                            <div>{formatCurrency(course.price)}</div>
+                                            <button onClick={()=>this.props.addToCart(course)} className="button primary">Buy course</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                                </li>
+                            ))}
+                        </ul>
+                    : <>
+                        <ul className="courses">
+                            {bought.map(course =>(
+                                <li key={course.id}>
+                                    <div className="course">
+                                        <a href={"#"+course.id} onClick={()=>this.openModal(course)}>
+                                            <img src={course.image} alt="course image"></img>
+                                            <p>{course.title}</p>
+                                        </a>
+                                        <div className="course-price">
+                                            <div>{formatCurrency(course.price)}</div>
+                                            <button onClick={()=>this.props.addToCart(course)} disabled={true} id="bought-course" className="button primary">Bought</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        <ul className="courses">
+                            {filtered.map(course =>(
+                                <li key={course.id}>
+                                    <div className="course">
+                                        <a href={"#"+course.id} onClick={()=>this.openModal(course)}>
+                                            <img src={course.image} alt="course image"></img>
+                                            <p>{course.title}</p>
+                                        </a>
+                                        <div className="course-price">
+                                            <div>{formatCurrency(course.price)}</div>
+                                            <button onClick={()=>this.props.addToCart(course)} className="button primary">Buy course</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>        
+                    </>
+
+                    
+                
+                
+                }
+                    
+
+                    
                 </Fade>
                 {course && <Modal isOpen={true} onRequestClose={this.closeModal}>
                     <Zoom>
