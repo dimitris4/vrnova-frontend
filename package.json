@@ -17,6 +17,7 @@
     "axios": "^0.19.2",
     "bootbox-react": "^1.1.1",
     "bootstrap": "^4.5.2",
+    "font-awesome": "^4.7.0",
     "node-sass": "^5.0.0",
     "react": "^16.13.1",
     "react-bootbox": "^1.1.1",

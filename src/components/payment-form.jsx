@@ -80,10 +80,6 @@ export default class PaymentForm extends Component {
   const existingBought = JSON.parse(localStorage.getItem('bought'))?JSON.parse(localStorage.getItem('bought')):[];
   existingBought.push(...bought);
   localStorage.setItem("bought", JSON.stringify(existingBought));
-  
-  // existingBought.push({...bought});
-  // localStorage.setItem("bought", JSON.stringify(existingBought));
-
 
   //sending data to backend
   axios.post(API_URL + "orders/save", data, { headers: authHeader() } );
@@ -98,7 +94,6 @@ export default class PaymentForm extends Component {
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData, isPaid } = this.state;
   const {items, user }= this.props;
-  // console.log(user.use)
 
     return (
       <div>

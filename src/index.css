@@ -408,3 +408,52 @@ div#price-of-course {
   top: 2.5rem;
   z-index: 1000;
 }
+
+/* My courses */
+
+.myCourses-list {
+  list-style-type: none;
+  margin-right: 8%;
+  margin-bottom: 12%;
+}
+
+/* .myCourses-list-item {
+
+} */
+
+.wrapper {
+  display: inline-grid;
+  font-size: small;
+  /* grid-template-rows: [first] 1fr [second] 1fr [third] 1fr [forth] 1fr [fifth] 1fr [sixth] 1fr [seventh] 1fr [eigth] 1fr [ninth] 1fr [tenth] 1fr [eleven]; */
+  grid-template-columns: [first] 5fr [second] 10fr [third] 40fr [forth] 20fr [fifth] 10fr [sixth] 10fr [seventh] 5fr [last];
+  place-items: center stretch;
+  margin-bottom: 1%;
+  background-color: #eee;
+}
+
+.pic1 {
+  max-width: 70%;
+  max-height: 70%;
+  grid-column: 2 / 3;
+  margin: 10%;
+}
+
+.name1 {
+  grid-column: 3 / 4;
+  justify-self: center;
+}
+
+.teacher1 {
+  grid-column: 4 / 5;
+  color: black !important;
+}
+
+.time1 {
+  grid-column: 5 / 6;
+  color: black !important;
+}
+
+.complete1 {
+  grid-column: 6 / 7;
+  color: black !important;
+}
