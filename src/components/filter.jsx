@@ -34,7 +34,7 @@ export default class Filter extends Component {
                         <option value="Programming">Programming</option>
                         <option value="Data Visualization">Data Visualization</option>
                         <option value="Front End">Front End</option>
-                        <option value="Back End">Front End</option>
+                        <option value="Back End">Back End</option>
                         <option value="Version Control">Version Control</option>
                     </select>
                 </div>
