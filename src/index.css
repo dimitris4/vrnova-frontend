@@ -67,7 +67,7 @@ a:hover {
   flex: 0 1 30rem;
   padding-left: 5%;
   padding-bottom: 5%;
-  max-width: 35%;
+  max-width: 30%;
 }
 
 .course {
@@ -88,13 +88,13 @@ a:hover {
 }
 
 p {
-  width: 50%;
+  width: 55%;
   text-align: left;
   margin: 0;
 }
 
 .course-price {
-  max-width: 40%;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -107,38 +107,181 @@ p {
 }
 
 .course-price div {
-  font-size: 80%;
+  font-size: small;
   font-weight: bold;
+  padding-right: 20%;
 }
 
-.button {
-  border: 0.1rem #c0c0c0 solid;
-  background-color: #f0f0f0;
+div#price-of-course {
+  width: 100%;
+}
+/* buy button */
+#add-button,
+#proceed-button {
+  box-shadow: inset 0 0 0 2px #58afd1;
+  color: #58afd1;
+  transition: color 0.25s 0.0833333333s;
+  position: relative;
+}
+
+#add-button::before,
+#proceed-button::before,
+#add-button::after,
+#proceed-button::after {
+  border: 0 solid transparent;
+  box-sizing: border-box;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+#add-button::before,
+#proceed-button::before {
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+#add-button::after,
+#proceed-button::after {
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+#add-button:hover,
+#proceed-button:hover {
+  color: #6223f7;
+}
+#add-button:hover::before,
+#add-button:hover::after,
+#proceed-button:hover::before,
+#proceed-button:hover::after {
+  border-color: #6223f7;
+  transition: border-color 0s, width 0.25s, height 0.25s;
+  width: 100%;
+  height: 100%;
+}
+#add-button:hover::before,
+#proceed-button:hover::before {
+  transition-delay: 0s, 0s, 0.25s;
+}
+#add-button:hover::after,
+#proceed-button:hover::after {
+  transition-delay: 0s, 0.25s, 0s;
+}
+#add-button,
+#proceed-button {
+  background: none;
+  border: none;
   cursor: pointer;
+  line-height: 1.5;
+  font-size: small;
+  padding: 0.5em 0.5em;
+  letter-spacing: 0.05rem;
+}
+#add-button:focus,
+#proceed-button:focus {
   outline: none;
 }
 
-.button:hover {
-  border: 0.1rem #808080 solid;
-}
-
-.button.primary {
-  background-color: #f0c040;
-  outline: none;
-}
-
-#bought-course {
-  background-color: blue;
-  color: white;
-  cursor: default;
-  border: none;
-}
-
+/* in cart button */
 #in-cart-course {
-  background-color: greenyellow;
+  box-shadow: inset 0 0 0 2px #6223f7;
+  color: #6223f7;
+  transition: color 0.25s 0.0833333333s;
+  position: relative;
+  background-color: #f0f0f0;
   cursor: default;
   border: none;
 }
+/* bought button */
+#bought-course {
+  box-shadow: inset 0 0 0 2px #015e15;
+  color: #015e15;
+  transition: color 0.25s 0.0833333333s;
+  position: relative;
+  background-color: #f0f0f0;
+  cursor: default;
+  border: none;
+}
+
+/*remove button*/
+
+#remove-button {
+  box-shadow: inset 0 0 0 2px #606263;
+  color: #606263;
+  transition: color 0.25s 0.0833333333s;
+  position: relative;
+}
+
+#remove-button::before,
+#remove-button::after {
+  border: 0 solid transparent;
+  box-sizing: border-box;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+#remove-button::before {
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+#remove-button::after {
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+#remove-button:hover {
+  color: crimson;
+}
+#remove-button:hover::before,
+#remove-button:hover::after {
+  border-color: crimson;
+  transition: border-color 0s, width 0.25s, height 0.25s;
+  width: 100%;
+  height: 100%;
+}
+#remove-button:hover::before {
+  transition-delay: 0s, 0s, 0.25s;
+}
+#remove-button:hover::after {
+  transition-delay: 0s, 0.25s, 0s;
+}
+#remove-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1.5;
+  font-size: small;
+  padding: 0.5em 0.5em;
+  letter-spacing: 0.05rem;
+}
+#remove-button:focus {
+  outline: none;
+}
+
+/* pay button */
+.btn-submit {
+  background: white;
+  box-shadow: inset 0 0 0 1px #1ecd97;
+  color: #1ecd97;
+  border: 0;
+  width: 100%;
+  height: 17%;
+  font-size: 80%;
+  border-radius: 100px;
+  transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  outline: none;
+}
+.btn-submit:hover {
+  background: #1ecd97;
+  color: white;
+}
+
+/* pay button end */
 
 .filter,
 .cart-header {
@@ -194,6 +337,7 @@ p {
   padding: 0;
   width: 100%;
   list-style-type: none;
+  font-size: small;
 }
 
 .cart-items img {

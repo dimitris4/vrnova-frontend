@@ -27,7 +27,7 @@ export default class CourseList extends Component {
 
      styling =(id)=> this.state.disabled.indexOf(id)!==-1 
         ? "in-cart-course"
-        : "ghghg"; 
+        : "add-button"; 
           
 
 
@@ -45,7 +45,7 @@ export default class CourseList extends Component {
                                             <p>{course.title}</p>
                                         </a>
                                         <div className="course-price">
-                                            <div>{formatCurrency(course.price)}</div>
+                                            <div id="price-of-course">{formatCurrency(course.price)}</div>
                                             {bought.some(e => e.id === course.id)
                                                 ?   <button className="button primary" disabled={true} id="bought-course">Bought</button>
                                                 :   <>{cartItems.some(e => e.id === course.id)

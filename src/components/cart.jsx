@@ -36,7 +36,7 @@ export default class Cart extends Component {
                                     <div>{item.title}</div>
                                     <div className="right">
                                         {formatCurrency(item.price)}{" "}
-                                        <button className="button" onClick={()=>this.props.removeFromCart(item)}>
+                                        <button id="remove-button" onClick={()=>this.props.removeFromCart(item)}>
                                             Remove
                                         </button>
                                     </div>
@@ -54,7 +54,7 @@ export default class Cart extends Component {
                             Total:{" "}
                             {formatCurrency(cartItems.reduce((a,c) => a + c.price*c.count,0))}
                         </div>
-                        <button onClick={()=>this.setState({showCheckout:true})} className="button primary">Proceed</button>        
+                        <button onClick={()=>this.setState({showCheckout:true})} className="button primary" id="proceed-button">Proceed</button>        
                     </div>
                 </div>
                     {this.state.showCheckout && (<PaymentForm user={user} items={cartItems} />)}

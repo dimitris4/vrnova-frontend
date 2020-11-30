@@ -166,7 +166,8 @@ export default class PaymentForm extends Component {
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              <button className="btn btn-primary btn-block">PAY</button>
+              {/* <button className="btn btn-primary btn-block">PAY</button> */}
+              <button className="btn-submit">Submit</button>
             </div>
           </form>
           {/* {formData && (
