@@ -4,20 +4,31 @@ import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import "../index.css";
+import axios from "axios";
+import authHeader from "../services/auth-header";
+const API_URL = "http://localhost:8080/";
 
 export default class CourseList extends Component {
+
+  
 
     constructor(props){
         super(props);
         this.state = {
             course: null,
-            bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[],
+            bought: [],
             cartItems: JSON.parse(localStorage.getItem('cartItems'))? JSON.parse(localStorage.getItem('cartItems')):[],
             disabled: [],
             label: ''
         };
+        
+
      }
 
+     componentDidMount() {
+        axios.post(API_URL +'orders/my-courses', {userId:localStorage.getItem('id')}, { headers: authHeader()}).then(resp =>{this.setState({bought: resp.data});
+    });
+    }
     
      openModal = (course) => this.setState({course});
 
@@ -32,7 +43,10 @@ export default class CourseList extends Component {
 
 
     render() {
-        const{course, bought, cartItems, disabled, label}=this.state;
+        // console.log(this.props.user.id);
+        
+        const{isLoading, course, bought, cartItems, disabled, label}=this.state;
+
         return (
             <div>
                 <Fade bottom cascade>
@@ -46,7 +60,7 @@ export default class CourseList extends Component {
                                         </a>
                                         <div className="course-price">
                                             <div id="price-of-course">{formatCurrency(course.price)}</div>
-                                            {bought.some(e => e.id === course.id)
+                                            {bought.length>0 && bought.some(e => e.id === course.id)
                                                 ?   <button className="button primary" disabled={true} id="bought-course">Bought</button>
                                                 :   <>{cartItems.some(e => e.id === course.id)
                                                         ? <button className="button primary" disabled={true} id="in-cart-course">In cart</button> 
@@ -61,7 +75,7 @@ export default class CourseList extends Component {
         
                     
                 </Fade>
-                {course && <Modal isOpen={true} onRequestClose={this.closeModal}>
+                {course && <Modal isOpen={true} onRequestClose={this.closeModal} >
                     <Zoom>
                         <button className="close-modal" onClick={this.closeModal}>x</button>
                         <div className="course-details">

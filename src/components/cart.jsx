@@ -57,7 +57,7 @@ export default class Cart extends Component {
                         <button onClick={()=>this.setState({showCheckout:true})} className="button primary" id="proceed-button">Proceed</button>        
                     </div>
                 </div>
-                    {this.state.showCheckout && (<PaymentForm user={user} items={cartItems} />)}
+                    {this.state.showCheckout && (<PaymentForm user={user} items={cartItems}/>)}
                 </div>
                 )}
              </div>

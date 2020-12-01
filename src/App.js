@@ -64,7 +64,7 @@ class App extends Component {
       <Router history={history}>
           <nav className="navbar navbar-expand-sm container-fluid" >
             <Link to={"/"} className="navbar-brand" >
-              <img src="logo1_transparent.png" className="d-inline-block align-top"/>{' '}
+              <img src="logo1_transparent.png" alt="" className="d-inline-block align-top"/>{' '}
             </Link>
             <div className="navbar-nav mr-auto">
             {currentUser && (

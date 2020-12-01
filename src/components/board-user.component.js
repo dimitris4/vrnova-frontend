@@ -30,14 +30,19 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
+      course:null,
       content: "",
-      bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[],
+      bought:[],
+      // bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[],
     };
+    
+    axios.post(API_URL +'orders/my-courses/', {userId:localStorage.getItem('id')}, { headers: authHeader()}).then(resp => this.setState({bought: resp.data}));
   }
 
   
 
   componentDidMount() {
+
     UserService.getUserBoard().then(
       response => {
         this.setState({
@@ -55,40 +60,150 @@ export default class BoardUser extends Component {
         });
       }
     );
+    axios.post(API_URL +'orders/my-courses', {userId:localStorage.getItem('id')}, { headers: authHeader()}).then(resp =>{this.setState({bought: resp.data});
+  });
   }
+
+  openModal = (course) => this.setState({course});
+
+  closeModal= () => this.setState({course:null});
   
 
   render() {
     const { user : currentUser } = this.props;
-    const{bought} = this.state;
+    const{bought, course} = this.state;
     return (
       <div>
          <Fade bottom cascade>
                         <ul className="myCourses-list">
-                            {bought.map(course =>(
+                            {bought.length>0 ? bought.map(course =>(
                                 <li key={course.id} className="myCourses-list-item">
-                                   <div class="wrapper">
-                                     <div class="item pic1 "><img src={course.image} class="rounded img-fluid" alt="Picture" ></img></div>
-                                     <div class="item name1"><a href="https://google.com" class="text-decoration-none text-info">{course.title}</a></div>
-                                     <div class="item teacher1 text-info"><i class="fas fa-chalkboard-teacher"></i> {course.teacher}</div>
-                                     <div class="item time1 text-info"><i class="fa fa-clock-o"></i> 2:30:00</div>
-                                     <div class="item complete1 text-info"> <i class="far fa-check-circle"></i> 0% Completed </div>
+                                   <div className="wrapper">
+                                     <div className="item pic1 "><img src={course.image} className="rounded img-fluid" alt="Picture" ></img></div>
+                                     <div className="item name1"><a href={"#"+course.id+"/start"} onClick={()=>this.openModal(course)} className="text-decoration-none text-info">{course.title}</a></div>
+                                     <div className="item teacher1 text-info"><i className="fas fa-chalkboard-teacher"></i> {course.teacher}</div>
+                                     <div className="item time1 text-info"><i className="fa fa-clock-o"></i> {course.duration}</div>
+                                     <div className="item complete1 text-info"> <i className="far fa-check-circle"></i> {course.progress}% Completed </div>
                                   </div>
                                 </li>
-                            ))}
+                            )):<h1>No courses bought</h1>}
                         </ul>
          </Fade>
 
+{course && <Modal isOpen={true} onRequestClose={this.closeModal} >
+    <Zoom>
+        <div className="row">
+            <div className="course">
+            
+                <span className="modal-course-title">
+                 <i className="fa fa-file-text"></i>&nbsp;
+                 {course.title}{' '}with{' '}{course.teacher}{' '}({course.duration})
+               </span>
 
-    {/* <div>
-        <ul class="pagination justify-content-end" style={{margin:'20px'}}>
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </div> */}
+    
+    <ul className="section-list">
+      
+      <li className="" >
+        <a className="item"  href="">
+          <span className="status-container" aria-label="Completed item">
+            <span className="status-icon">&nbsp;</span>
+          </span>
+          <div className="title-container">
+            <div className="btn-primary btn-sm pull-right">
+              Start
+            </div>
+          <span className="lecture-icon">
+          <i className="fa fa-youtube-play"></i>
+            </span>
+            <span className="lecture-name">Part 1(2:00)</span>
+          </div>
+        </a>
+      </li>
+      
+      <li className="" >
+        <a className="item"  href="">
+          <span className="status-container" aria-label="Completed item">
+            <span className="status-icon">&nbsp;</span>
+          </span>
+          <div className="title-container">
+            <div className="btn-primary btn-sm pull-right">
+              Start
+            </div>
+          <span className="lecture-icon">
+          <i className="fa fa-youtube-play"></i>
+            </span>
+            <span className="lecture-name">Part 2(2:00)</span>
+          </div>
+        </a>
+      </li>
+
+      <li className="" >
+        <a className="item"  href="">
+          <span className="status-container" aria-label="Completed item">
+            <span className="status-icon">&nbsp;</span>
+          </span>
+          <div className="title-container">
+            <div className="btn-primary btn-sm pull-right">
+              Start
+            </div>
+          <span className="lecture-icon">
+          <i className="fa fa-youtube-play"></i>
+            </span>
+            <span className="lecture-name">Part 3(1:30)</span>
+          </div>
+        </a>
+      </li>
+      
+      <li className="" >
+        <a className="item"  href="">
+          <span className="status-container" aria-label="Completed item">
+            <span className="status-icon">&nbsp;</span>
+          </span>
+          <div className="title-container">
+            <div className="btn-primary btn-sm pull-right">
+              Open
+            </div>
+          <span className="lecture-icon">
+          <i className="fa fa-file-text"></i>
+            </span>
+            <span className="lecture-name">Source code</span>
+          </div>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+                        {/* <button className="close-modal" onClick={this.closeModal}>x</button>
+                        <div className="course-details">
+                            <img src={course.image} alt={course.title}></img>
+                            <div className="course-details-description">
+                                <p className="modal-course-title">
+                                    <strong>{course.title}</strong>
+                                </p>      
+                                <p>
+                                    Category:{" "}
+                                    {course.categoryNames.map((x)=>(
+                                        <span>
+                                            {" "}
+                                            <button className="button">{x}</button>
+                                        </span>
+                                    ))}
+                                </p>
+                                <p>
+                                    Your teacher:{" "}
+                                    {course.teacher}
+                                </p>
+                                <div className="course-price">
+                                    <div>
+                                        {formatCurrency(course.price)}
+                                    </div>
+                          
+                                        </div>
+                            </div>
+                        </div> */}
+                    </Zoom>
+                </Modal>}
 
 
         <Footer/>

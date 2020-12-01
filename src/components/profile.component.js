@@ -79,12 +79,12 @@ class Profile extends Component {
 
   showDeactivate(user) {
     if (!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR') ) {
-      return <div class="tab-content py-4">
-              <div class="tab-pane active" id="profile">
-                <h5 style={{fontWeight: 'bold', fontSize:"80%"}} class="mb-3">By clicking deactivate your profile will be deleted.</h5>
-                <div class="row">
-                  <div class="col-md-6">
-                     <button type="button" class="btn btn-danger" style={{fontWeight: 'bold', fontSize:"80%"}} onClick={()=>{this.setState({showDeactivateDialog:true})}}>Deactivate</button>
+      return <div className="tab-content py-4">
+              <div className="tab-pane active" id="profile">
+                <h5 style={{fontWeight: 'bold', fontSize:"80%"}} className="mb-3">By clicking deactivate your profile will be deleted.</h5>
+                <div className="row">
+                  <div className="col-md-6">
+                     <button type="button" className="btn btn-danger" style={{fontWeight: 'bold', fontSize:"80%"}} onClick={()=>{this.setState({showDeactivateDialog:true})}}>Deactivate</button>
                      <BootBox show={this.state.showDeactivateDialog} 
                         message="Are you sure you want to deactivate your account?
                           WARNING: Your account will be deleted and you will be logged out!"
@@ -134,6 +134,7 @@ class Profile extends Component {
 
   render() {
     const { user : currentUser } = this.props;
+    localStorage.setItem("id", this.props.user.id);
     
 
     
@@ -214,7 +215,7 @@ class Profile extends Component {
                         <span className='error'>{errors.password2}</span>}   
                   </div>
                   <div>
-                    <input type="submit" value="SAVE" class="btn btn-primary" style={{fontWeight: 'bold', fontSize:"80%"}}style={{fontWeight: 'bold', fontSize:"80%", marginTop: 10, marginLeft:43}} />
+                    <input type="submit" value="SAVE" className="btn btn-primary" style={{fontWeight: 'bold', fontSize:"80%"}}style={{fontWeight: 'bold', fontSize:"80%", marginTop: 10, marginLeft:43}} />
                   </div> 
                 </form>
               </div>

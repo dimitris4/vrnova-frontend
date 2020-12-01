@@ -167,27 +167,27 @@ render() {
         }
       /> 
       <img id="learning-pc" src={this.imagesPath[imageName]} onClick={this.changeImage}></img>
-        <div class="title" >
-            <div class="line_1">      
-                     <div class="letter letter-0">L</div>  
-                     <div class="letter letter-1">E</div>
-                     <div class="letter letter-2">A</div>
-                     <div class="letter letter-3">R</div> 
-                     <div class="letter letter-4">N</div>  	
-                     <div class="letter letter-5"> </div>
-                     <div class="letter letter-6">W</div>
-                     <div class="letter letter-7">I</div>
-                     <div class="letter letter-8">T</div>
-                     <div class="letter letter-9">H</div>
+        <div className="title" >
+            <div className="line_1">      
+                     <div className="letter letter-0">L</div>  
+                     <div className="letter letter-1">E</div>
+                     <div className="letter letter-2">A</div>
+                     <div className="letter letter-3">R</div> 
+                     <div className="letter letter-4">N</div>  	
+                     <div className="letter letter-5"> </div>
+                     <div className="letter letter-6">W</div>
+                     <div className="letter letter-7">I</div>
+                     <div className="letter letter-8">T</div>
+                     <div className="letter letter-9">H</div>
             </div>
                 
-            <div class="line_2"> 
-                     <div class="letter letter-8">V</div>
-                     <div class="letter letter-9">R</div>
-                     <div class="letter letter-10">N</div>
-                     <div class="letter letter-11">O</div>
-                     <div class="letter letter-12">V</div>
-                     <div class="letter letter-13">A</div>
+            <div className="line_2"> 
+                     <div className="letter letter-8">V</div>
+                     <div className="letter letter-9">R</div>
+                     <div className="letter letter-10">N</div>
+                     <div className="letter letter-11">O</div>
+                     <div className="letter letter-12">V</div>
+                     <div className="letter letter-13">A</div>
             </div>
         </div>
         <Footer />

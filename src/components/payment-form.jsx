@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import { Redirect } from 'react-router-dom';
 import Card from "react-credit-cards";
 import "../cards.css";
 import "react-credit-cards/es/styles-compiled.css";
@@ -76,24 +77,28 @@ export default class PaymentForm extends Component {
 
  closeModal=()=>{
   const data = {userId: this.props.user.id, items : this.props.items };
-  const bought = this.props.items;
-  const existingBought = JSON.parse(localStorage.getItem('bought'))?JSON.parse(localStorage.getItem('bought')):[];
-  existingBought.push(...bought);
-  localStorage.setItem("bought", JSON.stringify(existingBought));
-
+ 
   //sending data to backend
-  axios.post(API_URL + "orders/save", data, { headers: authHeader() } );
+  axios.post(API_URL + "orders/save", data, { headers: authHeader() } ).then(()=>{localStorage.setItem("cartItems", null); window.location.reload();});
 
-  localStorage.setItem("cartItems", null);
-  window.location.reload();
+  
+
+  
+  // window.location.href = "/courses";
+  // window.location.reload();
+
 
   //Closing the modal (not needed anymore as the page refreshes above, but keep for future reference)
-  // this.setState({isPaid:false});
+  // this.setState({redirect:true});
+  // window.location.reload();
  };
 
   render() {
-    const { name, number, expiry, cvc, focused, issuer, formData, isPaid } = this.state;
+    const { redirect, name, number, expiry, cvc, focused, issuer, formData, isPaid } = this.state;
   const {items, user }= this.props;
+
+  // if(redirect)
+  //   return <Redirect push to="/courses"/> 
 
     return (
       <div>
@@ -183,7 +188,7 @@ export default class PaymentForm extends Component {
                           <h1 className="card__msg">Payment Complete</h1>
                            <h2 className="card__submsg">Thank you for your transfer</h2>
                                <div className="card__body">
-                                  <img src="./logo1_transparent.png" class="card__avatar"/>
+                                  <img src="./logo1_transparent.png" className="card__avatar"/>
                                    <div className="card__recipient-info">
                                  <p className="card__recipient">{this.state.name}</p>
                                          <p className="card__email">{user.email}</p>
@@ -191,14 +196,14 @@ export default class PaymentForm extends Component {
                                   <h1 className="card__price">{formatCurrency(items.reduce((a,c) => a + c.price*c.count,0))}</h1>
                                   <p className="card__method">Payment method</p>
                                   <div className="card__payment">
-                                      <img src="./credit.png" class="card__credit-card"/>
+                                      <img src="./credit.png" className="card__credit-card"/>
                                       <div className="card__card-details">
                                         <p className="card__card-type">Credit / debit card</p>
                                         <p className="card__card-number">Card ending in **{this.state.number.slice(-2)}</p>          
                                   </div>
                               </div>
                           </div>
-                          <div class="card__tags">
+                          <div className="card__tags">
                               <span className="card__tag">completed</span>
                               <span className="card__tag">#123456789</span>        
                           </div>
