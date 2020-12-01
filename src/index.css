@@ -469,24 +469,33 @@ img#title-image {
 .section-list {
   list-style-type: none;
   padding: 0;
-}
-
-.section-list {
   display: flex;
   /* flex-wrap: wrap; */
   flex-direction: column;
   justify-content: left;
   border-top: 1px solid black;
+  cursor: pointer;
 }
 
 .row {
-  max-width: 50%;
+  max-width: 46%;
   max-height: 100%;
   padding-right: 10px;
   border-right: 5px solid purple;
 }
 
+.video-box {
+  position: absolute;
+  right: 5rem;
+  top: 1rem;
+}
+
 .ReactModal__Content {
   padding-left: 1.5% !important;
   padding-top: 0% !important;
+}
+
+.checkbox-inline {
+  font-size: small;
+  margin: 0;
 }
