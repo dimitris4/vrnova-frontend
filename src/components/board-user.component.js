@@ -23,6 +23,7 @@ import authHeader from "../services/auth-header";
 
 import UserService from "../services/user.service";
 import Footer from "./footer";
+import YoutubePlayer from './youtube';
 const API_URL = "http://localhost:8080/";
 
 export default class BoardUser extends Component {
@@ -36,7 +37,7 @@ export default class BoardUser extends Component {
       // bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[],
     };
     
-    axios.post(API_URL +'orders/my-courses/', {userId:localStorage.getItem('id')}, { headers: authHeader()}).then(resp => this.setState({bought: resp.data}));
+    axios.post(API_URL +'orders/my-courses', {userId:localStorage.getItem('id')}, { headers: authHeader()}).then(resp => this.setState({bought: resp.data}));
   }
 
   
@@ -92,9 +93,10 @@ export default class BoardUser extends Component {
 
 {course && <Modal isOpen={true} onRequestClose={this.closeModal} >
     <Zoom>
+    <button className="close-modal" onClick={this.closeModal}>x</button>
         <div className="row">
             <div className="course">
-            
+            <img id="title-image" src={course.image} alt={course.title}></img>
                 <span className="modal-course-title">
                  <i className="fa fa-file-text"></i>&nbsp;
                  {course.title}{' '}with{' '}{course.teacher}{' '}({course.duration})
@@ -104,12 +106,12 @@ export default class BoardUser extends Component {
     <ul className="section-list">
       
       <li className="" >
-        <a className="item"  href="">
+        <a className="item">
           <span className="status-container" aria-label="Completed item">
             <span className="status-icon">&nbsp;</span>
           </span>
           <div className="title-container">
-            <div className="btn-primary btn-sm pull-right">
+            <div className="btn-primary btn-sm float-right">
               Start
             </div>
           <span className="lecture-icon">
@@ -172,6 +174,7 @@ export default class BoardUser extends Component {
       </li>
       
     </ul>
+    <YoutubePlayer/>
   </div>
 </div>
                         {/* <button className="close-modal" onClick={this.closeModal}>x</button>
