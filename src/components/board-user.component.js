@@ -23,7 +23,6 @@ import authHeader from "../services/auth-header";
 
 import UserService from "../services/user.service";
 import Footer from "./footer";
-import YoutubePlayer from './youtube';
 const API_URL = "http://localhost:8080/";
 
 export default class BoardUser extends Component {
@@ -174,7 +173,6 @@ export default class BoardUser extends Component {
       </li>
       
     </ul>
-    <YoutubePlayer/>
   </div>
 </div>
                         {/* <button className="close-modal" onClick={this.closeModal}>x</button>
