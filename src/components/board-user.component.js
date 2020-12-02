@@ -1,11 +1,3 @@
-// <link rel="stylesheet" href="styles.css">
-// <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-// <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-// <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-// <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 import React, { Component } from "react";
 import formatCurrency from "../utils";
 import Fade from "react-reveal/Fade";
@@ -15,7 +7,7 @@ import YouTube from "react-youtube";
 import "../index.css";
 import axios from "axios";
 import authHeader from "../services/auth-header";
-import { ChangeEvent } from 'react';
+import { ChangeEvent } from "react";
 
 import UserService from "../services/user.service";
 import Footer from "./footer";
@@ -26,14 +18,13 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
-      firstChk:'',
-      secondChk:'',
-      thirdChk:'',
+      firstChk: "",
+      secondChk: "",
+      thirdChk: "",
       videoId: "",
       course: null,
       content: "",
       bought: [],
-      // bought: JSON.parse(localStorage.getItem('bought'))? JSON.parse(localStorage.getItem('bought')):[],
     };
 
     axios
@@ -44,8 +35,6 @@ export default class BoardUser extends Component {
       )
       .then((resp) => this.setState({ bought: resp.data }));
   }
-
-  
 
   componentDidMount() {
     UserService.getUserBoard().then(
@@ -77,70 +66,87 @@ export default class BoardUser extends Component {
   }
 
   openModal = (course) => {
-    this.setState({ course, firstChk:false, secondChk:false, thirdChk:false});
-  }
+    this.setState({
+      course,
+      firstChk: false,
+      secondChk: false,
+      thirdChk: false,
+    });
+  };
 
   closeModal = () => {
-    let progress=this.state.course.progress;
+    let progress = this.state.course.progress;
 
-    if(this.state.firstChk===true)
-      progress+=41;
-    if(this.state.secondChk===true)
-      progress+=39;
-    if(this.state.thirdChk===true)
-      progress+=20;        
+    if (this.state.firstChk === true) progress += 41;
+    if (this.state.secondChk === true) progress += 39;
+    if (this.state.thirdChk === true) progress += 20;
 
-    const data = {userId:localStorage.getItem('id'),
-                  courseId:this.state.course.id,
-                  progress: progress
-                }
+    const data = {
+      userId: localStorage.getItem("id"),
+      courseId: this.state.course.id,
+      progress: progress,
+    };
     console.log(data);
-    axios.post(API_URL +'orders/save-progress', data, { headers: authHeader()}).then(() =>{
-      this.setState({ course: null });
-      window.location.reload();
-    });   
-             
-    
-  }
-  
+    axios
+      .post(API_URL + "orders/save-progress", data, { headers: authHeader() })
+      .then(() => {
+        this.setState({ course: null });
+        window.location.reload();
+      });
+  };
 
   _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
 
-  handleChange1=(event)=>{
-      console.log(event.target.checked);
-      this.setState({firstChk:event.target.checked});
-  };
-
-  handleChange2=(event)=>{
+  handleChange1 = (event) => {
     console.log(event.target.checked);
-      this.setState({secondChk:event.target.checked});
+    this.setState({ firstChk: event.target.checked });
   };
 
-  handleChange3=(event)=>{
+  handleChange2 = (event) => {
     console.log(event.target.checked);
-      this.setState({thirdChk:event.target.checked});
+    this.setState({ secondChk: event.target.checked });
   };
 
-  checkStatusChecked1=(course)=>{
-    if(course.progress===100||course.progress===80||course.progress===41||course.progress===61)
-          return true;
-    return false;      
-  }
+  handleChange3 = (event) => {
+    console.log(event.target.checked);
+    this.setState({ thirdChk: event.target.checked });
+  };
 
-  checkStatusChecked2=(course)=>{
-    if(course.progress===100||course.progress===80||course.progress===39||course.progress===59)
-          return true;
-    return false;      
-  }
+  checkStatusChecked1 = (course) => {
+    if (
+      course.progress === 100 ||
+      course.progress === 80 ||
+      course.progress === 41 ||
+      course.progress === 61
+    )
+      return true;
+    return false;
+  };
 
-  checkStatusChecked3=(course)=>{
-    if(course.progress===100||course.progress===20||course.progress===59||course.progress===61)
-          return true;
-    return false;      
-  }
+  checkStatusChecked2 = (course) => {
+    if (
+      course.progress === 100 ||
+      course.progress === 80 ||
+      course.progress === 39 ||
+      course.progress === 59
+    )
+      return true;
+    return false;
+  };
+
+  checkStatusChecked3 = (course) => {
+    if (
+      course.progress === 100 ||
+      course.progress === 20 ||
+      course.progress === 59 ||
+      course.progress === 61
+    )
+      return true;
+    return false;
+  };
 
   render() {
     const { user: currentUser } = this.props;
@@ -216,10 +222,12 @@ export default class BoardUser extends Component {
                 </span>
 
                 <ul className="section-list">
-                  <li className="">
+                  <li className="yt-link">
                     <a
                       className="item"
-                      onClick={() => this.setState({ videoId: course.videoUrls[0] })}
+                      onClick={() =>
+                        this.setState({ videoId: course.videoUrls[0] })
+                      }
                     >
                       <span
                         className="status-container"
@@ -238,14 +246,26 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {this.checkStatusChecked1(course)?<p className='completion-status'><i class="fa fa-check" aria-hidden="true"></i>Completed</p>:<label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange1(event)}/> Mark as completed</label>}
-                  
-                  
+                  {this.checkStatusChecked1(course) ? (
+                    <p className="completion-status">
+                      <i class="fa fa-check" aria-hidden="true"></i>Completed
+                    </p>
+                  ) : (
+                    <label className="checkbox-inline">
+                      <input
+                        type="checkbox"
+                        onChange={(event) => this.handleChange1(event)}
+                      />{" "}
+                      Mark as completed
+                    </label>
+                  )}
 
-                  <li className="">
+                  <li className="yt-link">
                     <a
                       className="item"
-                      onClick={() => this.setState({ videoId: course.videoUrls[1] })}
+                      onClick={() =>
+                        this.setState({ videoId: course.videoUrls[1] })
+                      }
                     >
                       <span
                         className="status-container"
@@ -264,12 +284,26 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {this.checkStatusChecked2(course)?<p className='completion-status'><i class="fa fa-check" aria-hidden="true"></i>Completed</p>:<label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange2(event)}/> Mark as completed</label>}
+                  {this.checkStatusChecked2(course) ? (
+                    <p className="completion-status">
+                      <i class="fa fa-check" aria-hidden="true"></i>Completed
+                    </p>
+                  ) : (
+                    <label className="checkbox-inline">
+                      <input
+                        type="checkbox"
+                        onChange={(event) => this.handleChange2(event)}
+                      />{" "}
+                      Mark as completed
+                    </label>
+                  )}
 
-                  <li className="">
+                  <li className="yt-link">
                     <a
                       className="item"
-                      onClick={() => this.setState({ videoId: course.videoUrls[2] })}
+                      onClick={() =>
+                        this.setState({ videoId: course.videoUrls[2] })
+                      }
                     >
                       <span
                         className="status-container"
@@ -288,12 +322,26 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {this.checkStatusChecked3(course)?<p className='completion-status'><i class="fa fa-check" aria-hidden="true"></i>Completed</p>:<label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange3(event)}/> Mark as completed</label>}
+                  {this.checkStatusChecked3(course) ? (
+                    <p className="completion-status">
+                      <i class="fa fa-check" aria-hidden="true"></i>Completed
+                    </p>
+                  ) : (
+                    <label className="checkbox-inline">
+                      <input
+                        type="checkbox"
+                        onChange={(event) => this.handleChange3(event)}
+                      />{" "}
+                      Mark as completed
+                    </label>
+                  )}
 
                   <li className="">
                     <a
                       className="item"
                       href="https://github.com/dimitris4/vrnova-frontend"
+                      target="_blank" 
+                      rel="noopener noreferrer"
                     >
                       <span
                         className="status-container"

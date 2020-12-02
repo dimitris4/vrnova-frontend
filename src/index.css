@@ -328,11 +328,6 @@ div#price-of-course {
   display: flex;
 }
 
-.cart-header {
-  margin-top: 1.1rem;
-  font-family: "Font Awesome 5 Free";
-}
-
 .cart-items {
   padding: 0;
   width: 100%;
@@ -474,6 +469,9 @@ img#title-image {
   flex-direction: column;
   justify-content: left;
   border-top: 1px solid black;
+}
+
+.yt-link {
   cursor: pointer;
 }
 
@@ -485,7 +483,7 @@ img#title-image {
   max-width: 46%;
   max-height: 100%;
   padding-right: 10px;
-  border-right: 5px solid purple;
+  border-right: 2px solid purple;
 }
 
 .video-box {
