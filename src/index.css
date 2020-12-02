@@ -499,7 +499,12 @@ img#title-image {
   padding-top: 0% !important;
 }
 
-.checkbox-inline {
+.completion-status {
   font-size: small;
+  color: #015e15;
+}
+
+.checkbox-inline {
+  font-size: x-small;
   margin: 0;
 }

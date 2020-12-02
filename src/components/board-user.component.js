@@ -26,7 +26,6 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
-      dummy: 33,
       firstChk:'',
       secondChk:'',
       thirdChk:'',
@@ -77,9 +76,33 @@ export default class BoardUser extends Component {
       });
   }
 
-  openModal = (course) => this.setState({ course });
+  openModal = (course) => {
+    this.setState({ course, firstChk:false, secondChk:false, thirdChk:false});
+  }
 
-  closeModal = () => this.setState({ course: null });
+  closeModal = () => {
+    let progress=this.state.course.progress;
+
+    if(this.state.firstChk===true)
+      progress+=41;
+    if(this.state.secondChk===true)
+      progress+=39;
+    if(this.state.thirdChk===true)
+      progress+=20;        
+
+    const data = {userId:localStorage.getItem('id'),
+                  courseId:this.state.course.id,
+                  progress: progress
+                }
+    console.log(data);
+    axios.post(API_URL +'orders/save-progress', data, { headers: authHeader()}).then(() =>{
+      this.setState({ course: null });
+      window.location.reload();
+    });   
+             
+    
+  }
+  
 
   _onReady(event) {
     // access to player in all event handlers via event.target
@@ -87,26 +110,18 @@ export default class BoardUser extends Component {
   }
 
   handleChange1=(event)=>{
-    // event.preventDefault();
-    if(event.target.checked){
-      console.log('on');
-      this.setState({firstChk: event.target.checked});
-    }else
-    console.log('off');
+      console.log(event.target.checked);
+      this.setState({firstChk:event.target.checked});
   };
 
   handleChange2=(event)=>{
-    if(event.target.checked){
-      console.log(event.target.checked);
+    console.log(event.target.checked);
       this.setState({secondChk:event.target.checked});
-    }
   };
 
   handleChange3=(event)=>{
-    if(event.target.checked){
-      console.log(event.target.checked);
+    console.log(event.target.checked);
       this.setState({thirdChk:event.target.checked});
-    }
   };
 
   checkStatusChecked1=(course)=>{
@@ -204,7 +219,7 @@ export default class BoardUser extends Component {
                   <li className="">
                     <a
                       className="item"
-                      onClick={() => this.setState({ videoId: "fBCwfoBr2ng" })}
+                      onClick={() => this.setState({ videoId: course.videoUrls[0] })}
                     >
                       <span
                         className="status-container"
@@ -223,14 +238,14 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  <label className="checkbox-inline"><input type="checkbox" checked={this.checkStatusChecked1(course)} onChange={event=>this.handleChange1(event)}/> Completed</label>
+                  {this.checkStatusChecked1(course)?<p className='completion-status'><i class="fa fa-check" aria-hidden="true"></i>Completed</p>:<label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange1(event)}/> Mark as completed</label>}
                   
                   
 
                   <li className="">
                     <a
                       className="item"
-                      onClick={() => this.setState({ videoId: "nH7qJHx-h5s" })}
+                      onClick={() => this.setState({ videoId: course.videoUrls[1] })}
                     >
                       <span
                         className="status-container"
@@ -249,12 +264,12 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  <label className="checkbox-inline"><input type="checkbox" checked={this.checkStatusChecked2(course)} onChange={event=>this.handleChange2(event)} /> Completed</label>
+                  {this.checkStatusChecked2(course)?<p className='completion-status'><i class="fa fa-check" aria-hidden="true"></i>Completed</p>:<label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange2(event)}/> Mark as completed</label>}
 
                   <li className="">
                     <a
                       className="item"
-                      onClick={() => this.setState({ videoId: "UFEby2zo-9E" })}
+                      onClick={() => this.setState({ videoId: course.videoUrls[2] })}
                     >
                       <span
                         className="status-container"
@@ -273,7 +288,7 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  <label className="checkbox-inline"><input type="checkbox" checked={this.checkStatusChecked3(course)} onChange={event=>this.handleChange3(event)} /> Completed</label>
+                  {this.checkStatusChecked3(course)?<p className='completion-status'><i class="fa fa-check" aria-hidden="true"></i>Completed</p>:<label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange3(event)}/> Mark as completed</label>}
 
                   <li className="">
                     <a
