@@ -42,11 +42,12 @@ export default class Filter extends Component {
                     Filter by teacher<br></br>  
                     <select value={this.props.teacher} onChange={this.props.filterCourses}>
                     <option value="ALL">ALL</option>
-                        <option value="Anna Andreasen">Anna Andreasen</option>
-                        <option value="Alex Sandrovschii">Alex Sandrovschii</option>
-                        <option value="Dimitrios Gkiokas">Dimitrios Gkiokas</option>
-                        <option value="Elias Martidis">Elias Martidis</option>
-                        <option value="Max Payne">Max Payne</option>
+                        <option value="Avetis Ghukasyan">Avetis Ghukasyan</option>
+                        <option value="John Smith">John Smith</option>
+                        <option value="Mosh Hamedani">Mosh Hamedani</option>
+                        <option value="Nelson Djalo">Nelson Djalo</option>
+                        <option value="Quentin Valembois">Quentin Valembois</option>
+                        <option value="Zach Gollwitzer">Zach Gollwitzer</option>
                     </select>
                 </div>
             </div>

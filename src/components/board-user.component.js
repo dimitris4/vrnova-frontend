@@ -26,7 +26,8 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
-      firstChk:'on',
+      dummy: 33,
+      firstChk:'',
       secondChk:'',
       thirdChk:'',
       videoId: "",
@@ -44,6 +45,8 @@ export default class BoardUser extends Component {
       )
       .then((resp) => this.setState({ bought: resp.data }));
   }
+
+  
 
   componentDidMount() {
     UserService.getUserBoard().then(
@@ -87,22 +90,22 @@ export default class BoardUser extends Component {
     // event.preventDefault();
     if(event.target.checked){
       console.log('on');
-      this.setState({firstChk: event.target.value});
+      this.setState({firstChk: event.target.checked});
     }else
     console.log('off');
   };
 
   handleChange2=(event)=>{
     if(event.target.checked){
-      console.log('2');
-      this.setState({secondChk:event.target.value});
+      console.log(event.target.checked);
+      this.setState({secondChk:event.target.checked});
     }
   };
 
   handleChange3=(event)=>{
     if(event.target.checked){
-      console.log('3');
-      this.setState({thirdChk:event.target.value});
+      console.log(event.target.checked);
+      this.setState({thirdChk:event.target.checked});
     }
   };
 
@@ -116,6 +119,7 @@ export default class BoardUser extends Component {
         autoplay: 1,
       },
     };
+
     return (
       <div>
         <Fade bottom cascade>
