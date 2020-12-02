@@ -477,7 +477,11 @@ img#title-image {
   cursor: pointer;
 }
 
-.row {
+.b-course {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   max-width: 46%;
   max-height: 100%;
   padding-right: 10px;

@@ -109,6 +109,24 @@ export default class BoardUser extends Component {
     }
   };
 
+  checkStatusChecked1=(course)=>{
+    if(course.progress===100||course.progress===80||course.progress===41||course.progress===61)
+          return true;
+    return false;      
+  }
+
+  checkStatusChecked2=(course)=>{
+    if(course.progress===100||course.progress===80||course.progress===39||course.progress===59)
+          return true;
+    return false;      
+  }
+
+  checkStatusChecked3=(course)=>{
+    if(course.progress===100||course.progress===20||course.progress===59||course.progress===61)
+          return true;
+    return false;      
+  }
+
   render() {
     const { user: currentUser } = this.props;
     const { bought, course, videoId } = this.state;
@@ -171,7 +189,7 @@ export default class BoardUser extends Component {
               x
             </button>
             <div className="row">
-              <div className="course">
+              <div className="b-course">
                 <img
                   id="title-image"
                   src={course.image}
@@ -205,7 +223,7 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  <label className="checkbox-inline"><input type="checkbox" value={this.state.firstChk} onChange={event=>this.handleChange1(event)}/> Completed</label>
+                  <label className="checkbox-inline"><input type="checkbox" checked={this.checkStatusChecked1(course)} onChange={event=>this.handleChange1(event)}/> Completed</label>
                   
                   
 
@@ -231,7 +249,7 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  <label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange2(event)} /> Completed</label>
+                  <label className="checkbox-inline"><input type="checkbox" checked={this.checkStatusChecked2(course)} onChange={event=>this.handleChange2(event)} /> Completed</label>
 
                   <li className="">
                     <a
@@ -255,7 +273,7 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  <label className="checkbox-inline"><input type="checkbox" onChange={event=>this.handleChange3(event)} /> Completed</label>
+                  <label className="checkbox-inline"><input type="checkbox" checked={this.checkStatusChecked3(course)} onChange={event=>this.handleChange3(event)} /> Completed</label>
 
                   <li className="">
                     <a
