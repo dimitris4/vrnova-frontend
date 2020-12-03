@@ -5,6 +5,7 @@ body {
   font-family: "Font Awesome 5 Free", "Myriad Pro", Helvetica, Arial, sans-serif;
   font-size: 100%;
   color: #ffffff;
+  background-color: #fff !important;
   background: black;
   margin: 0;
   height: 100vh;
