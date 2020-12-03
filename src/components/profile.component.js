@@ -69,8 +69,11 @@ class Profile extends Component {
 
   handleDeactivation=event=>{
       if(event) event.preventDefault();
-      axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } );
-      this.logOut();      
+      axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } ).then(()=>{
+        this.logOut();  
+        window.location.reload();
+      });
+          
   }
 
 
@@ -131,17 +134,13 @@ class Profile extends Component {
 
   render() {
     const { user : currentUser } = this.props;
-    localStorage.setItem("id", this.props.user.id);
-    localStorage.setItem("user", this.props.user);
-
-
     
 
-    
-    
-    
     if (!currentUser) {
       return <Redirect to="/login" />;
+    } else {
+      localStorage.setItem("id", currentUser.id);
+      localStorage.setItem("roles", currentUser.roles);
     }
 
     const {errors} = this.state;

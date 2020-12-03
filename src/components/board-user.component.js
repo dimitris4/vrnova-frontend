@@ -26,7 +26,7 @@ export default class BoardUser extends Component {
       content: "",
       bought: [],
       allCourses:[],
-      user: JSON.parse(localStorage.getItem("user", this.props.user))
+      roles: localStorage.getItem("roles")
     };
 
     axios
@@ -156,7 +156,7 @@ export default class BoardUser extends Component {
   };
 
   render() {
-    const { bought, course, videoId, allCourses, user } = this.state;
+    const { bought, course, videoId, allCourses, roles } = this.state;
     let myListOfCourses=[];
     const opts = {
       height: "390",
@@ -166,7 +166,7 @@ export default class BoardUser extends Component {
       },
     };
 
-    if(user.roles.includes('ROLE_ADMIN') || user.roles.includes('ROLE_MODERATOR'))
+    if(roles==='ROLE_ADMIN' || roles==='ROLE_MODERATOR')
       myListOfCourses = allCourses;
     else if(bought.length > 0 )
       myListOfCourses = bought; 
@@ -204,7 +204,7 @@ export default class BoardUser extends Component {
                     <div className="item time1 text-info">
                       <i className="fa fa-clock-o"></i> {course.duration}
                     </div>
-                    {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&
+                    {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&
                       <div className="item complete1 text-info">
                       {" "}
                       <i className="far fa-check-circle"></i> {course.progress}%
@@ -261,7 +261,7 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&
+                  {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&
                   <>
                   {this.checkStatusChecked1(course) ? (
                     <p className="completion-status">
@@ -303,7 +303,7 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&
+                  {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&
                   <>
                   {this.checkStatusChecked2(course) ? (
                     <p className="completion-status">
@@ -345,7 +345,7 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&<>{this.checkStatusChecked3(course) ? (
+                  {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&<>{this.checkStatusChecked3(course) ? (
                     <p className="completion-status">
                       <i class="fa fa-check" aria-hidden="true"></i>Completed
                     </p>
