@@ -11,7 +11,9 @@ import { ChangeEvent } from "react";
 
 import UserService from "../services/user.service";
 import Footer from "./footer";
-const API_URL = "http://localhost:8080/";
+// const API_URL = "https://vrnova-backend.herokuapp.com/";
+const API_URL = "https://vrnova-backend.herokuapp.com/";
+
 
 export default class BoardUser extends Component {
   constructor(props) {

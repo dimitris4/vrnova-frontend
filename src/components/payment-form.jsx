@@ -17,7 +17,7 @@ import {
   formatFormData
 } from "../utils";
 
-const API_URL = "http://localhost:8080/";
+const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 export default class PaymentForm extends Component {
 

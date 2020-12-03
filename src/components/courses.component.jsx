@@ -8,7 +8,7 @@ import Cart from './cart';
 import 'react-credit-cards/es/styles-compiled.css';
 import axios from "axios";
 import authHeader from "../services/auth-header";
-const API_URL = "http://localhost:8080/";
+const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 
 export default class Courses extends Component {

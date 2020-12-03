@@ -6,7 +6,8 @@ import Zoom from "react-reveal/Zoom";
 import "../index.css";
 import axios from "axios";
 import authHeader from "../services/auth-header";
-const API_URL = "http://localhost:8080/";
+// const API_URL = "http://localhost:8080/";
+const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 export default class CourseList extends Component {
 

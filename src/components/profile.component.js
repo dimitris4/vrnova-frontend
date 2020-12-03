@@ -10,7 +10,8 @@ import Footer from "./footer";
 import BootBox from 'react-bootbox';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-const API_URL = "http://localhost:8080/";
+// const API_URL = "https://vrnova-backend.herokuapp.com/";
+const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 
 const validateForm = (errors) => {
