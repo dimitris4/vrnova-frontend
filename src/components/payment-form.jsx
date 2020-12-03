@@ -81,24 +81,12 @@ export default class PaymentForm extends Component {
   //sending data to backend
   axios.post(API_URL + "orders/save", data, { headers: authHeader() } ).then(()=>{localStorage.setItem("cartItems", null); window.location.reload();});
 
-  
-
-  
-  // window.location.href = "/courses";
-  // window.location.reload();
-
-
-  //Closing the modal (not needed anymore as the page refreshes above, but keep for future reference)
-  // this.setState({redirect:true});
-  // window.location.reload();
  };
 
   render() {
     const { redirect, name, number, expiry, cvc, focused, issuer, formData, isPaid } = this.state;
   const {items, user }= this.props;
 
-  // if(redirect)
-  //   return <Redirect push to="/courses"/> 
 
     return (
       <div>
@@ -166,7 +154,6 @@ export default class PaymentForm extends Component {
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              {/* <button className="btn btn-primary btn-block">PAY</button> */}
               <button className="btn-submit">Submit</button>
             </div>
           </form>

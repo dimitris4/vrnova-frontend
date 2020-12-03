@@ -84,11 +84,18 @@ class App extends Component {
               )}
 
               {showAdminBoard && (
+                <>
+                <li className="nav-item upper-link">
+                  <Link to={"/user"} className="nav-link">
+                    COURSES AVAILABLE
+                  </Link>
+                </li>
                 <li className="nav-item upper-link">
                   <Link to={"/admin"} className="nav-link">
                     MANAGEMENT
                   </Link>
                 </li>
+                </>
               )}
 
               {showUserBoard && (

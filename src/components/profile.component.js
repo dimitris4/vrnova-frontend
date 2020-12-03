@@ -10,15 +10,7 @@ import Footer from "./footer";
 import BootBox from 'react-bootbox';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-
-
-
 const API_URL = "http://localhost:8080/";
-
-
-
-// const validEmailRegex = 
-//   RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
 
 const validateForm = (errors) => {
@@ -37,8 +29,13 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
-    this.state = { password : null, password2 : null, showDeactivateDialog: false, showUpdateDialog: false,  errors : { password: '', password2 : ''} };
+    this.state = { bought:[], password : null, password2 : null, showDeactivateDialog: false, showUpdateDialog: false,  errors : { password: '', password2 : ''} };
+
+    axios.post(API_URL + "orders/my-courses",{ userId: localStorage.getItem("id") },{ headers: authHeader() }).then((resp) => this.setState({ bought: resp.data }));
+
   }
+
+
 
   showAlert = () => {
     alert('Yes is clicked');
@@ -135,6 +132,9 @@ class Profile extends Component {
   render() {
     const { user : currentUser } = this.props;
     localStorage.setItem("id", this.props.user.id);
+    localStorage.setItem("user", this.props.user);
+
+
     
 
     
@@ -157,12 +157,16 @@ class Profile extends Component {
             <div className="tab-pane active" id="profile">
                 <div className="row">
                     <div className="col-md-6">
-                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>USERNAME</h6>
-                        <p style={{fontSize:"80%"}}>{currentUser.username}</p>
-                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>E-MAIL</h6>
-                          <p style={{fontSize:"80%"}}>{currentUser.email}</p>
-                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>COURSES PURCHASED</h6>
-                          <p style={{fontSize:"80%"}}>2</p>
+                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>USERNAME:
+                              <p style={{fontSize:'90%', fontWeight:'normal'}}>{currentUser.username}</p>
+                        </h6>
+                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>E-MAIL:
+                             <p style={{fontSize:'90%', fontWeight:'normal'}}>{currentUser.email}</p>
+                        </h6>
+                        {!currentUser.roles.includes('ROLE_ADMIN') && !currentUser.roles.includes('ROLE_MODERATOR')&&
+                        <h6 style={{fontWeight: 'bold', fontSize:"80%"}}>COURSES PURCHASED:
+                             <p style={{fontSize:'90%', fontWeight:'normal'}}>{this.state.bought.length}</p>
+                        </h6>}
                     </div>
               </div>
             </div>
@@ -170,7 +174,7 @@ class Profile extends Component {
                     
         </Tab>
 
-        <Tab label="UPDATE">
+        <Tab label="UPDATE PASSWORD">
           <div className="tab-content py-2">
             <div className="tab-pane active" id="profile">
               <div className="wrap">

@@ -25,6 +25,8 @@ export default class BoardUser extends Component {
       course: null,
       content: "",
       bought: [],
+      allCourses:[],
+      user: JSON.parse(localStorage.getItem("user", this.props.user))
     };
 
     axios
@@ -34,7 +36,12 @@ export default class BoardUser extends Component {
         { headers: authHeader() }
       )
       .then((resp) => this.setState({ bought: resp.data }));
+
+      axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({allCourses: resp.data}));
   }
+
+  
+
 
   componentDidMount() {
     UserService.getUserBoard().then(
@@ -149,8 +156,8 @@ export default class BoardUser extends Component {
   };
 
   render() {
-    const { user: currentUser } = this.props;
-    const { bought, course, videoId } = this.state;
+    const { bought, course, videoId, allCourses, user } = this.state;
+    let myListOfCourses=[];
     const opts = {
       height: "390",
       width: "550",
@@ -159,12 +166,19 @@ export default class BoardUser extends Component {
       },
     };
 
+    if(user.roles.includes('ROLE_ADMIN') || user.roles.includes('ROLE_MODERATOR'))
+      myListOfCourses = allCourses;
+    else if(bought.length > 0 )
+      myListOfCourses = bought; 
+    
+  
+
     return (
       <div>
         <Fade bottom cascade>
           <ul className="myCourses-list">
-            {bought.length > 0 ? (
-              bought.map((course) => (
+            {myListOfCourses.length > 0 ? (
+              myListOfCourses.map((course) => (
                 <li key={course.id} className="myCourses-list-item">
                   <div className="wrapper">
                     <div className="item pic1 ">
@@ -190,11 +204,12 @@ export default class BoardUser extends Component {
                     <div className="item time1 text-info">
                       <i className="fa fa-clock-o"></i> {course.duration}
                     </div>
-                    <div className="item complete1 text-info">
+                    {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&
+                      <div className="item complete1 text-info">
                       {" "}
                       <i className="far fa-check-circle"></i> {course.progress}%
                       Completed{" "}
-                    </div>
+                    </div>}
                   </div>
                 </li>
               ))
@@ -242,10 +257,12 @@ export default class BoardUser extends Component {
                         <span className="lecture-icon">
                           <i className="fa fa-youtube-play"></i>
                         </span>
-                        <span className="lecture-name">Part 1(2:00)</span>
+                        <span className="lecture-name">Part 1</span>
                       </div>
                     </a>
                   </li>
+                  {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&
+                  <>
                   {this.checkStatusChecked1(course) ? (
                     <p className="completion-status">
                       <i class="fa fa-check" aria-hidden="true"></i>Completed
@@ -259,6 +276,8 @@ export default class BoardUser extends Component {
                       Mark as completed
                     </label>
                   )}
+                  </>
+                  }
 
                   <li className="yt-link">
                     <a
@@ -280,10 +299,12 @@ export default class BoardUser extends Component {
                         <span className="lecture-icon">
                           <i className="fa fa-youtube-play"></i>
                         </span>
-                        <span className="lecture-name">Part 2(2:00)</span>
+                        <span className="lecture-name">Part 2</span>
                       </div>
                     </a>
                   </li>
+                  {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&
+                  <>
                   {this.checkStatusChecked2(course) ? (
                     <p className="completion-status">
                       <i class="fa fa-check" aria-hidden="true"></i>Completed
@@ -297,6 +318,8 @@ export default class BoardUser extends Component {
                       Mark as completed
                     </label>
                   )}
+                  </>
+                  }
 
                   <li className="yt-link">
                     <a
@@ -318,11 +341,11 @@ export default class BoardUser extends Component {
                         <span className="lecture-icon">
                           <i className="fa fa-youtube-play"></i>
                         </span>
-                        <span className="lecture-name">Part 3(1:30)</span>
+                        <span className="lecture-name">Part 3</span>
                       </div>
                     </a>
                   </li>
-                  {this.checkStatusChecked3(course) ? (
+                  {!user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_MODERATOR')&&<>{this.checkStatusChecked3(course) ? (
                     <p className="completion-status">
                       <i class="fa fa-check" aria-hidden="true"></i>Completed
                     </p>
@@ -335,6 +358,8 @@ export default class BoardUser extends Component {
                       Mark as completed
                     </label>
                   )}
+                  </>
+                  }
 
                   <li className="">
                     <a
