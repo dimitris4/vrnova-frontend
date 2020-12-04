@@ -105,7 +105,7 @@ export default class CourseList extends Component {
                                     <div>
                                         {formatCurrency(course.price)}
                                     </div>
-                                    {bought.some(e => e.id === course.id)
+                                    {bought.length>0 && bought.some(e => e.id === course.id)
                                                 ?   <button className="button primary" disabled={true} id="bought-course">Bought</button>
                                                 :   <>{cartItems.some(e => e.id === course.id)
                                                         ? <button className="button primary" disabled={true} id="in-cart-course">In cart</button> 
