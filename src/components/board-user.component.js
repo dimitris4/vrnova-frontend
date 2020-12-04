@@ -19,6 +19,7 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
+      isLoading: true,
       firstChk: "",
       secondChk: "",
       thirdChk: "",
@@ -30,17 +31,6 @@ export default class BoardUser extends Component {
       roles: localStorage.getItem("roles"),
     };
 
-    axios
-      .post(
-        API_URL + "orders/my-courses",
-        { userId: localStorage.getItem("id") },
-        { headers: authHeader() }
-      )
-      .then((resp) => this.setState({ bought: resp.data }));
-
-    axios
-      .get(API_URL + "courses", { headers: authHeader() })
-      .then((resp) => this.setState({ allCourses: resp.data }));
   }
 
   componentDidMount() {
@@ -61,15 +51,18 @@ export default class BoardUser extends Component {
         });
       }
     );
-    // axios
-    //   .post(
-    //     API_URL + "orders/my-courses",
-    //     { userId: localStorage.getItem("id") },
-    //     { headers: authHeader() }
-    //   )
-    //   .then((resp) => {
-    //     this.setState({ bought: resp.data });
-    //   });
+    
+    axios
+      .post(
+        API_URL + "orders/my-courses",
+        { userId: localStorage.getItem("id") },
+        { headers: authHeader() }
+      )
+      .then((resp) => this.setState({ bought: resp.data, isLoading: false }));
+
+    axios
+      .get(API_URL + "courses", { headers: authHeader() })
+      .then((resp) => this.setState({ allCourses: resp.data }));
   }
 
   openModal = (course) => {
@@ -156,7 +149,7 @@ export default class BoardUser extends Component {
   };
 
   render() {
-    const { bought, course, videoId, allCourses, roles } = this.state;
+    const { bought, course, videoId, allCourses, roles, isLoading } = this.state;
     let myListOfCourses = [];
     const opts = {
       height: "390",
@@ -174,7 +167,7 @@ export default class BoardUser extends Component {
       <div>
         <Fade bottom cascade>
           <ul className="myCourses-list">
-            {myListOfCourses.length > 0 
+            {!isLoading && myListOfCourses.length > 0 
             ? (myListOfCourses.map((course) => (<li key={course.id} className="myCourses-list-item">
                   <div className="wrapper">
                     <div className="item pic1 "><img src={course.image} className="rounded img-fluid" alt="Picture"></img></div>
