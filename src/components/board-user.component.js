@@ -167,7 +167,7 @@ export default class BoardUser extends Component {
       <div>
         <Fade bottom cascade>
           <ul className="myCourses-list">
-            {!isLoading && myListOfCourses.length > 0 
+            {myListOfCourses.length > 0 
             ? (myListOfCourses.map((course) => (<li key={course.id} className="myCourses-list-item">
                   <div className="wrapper">
                     <div className="item pic1 "><img src={course.image} className="rounded img-fluid" alt="Picture"></img></div>
@@ -192,7 +192,7 @@ export default class BoardUser extends Component {
                   </div>
                 </li>
               ))) 
-            : (<h1>No courses bought</h1>)}
+            : (!isLoading &&<h1>No courses bought</h1>)}
           </ul>
         </Fade>
 
