@@ -14,7 +14,6 @@ import Footer from "./footer";
 // const API_URL = "https://vrnova-backend.herokuapp.com/";
 const API_URL = "https://vrnova-backend.herokuapp.com/";
 
-
 export default class BoardUser extends Component {
   constructor(props) {
     super(props);
@@ -27,8 +26,8 @@ export default class BoardUser extends Component {
       course: null,
       content: "",
       bought: [],
-      allCourses:[],
-      roles: localStorage.getItem("roles")
+      allCourses: [],
+      roles: localStorage.getItem("roles"),
     };
 
     axios
@@ -39,11 +38,10 @@ export default class BoardUser extends Component {
       )
       .then((resp) => this.setState({ bought: resp.data }));
 
-      axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({allCourses: resp.data}));
+    axios
+      .get(API_URL + "courses", { headers: authHeader() })
+      .then((resp) => this.setState({ allCourses: resp.data }));
   }
-
-  
-
 
   componentDidMount() {
     UserService.getUserBoard().then(
@@ -63,15 +61,15 @@ export default class BoardUser extends Component {
         });
       }
     );
-    axios
-      .post(
-        API_URL + "orders/my-courses",
-        { userId: localStorage.getItem("id") },
-        { headers: authHeader() }
-      )
-      .then((resp) => {
-        this.setState({ bought: resp.data });
-      });
+    // axios
+    //   .post(
+    //     API_URL + "orders/my-courses",
+    //     { userId: localStorage.getItem("id") },
+    //     { headers: authHeader() }
+    //   )
+    //   .then((resp) => {
+    //     this.setState({ bought: resp.data });
+    //   });
   }
 
   openModal = (course) => {
@@ -159,7 +157,7 @@ export default class BoardUser extends Component {
 
   render() {
     const { bought, course, videoId, allCourses, roles } = this.state;
-    let myListOfCourses=[];
+    let myListOfCourses = [];
     const opts = {
       height: "390",
       width: "550",
@@ -168,36 +166,20 @@ export default class BoardUser extends Component {
       },
     };
 
-    if(roles==='ROLE_ADMIN' || roles==='ROLE_MODERATOR')
+    if (roles === "ROLE_ADMIN" || roles === "ROLE_MODERATOR")
       myListOfCourses = allCourses;
-    else if(bought.length > 0 )
-      myListOfCourses = bought; 
-    
-  
+    else if (bought.length > 0) myListOfCourses = bought;
 
     return (
       <div>
         <Fade bottom cascade>
           <ul className="myCourses-list">
-            {myListOfCourses.length > 0 ? (
-              myListOfCourses.map((course) => (
-                <li key={course.id} className="myCourses-list-item">
+            {myListOfCourses.length > 0 
+            ? (myListOfCourses.map((course) => (<li key={course.id} className="myCourses-list-item">
                   <div className="wrapper">
-                    <div className="item pic1 ">
-                      <img
-                        src={course.image}
-                        className="rounded img-fluid"
-                        alt="Picture"
-                      ></img>
-                    </div>
+                    <div className="item pic1 "><img src={course.image} className="rounded img-fluid" alt="Picture"></img></div>
                     <div className="item name1">
-                      <a
-                        href={"#" + course.id + "/start"}
-                        onClick={() => this.openModal(course)}
-                        className="text-decoration-none text-info"
-                      >
-                        {course.title}
-                      </a>
+                      <a href={"#" + course.id + "/start"} onClick={() => this.openModal(course)} className="text-decoration-none text-info">{course.title}</a>
                     </div>
                     <div className="item teacher1 text-info">
                       <i className="fas fa-chalkboard-teacher"></i>{" "}
@@ -206,18 +188,18 @@ export default class BoardUser extends Component {
                     <div className="item time1 text-info">
                       <i className="fa fa-clock-o"></i> {course.duration}
                     </div>
-                    {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&
-                      <div className="item complete1 text-info">
-                      {" "}
-                      <i className="far fa-check-circle"></i> {course.progress}%
-                      Completed{" "}
-                    </div>}
+                    {!roles.includes("ROLE_ADMIN") &&
+                      !roles.includes("ROLE_MODERATOR") && (
+                        <div className="item complete1 text-info">
+                          {" "}
+                          <i className="far fa-check-circle"></i>{" "}
+                          {course.progress}% Completed{" "}
+                        </div>
+                      )}
                   </div>
                 </li>
-              ))
-            ) : (
-              <h1>No courses bought</h1>
-            )}
+              ))) 
+            : (<h1>No courses bought</h1>)}
           </ul>
         </Fade>
 
@@ -263,23 +245,25 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&
-                  <>
-                  {this.checkStatusChecked1(course) ? (
-                    <p className="completion-status">
-                      <i class="fa fa-check" aria-hidden="true"></i>Completed
-                    </p>
-                  ) : (
-                    <label className="checkbox-inline">
-                      <input
-                        type="checkbox"
-                        onChange={(event) => this.handleChange1(event)}
-                      />{" "}
-                      Mark as completed
-                    </label>
-                  )}
-                  </>
-                  }
+                  {!roles.includes("ROLE_ADMIN") &&
+                    !roles.includes("ROLE_MODERATOR") && (
+                      <>
+                        {this.checkStatusChecked1(course) ? (
+                          <p className="completion-status">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Completed
+                          </p>
+                        ) : (
+                          <label className="checkbox-inline">
+                            <input
+                              type="checkbox"
+                              onChange={(event) => this.handleChange1(event)}
+                            />{" "}
+                            Mark as completed
+                          </label>
+                        )}
+                      </>
+                    )}
 
                   <li className="yt-link">
                     <a
@@ -305,23 +289,25 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&
-                  <>
-                  {this.checkStatusChecked2(course) ? (
-                    <p className="completion-status">
-                      <i class="fa fa-check" aria-hidden="true"></i>Completed
-                    </p>
-                  ) : (
-                    <label className="checkbox-inline">
-                      <input
-                        type="checkbox"
-                        onChange={(event) => this.handleChange2(event)}
-                      />{" "}
-                      Mark as completed
-                    </label>
-                  )}
-                  </>
-                  }
+                  {!roles.includes("ROLE_ADMIN") &&
+                    !roles.includes("ROLE_MODERATOR") && (
+                      <>
+                        {this.checkStatusChecked2(course) ? (
+                          <p className="completion-status">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Completed
+                          </p>
+                        ) : (
+                          <label className="checkbox-inline">
+                            <input
+                              type="checkbox"
+                              onChange={(event) => this.handleChange2(event)}
+                            />{" "}
+                            Mark as completed
+                          </label>
+                        )}
+                      </>
+                    )}
 
                   <li className="yt-link">
                     <a
@@ -347,27 +333,31 @@ export default class BoardUser extends Component {
                       </div>
                     </a>
                   </li>
-                  {!roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_MODERATOR')&&<>{this.checkStatusChecked3(course) ? (
-                    <p className="completion-status">
-                      <i class="fa fa-check" aria-hidden="true"></i>Completed
-                    </p>
-                  ) : (
-                    <label className="checkbox-inline">
-                      <input
-                        type="checkbox"
-                        onChange={(event) => this.handleChange3(event)}
-                      />{" "}
-                      Mark as completed
-                    </label>
-                  )}
-                  </>
-                  }
+                  {!roles.includes("ROLE_ADMIN") &&
+                    !roles.includes("ROLE_MODERATOR") && (
+                      <>
+                        {this.checkStatusChecked3(course) ? (
+                          <p className="completion-status">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Completed
+                          </p>
+                        ) : (
+                          <label className="checkbox-inline">
+                            <input
+                              type="checkbox"
+                              onChange={(event) => this.handleChange3(event)}
+                            />{" "}
+                            Mark as completed
+                          </label>
+                        )}
+                      </>
+                    )}
 
                   <li className="">
                     <a
                       className="item"
                       href="https://github.com/dimitris4/vrnova-frontend"
-                      target="_blank" 
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <span
