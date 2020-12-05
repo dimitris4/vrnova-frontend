@@ -196,7 +196,7 @@ export default class BoardUser extends Component {
 
         {course && (
           <Modal isOpen={true} onRequestClose={this.closeModal}>
-            <button className="close-modal" onClick={this.closeModal}>
+            <button className="close-modal-tutorial" onClick={this.closeModal}>
               x
             </button>
             <div className="row">

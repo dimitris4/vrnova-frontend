@@ -372,17 +372,31 @@ div#price-of-course {
 
 /* Course Details */
 
-.course-details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-height: 96vh;
+.modal-dialog{
+  max-width:60%;
+  pointer-events: all;
 }
 
-.course-details img {
-  max-height: 100vh;
-  max-width: 46rem;
+img.course-detail-image {
+  max-height: 46rem;
+  max-width: 50rem;
   margin: 0 auto;
+}
+
+.course-details {
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 96vh; */
+
+  background-color: white;
+    width: 70%; 
+    max-width: 640px;
+    height: 70%; 
+    margin: auto; 
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
 }
 
 .course-details-description {
@@ -399,9 +413,24 @@ div#price-of-course {
 
 .close-modal {
   position: absolute;
-  right: 1rem;
-  top: 2.5rem;
+  right: 14%;
+  top: 3rem; 
   z-index: 1000;
+  color: #aaaaaa;
+  float: right; 
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.close-modal-tutorial {
+  position: absolute;
+  right: 0.5%;
+  top: 0.5rem; 
+  z-index: 1000;
+  color: #aaaaaa;
+  float: right; 
+  font-size: 25px;
+  font-weight: bold;
 }
 
 /* My courses */
@@ -412,9 +441,9 @@ div#price-of-course {
   margin-bottom: 12%;
 }
 
-/* .myCourses-list-item {
+.myCourses-list-item {
 
-} */
+}
 
 .wrapper {
   display: inline-grid;
