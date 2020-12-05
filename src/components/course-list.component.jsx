@@ -4,10 +4,8 @@ import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import "../index.css";
-import axios from "axios";
+import axios from "../connections";
 import authHeader from "../services/auth-header";
-// const API_URL = "http://localhost:8080/";
-const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 export default class CourseList extends Component {
 
@@ -27,7 +25,7 @@ export default class CourseList extends Component {
      }
 
      componentDidMount() {
-        axios.post(API_URL +'orders/my-courses', {userId:localStorage.getItem('id')}, { headers: authHeader()}).then(resp =>{this.setState({bought: resp.data});
+        axios.post('orders/my-courses', {userId:localStorage.getItem('id')}, { headers: authHeader()}).then(resp =>{this.setState({bought: resp.data});
     });
     }
     

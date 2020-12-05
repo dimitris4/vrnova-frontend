@@ -5,14 +5,12 @@ import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import YouTube from "react-youtube";
 import "../index.css";
-import axios from "axios";
+import axios from "../connections";
 import authHeader from "../services/auth-header";
 import { ChangeEvent } from "react";
 
 import UserService from "../services/user.service";
 import Footer from "./footer";
-// const API_URL = "https://vrnova-backend.herokuapp.com/";
-const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 export default class BoardUser extends Component {
   constructor(props) {
@@ -54,14 +52,14 @@ export default class BoardUser extends Component {
     
     axios
       .post(
-        API_URL + "orders/my-courses",
+        "orders/my-courses",
         { userId: localStorage.getItem("id") },
         { headers: authHeader() }
       )
       .then((resp) => this.setState({ bought: resp.data, isLoading: false }));
 
     axios
-      .get(API_URL + "courses", { headers: authHeader() })
+      .get("courses", { headers: authHeader() })
       .then((resp) => this.setState({ allCourses: resp.data }));
   }
 
@@ -88,7 +86,7 @@ export default class BoardUser extends Component {
     };
     console.log(data);
     axios
-      .post(API_URL + "orders/save-progress", data, { headers: authHeader() })
+      .post("orders/save-progress", data, { headers: authHeader() })
       .then(() => {
         this.setState({ course: null });
         window.location.reload();

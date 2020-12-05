@@ -2,7 +2,7 @@ import React, { Component, useState} from "react";
 import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import {Tabs, Tab} from 'react-bootstrap-tabs';
-import axios from "axios";
+import axios from "../connections";
 import authHeader from "../services/auth-header";
 import { logout } from "../actions/auth";
 import "../App.css";
@@ -10,8 +10,6 @@ import Footer from "./footer";
 import BootBox from 'react-bootbox';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-// const API_URL = "https://vrnova-backend.herokuapp.com/";
-const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 
 const validateForm = (errors) => {
@@ -32,7 +30,7 @@ class Profile extends Component {
     this.logOut = this.logOut.bind(this);
     this.state = { bought:[], password : null, password2 : null, showDeactivateDialog: false, showUpdateDialog: false,  errors : { password: '', password2 : ''} };
 
-    axios.post(API_URL + "orders/my-courses",{ userId: localStorage.getItem("id") },{ headers: authHeader() }).then((resp) => this.setState({ bought: resp.data }));
+    axios.post("orders/my-courses",{ userId: localStorage.getItem("id") },{ headers: authHeader() }).then((resp) => this.setState({ bought: resp.data }));
 
   }
 
@@ -60,7 +58,7 @@ class Profile extends Component {
     if (validateForm(this.state.errors)) {
       console.info('Valid form');
       const data = {userId: this.props.user.id, password : this.password.value };
-      axios.put(API_URL + "profile/update", data, { headers: authHeader() } );
+      axios.put("profile/update", data, { headers: authHeader() } );
       return this.setState({showUpdateDialog:true});
 
     } else {
@@ -70,7 +68,7 @@ class Profile extends Component {
 
   handleDeactivation=event=>{
       if(event) event.preventDefault();
-      axios.put(API_URL + "profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } ).then(()=>{
+      axios.put("profile/deactivate", {userId: this.props.user.id}, { headers: authHeader() } ).then(()=>{
         this.logOut();  
         window.location.reload();
       });

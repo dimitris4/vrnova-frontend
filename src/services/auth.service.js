@@ -1,11 +1,9 @@
-import axios from "axios";
-
-const API_URL = "https://vrnova-backend.herokuapp.com/api/auth/";
+import axios from "../connections";
 
 class AuthService {
   login(username, password) {
     return axios
-      .post(API_URL + "signin", { username, password })
+      .post("api/auth/signin", { username, password })
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
@@ -20,7 +18,7 @@ class AuthService {
   }
 
   register(username, email, password) {
-    return axios.post(API_URL + "signup", {
+    return axios.post("api/auth/signup", {
       username,
       email,
       password,

@@ -1,27 +1,25 @@
-import axios from "axios";
+import axios from "../connections";
 import authHeader from "./auth-header";
-
-const API_URL = "https://vrnova-backend.herokuapp.com/api/test/";
 
 class UserService {
   getPublicContent() {
-    return axios.get(API_URL + "all");
+    return axios.get("api/test/all");
   }
 
   getUserBoard() {
-    return axios.get(API_URL + "user", { headers: authHeader() });
+    return axios.get("api/test/user", { headers: authHeader() });
   }
 
   getModeratorBoard() {
-    return axios.get(API_URL + "mod", { headers: authHeader() });
+    return axios.get("api/test/mod", { headers: authHeader() });
   }
 
   getAdminBoard() {
-    return axios.get(API_URL + "admin", { headers: authHeader() });
+    return axios.get("api/test/admin", { headers: authHeader() });
   }
 
   updateUser() {
-    return axios.put(API_URL + "profile", { headers: authHeader() })
+    return axios.put("api/test/profile", { headers: authHeader() })
   }
 }
 

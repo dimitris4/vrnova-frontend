@@ -6,9 +6,8 @@ import CourseList from './course-list.component';
 import Filter from './filter';
 import Cart from './cart';
 import 'react-credit-cards/es/styles-compiled.css';
-import axios from "axios";
+import axios from "../connections";
 import authHeader from "../services/auth-header";
-const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 
 export default class Courses extends Component {
@@ -24,8 +23,8 @@ export default class Courses extends Component {
                     categories:"", 
                     query:""};
 
-                    axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({courses: resp.data}));
-                    axios.get(API_URL +'courses', { headers: authHeader() }).then(resp => this.setState({allCourses: resp.data}));
+                    axios.get('courses', { headers: authHeader() }).then(resp => this.setState({courses: resp.data}));
+                    axios.get('courses', { headers: authHeader() }).then(resp => this.setState({allCourses: resp.data}));
    }
 
 

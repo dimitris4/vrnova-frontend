@@ -7,7 +7,7 @@ import formatCurrency from "../utils";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
-import axios from "axios";
+import axios from "../connections";
 import authHeader from "../services/auth-header";
 // import SupportedCards from "./cards";
 import {
@@ -17,7 +17,6 @@ import {
   formatFormData
 } from "../utils";
 
-const API_URL = "https://vrnova-backend.herokuapp.com/";
 
 export default class PaymentForm extends Component {
 
@@ -79,7 +78,7 @@ export default class PaymentForm extends Component {
   const data = {userId: this.props.user.id, items : this.props.items };
  
   //sending data to backend
-  axios.post(API_URL + "orders/save", data, { headers: authHeader() } ).then(()=>{localStorage.setItem("cartItems", null); window.location.reload();});
+  axios.post("orders/save", data, { headers: authHeader() } ).then(()=>{localStorage.setItem("cartItems", null); window.location.reload();});
 
  };
 
