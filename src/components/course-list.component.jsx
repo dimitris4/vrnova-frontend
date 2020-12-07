@@ -83,7 +83,7 @@ export default class CourseList extends Component {
                                 <p className="modal-course-title">
                                     <strong>{course.title}</strong>
                                 </p>
-                                <p>
+                                <p className="course-desc">
                                     {course.description}
                                 </p>
                                 <p>

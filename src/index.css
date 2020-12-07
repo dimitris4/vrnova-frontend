@@ -372,14 +372,14 @@ div#price-of-course {
 
 /* Course Details */
 
-.modal-dialog{
-  max-width:60%;
+.modal-dialog {
+  max-width: 50%;
+  max-height: 40%;
   pointer-events: all;
 }
 
 img.course-detail-image {
-  max-height: 46rem;
-  max-width: 50rem;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -390,13 +390,14 @@ img.course-detail-image {
   max-height: 96vh; */
 
   background-color: white;
-    width: 70%; 
-    max-width: 640px;
-    height: 70%; 
-    margin: auto; 
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 20px;
+  font-size: small;
+  width: 70%;
+  max-width: 640px;
+  height: 70%;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
 }
 
 .course-details-description {
@@ -408,16 +409,16 @@ img.course-detail-image {
   width: 80%;
   font-family: "Font Awesome 5 Free";
   font-size: 80%;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .close-modal {
   position: absolute;
   right: 14%;
-  top: 3rem; 
+  top: 3rem;
   z-index: 1000;
   color: #aaaaaa;
-  float: right; 
+  float: right;
   font-size: 25px;
   font-weight: bold;
 }
@@ -425,10 +426,10 @@ img.course-detail-image {
 .close-modal-tutorial {
   position: absolute;
   right: 0.5%;
-  top: 0.5rem; 
+  top: 0.5rem;
   z-index: 1000;
   color: #aaaaaa;
-  float: right; 
+  float: right;
   font-size: 25px;
   font-weight: bold;
 }
@@ -442,7 +443,6 @@ img.course-detail-image {
 }
 
 .myCourses-list-item {
-
 }
 
 .wrapper {
@@ -518,8 +518,8 @@ img#title-image {
 
 .video-box {
   position: absolute;
-  right: 5rem;
-  top: 1rem;
+  right: 5%;
+  top: 1%;
 }
 
 .ReactModal__Content {
