@@ -32,6 +32,10 @@ div.container-fluid {
   height: 100%;
 }
 
+.container {
+  margin-left: 5%;
+}
+
 /* header menu links */
 .upper-link {
   padding-top: 23% !important;
