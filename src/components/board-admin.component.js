@@ -30,10 +30,12 @@ export default class BoardAdmin extends Component {
         });
       }
     );
+    
 
   }
 
   render() {
+
       return (
         <div className="grid-container">
             <main>
