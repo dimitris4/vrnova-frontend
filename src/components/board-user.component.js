@@ -190,7 +190,7 @@ export default class BoardUser extends Component {
                   </div>
                 </li>
               ))) 
-            : (!isLoading &&<h1>No courses bought</h1>)}
+            : (!isLoading && roles !== "ROLE_ADMIN" && roles !== "ROLE_MODERATOR" &&<h1>No courses bought</h1>)}
           </ul>
         </Fade>
 

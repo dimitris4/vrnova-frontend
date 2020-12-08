@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import CollapsibleTable from "./report-table";
 import UserService from "../services/user.service";
 import Footer from "./footer";
 
@@ -30,16 +30,24 @@ export default class BoardAdmin extends Component {
         });
       }
     );
+
   }
 
   render() {
-    return (
-      <div className="container" style={{margin:'0 0 0 0', padding: '0 0 0 0'}}>
-        <header className="jumbotron">
-          <h3>Reports</h3>
-        </header>
-        <Footer/>
-      </div>
-    );
-  }
+      return (
+        <div className="grid-container">
+            <main>
+                <div className="content">
+                    <div className="main">
+                    <div className="filter">
+                      <span className="filter-result">REPORTS</span>
+                    </div>  
+                    </div>
+                    <CollapsibleTable/>
+                </div>
+            </main>
+            <Footer/>
+         </div>);
+
+    }
 }
