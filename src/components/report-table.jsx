@@ -52,6 +52,12 @@ const useRowStyles = makeStyles({
     const { row, orders } = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+
+function colorTheRole(role){
+    if(role==="ROLE_ADMIN"||role==="ROLE_MODERATOR")
+        return {color:'red'};
+    return {color:'blue'};    
+} 
   
     return (
       <React.Fragment>
@@ -64,11 +70,11 @@ const useRowStyles = makeStyles({
           <TableCell component="th" scope="row">{row.user_id}</TableCell>
           <TableCell align="right">{row.username}</TableCell>
           <TableCell align="right">{row.email}</TableCell>
-          <TableCell align="right">{row.role}</TableCell>
+          <TableCell style={colorTheRole(row.role)} align="right">{row.role.substring(5)}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            {row.role!=='ROLE_ADMIN'&&row.role!=='ROLE_MODERATOR'&&<Collapse in={open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
                   History
@@ -98,7 +104,7 @@ const useRowStyles = makeStyles({
 
                 </Table>
               </Box>
-            </Collapse>
+            </Collapse>}
           </TableCell>
         </TableRow>
       </React.Fragment>
