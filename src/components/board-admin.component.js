@@ -1,14 +1,24 @@
 import React, { Component } from "react";
 import CollapsibleTable from "./report-table";
 import UserService from "../services/user.service";
+import MyPiechart from "./piechart";
 import Footer from "./footer";
+import axios from "../connections";
+import authHeader from "../services/auth-header";
+import "../index.css";
 
 export default class BoardAdmin extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      content: ""
+      content: "",
+      orders: [],
+            users: [],
+            userCount:0,
+            adminCount:0,
+            moderatorCount:0, 
+            data:[]
     };
   }
   
@@ -30,24 +40,42 @@ export default class BoardAdmin extends Component {
         });
       }
     );
+
+    axios
+            .get("reports/orders", { headers: authHeader() })
+            .then((resp) => this.setState({ orders: resp.data }));
+        
+            axios
+            .get("reports/users", { headers: authHeader() })
+            .then((resp) => this.setState({ users: resp.data }));
     
 
   }
 
   render() {
-
+    const{users}=this.state;
+    const userCount = users.filter(user => user.role === 'ROLE_USER').length;
+    const adminCount = users.filter(user => user.role === 'ROLE_ADMIN').length;
+    const moderatorCount = users.filter(user => user.role === 'ROLE_MODERATOR').length;
       return (
         <div className="grid-container">
-            <main>
+            {userCount!==0 && adminCount!==0 && moderatorCount!==0 && <main>
                 <div className="content">
                     <div className="main">
                     <div className="filter">
-                      <span className="filter-result">REPORTS</span>
+                      <span className="reports-title">REPORTS & STATISTICS</span>
                     </div>  
                     </div>
-                    <CollapsibleTable/>
+                    
                 </div>
-            </main>
+                <div className="content">
+                  <CollapsibleTable/>
+                   <div className="chart-container">
+                       <MyPiechart userCount={userCount} adminCount={adminCount} moderatorCount={moderatorCount}></MyPiechart>
+                    </div>
+                </div>
+                
+            </main>}
             <Footer/>
          </div>);
 
