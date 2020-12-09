@@ -182,6 +182,7 @@ export default class CollapsibleTable2 extends Component {
             container: {
               maxWidth: '40%',
               boxShadow: 'none',
+              marginLeft:'8%'
               
           },
           row:{

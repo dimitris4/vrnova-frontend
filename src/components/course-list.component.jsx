@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import formatCurrency from "../utils";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
+import Footer from "./footer";
 import Zoom from "react-reveal/Zoom";
 import "../index.css";
 import axios from "../connections";
@@ -113,6 +114,7 @@ export default class CourseList extends Component {
                         </div>
                     </Zoom>
                 </Modal>}
+           
             </div>
         )
     }

@@ -3,7 +3,6 @@ import CollapsibleTable from "./report-table";
 import CollapsibleTable2 from "./report-table2";
 import UserService from "../services/user.service";
 import MyPiechart from "./piechart";
-import MyPiechart2 from "./piechart2";
 import Footer from "./footer";
 import axios from "../connections";
 import authHeader from "../services/auth-header";
@@ -77,14 +76,83 @@ export default class BoardAdmin extends Component {
     const reactCount = orders.filter(order => order.courses.includes('React')).length;
     const reduxCount = orders.filter(order => order.courses.includes('Redux')).length;
     const totalCount = javaCount+arCount+vrCount+jsCount+gitCount+angularCount+cCount+nodeCount+reactCount+reduxCount;
-    console.log("I'm java" + javaCount);
+    console.log(totalCount);
+    
+    const userPie = [{
+      color: "#E38627",
+      title: "Users (" + Math.round((userCount*1000)/(userCount+adminCount+moderatorCount))/10+"%)",
+      value: userCount
+      },
+      {
+      color: "#C13C37",
+      title: "Moderators (" + Math.round((moderatorCount*1000)/(userCount+adminCount+moderatorCount))/10+"%)",
+      value: moderatorCount
+      },
+      {
+      color: "#6A2135",
+      title: "Admins (" + Math.round((adminCount*1000)/(userCount+adminCount+moderatorCount))/10+"%)",
+      value: adminCount
+      }];
+
+      const orderPie = [{
+        color: "#4D4D4D",
+        title: arCount!==0?"AR (" + Math.round((arCount*1000)/totalCount)/10+"%)":"",
+        value: arCount
+        },
+        {
+        color: "#5DA5DA",
+        title: vrCount!==0?"VR (" + Math.round((vrCount*1000)/totalCount)/10+"%)":"",
+        value: vrCount
+        },
+        {
+        color: "#FAA43A",
+        title: angularCount!==0?"Angular (" + Math.round((angularCount*1000)/totalCount)/10+"%)":"",
+        value: angularCount
+        },
+        {
+        color: "#60BD68",
+        title: javaCount!==0?"Java (" + Math.round((javaCount*1000)/totalCount)/10+"%)":"",
+        value: javaCount
+        },
+        {
+        color: "#F17CB0",
+        title: gitCount!==0?"Git (" + Math.round((gitCount*1000)/totalCount)/10+"%)":"",
+        value: gitCount
+        },
+        {
+        color: "#B2912F",
+        title: jsCount!==0?"JavaScript (" + Math.round((jsCount*1000)/totalCount)/10+"%)":"",
+        value: jsCount
+        },
+        {
+        color: "#B276B2",
+        title: cCount!==0?"C# (" + Math.round((cCount*1000)/totalCount)/10+"%)":"",
+        value: cCount
+        },
+        {
+        color: "#DECF3F",
+        title: nodeCount!==0?"NodeJS (" + Math.round((nodeCount*1000)/totalCount)/10+"%)":"",
+        value: nodeCount
+        },
+        {
+        color: "#F15854",
+        title: reactCount!==0?"React (" + Math.round((reactCount*1000)/totalCount)/10+"%)":"",
+        value: reactCount
+        },
+        {
+        color: "#60BD68",
+        title: reduxCount!==0?"Redux (" + Math.round((reduxCount*1000)/totalCount)/10+"%)":"",
+        value: reduxCount
+        }
+    ];
+
       return (
         <div className="grid-container">
             {userCount!==0 && adminCount!==0 && moderatorCount!==0 && <main>
                 <div className="content">
                     <div className="main">
                     <div className="filter">
-                    <div className="filter-sort">
+                    <div className="report-selector">
                     Select report<br></br>  
                     <select onChange={this.reportSelector}>
                         <option value="user">User report</option>
@@ -98,17 +166,20 @@ export default class BoardAdmin extends Component {
                 </div>
                 <div className="content">
 
-                 {this.state.show==="user"&&userCount!==0 && adminCount!==0 && moderatorCount!==0 && <>
+                 {this.state.show==="user"&&userPie.length!==0 && <>                 
                   <CollapsibleTable/>
                    <div className="chart-container">
-                       <MyPiechart userCount={userCount} adminCount={adminCount} moderatorCount={moderatorCount}></MyPiechart>
+                   <h3 className="pie-title-users">PERCENTAGE OF SYSTEM USERS</h3>
+                       <MyPiechart count={userPie}></MyPiechart>
                     </div>
                   </>}
 
-                  {this.state.show==="order"&&<>  
+                  {this.state.show==="order"&&orderPie.length!==0&&<>  
                     <CollapsibleTable2/>
                    <div className="chart-container">
-                       <MyPiechart2 javaCount={javaCount} totalCount={totalCount} reactCount={reactCount} reduxCount={reduxCount} nodeCount={nodeCount} cCount={cCount} angularCount={angularCount} gitCount={gitCount} jsCount={jsCount} vrCount={vrCount} arCount={arCount}></MyPiechart2>
+                   <h3 className="pie-title-orders">PERCENTAGE OF COURSES SOLD</h3>
+                       <MyPiechart count={orderPie}></MyPiechart>
+                          <h3 className="pie-subtitles">COURSES SOLD:{" "+totalCount}</h3>                    
                     </div>
                   </>  }
 

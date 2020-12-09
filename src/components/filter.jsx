@@ -9,8 +9,7 @@ export default class Filter extends Component {
                 <div className="filter-result">{this.props.count} {this.props.count===1?"course found":"courses found"}</div>
                 <div className="search">
                     <label className="search-label" htmlFor="search-input">
-                        <input className="search-input" type="text" value={this.props.query} onChange={this.props.handleOnInputChange} placeholder="Search course..."/>
-                        <i className="fas fa-search search-icon"></i>
+                        <input className="search-input fontAwesome" type="text" value={this.props.query} onChange={this.props.handleOnInputChange} placeholder="&#xF002;Search for a course..."/>
                     </label>
                     
                 </div>

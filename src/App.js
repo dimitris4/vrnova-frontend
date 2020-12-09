@@ -92,7 +92,7 @@ class App extends Component {
                 </li>
                 <li className="nav-item upper-link">
                   <Link to={"/admin"} className="nav-link">
-                    MANAGEMENT
+                    REPORTS
                   </Link>
                 </li>
                 </>

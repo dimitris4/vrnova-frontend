@@ -12,30 +12,9 @@ export default class MyPiechart extends Component {
         }
     }
 
-    
-
     render() { 
         
-        const{userCount, adminCount, moderatorCount}=this.props;
-        console.log(userCount, adminCount, moderatorCount);
-
-
-        const count = [{
-            color: "#E38627",
-            title: "Users (" + Math.round((userCount*1000)/(userCount+adminCount+moderatorCount))/10+"%)",
-            value: userCount
-            },
-            {
-            color: "#C13C37",
-            title: "Moderators (" + Math.round((moderatorCount*1000)/(userCount+adminCount+moderatorCount))/10+"%)",
-            value: moderatorCount
-            },
-            {
-            color: "#6A2135",
-            title: "Admins (" + Math.round((adminCount*1000)/(userCount+adminCount+moderatorCount))/10+"%)",
-            value: adminCount
-            }];
-
+        const{count}=this.props;
         return (<PieChart
             
             data={count}
@@ -53,7 +32,7 @@ export default class MyPiechart extends Component {
             lengthAngle={360}
             lineWidth={70}
             paddingAngle={0}
-            radius={50}
+            radius={40}
             rounded={false}
             startAngle={0}
             viewBoxSize={[100, 100]}

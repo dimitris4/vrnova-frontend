@@ -305,6 +305,7 @@ div#price-of-course {
 
 .search-input {
   margin-top: 0.5rem;
+  font-family: Helvetica, "FontAwesome", sans-serif;
   width: 100%;
   font-style: italic;
   font-size: 80%;
@@ -314,10 +315,10 @@ div#price-of-course {
 }
 
 .search-icon {
-  position: absolute;
-  color: #555;
-  right: 73.7%;
-  top: 7.5%;
+  /* position: absolute; */
+
+  /* right: 73.7%;
+  top: 7.5%; */
 }
 
 /* Cart */
@@ -537,7 +538,7 @@ img#title-image {
   margin: 0;
 }
 
-/* PieChart */
+/* Reports & PieChart */
 
 .chart-container {
   height: 30%;
@@ -551,4 +552,31 @@ img#title-image {
   font-weight: 900;
   font-size: 100%;
   color: black;
+}
+
+.report-selector {
+  margin-left: 25%;
+}
+
+.pie-title-users {
+  font-family: "Font Awesome 5 Free", helvetica;
+  font-weight: 900;
+  font-size: 90%;
+  color: black;
+  margin-left: 25% !important;
+}
+.pie-title-orders {
+  font-family: "Font Awesome 5 Free", helvetica;
+  font-weight: 900;
+  font-size: 90%;
+  color: black;
+  margin-left: 25% !important;
+}
+
+.pie-subtitles {
+  font-family: "Font Awesome 5 Free", helvetica;
+  font-weight: 900;
+  font-size: 90%;
+  color: black;
+  margin-left: 40% !important;
 }
