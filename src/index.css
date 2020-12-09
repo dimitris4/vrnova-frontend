@@ -314,15 +314,6 @@ div#price-of-course {
   outline: none;
 }
 
-.search-icon {
-  /* position: absolute; */
-
-  /* right: 73.7%;
-  top: 7.5%; */
-}
-
-/* Cart */
-
 .cart {
   padding: 1rem;
   margin: 1rem;
@@ -441,9 +432,6 @@ img.course-detail-image {
   list-style-type: none;
   margin-right: 8%;
   margin-bottom: 12%;
-}
-
-.myCourses-list-item {
 }
 
 .wrapper {
