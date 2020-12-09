@@ -202,7 +202,7 @@ export default class CollapsibleTable2 extends Component {
                         <StyledTableCell/>
                         <StyledTableCell style={classes.row} align="left" onClick={this.onSort('order_id')}>Order ID</StyledTableCell>
                         <StyledTableCell style={classes.row} align="left" onClick={this.onSort('order_date')}>Date</StyledTableCell>
-                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('total_price_for_courses')}>Total price</StyledTableCell>
+                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('total_price_for_courses')}>Total price(DKK)</StyledTableCell>
                         <StyledTableCell align="left" >Items</StyledTableCell>
                       </TableRow>
                     </TableHead>

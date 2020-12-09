@@ -72,7 +72,7 @@ export default class BoardAdmin extends Component {
     const gitCount = orders.filter(order => order.courses.includes('Git')).length;
     const angularCount = orders.filter(order => order.courses.includes('Angular')).length;
     const cCount = orders.filter(order => order.courses.includes('C#')).length;
-    const nodeCount = orders.filter(order => order.courses.includes('NodeJS')).length;
+    const nodeCount = orders.filter(order => order.courses.includes('Node JS')).length;
     const reactCount = orders.filter(order => order.courses.includes('React')).length;
     const reduxCount = orders.filter(order => order.courses.includes('Redux')).length;
     const totalCount = javaCount+arCount+vrCount+jsCount+gitCount+angularCount+cCount+nodeCount+reactCount+reduxCount;

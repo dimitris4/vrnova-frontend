@@ -37,8 +37,8 @@ div.container-fluid {
 }
 
 /* header menu links */
-.upper-link {
-  padding-top: 23% !important;
+.nav-item.upper-link {
+  padding-top: 2.8rem !important;
 }
 
 .card {

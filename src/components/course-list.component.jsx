@@ -77,8 +77,9 @@ export default class CourseList extends Component {
                 </Fade>
                 {course && <Modal isOpen={true} className="modal-dialog modal-dialog-centered" onRequestClose={this.closeModal} >
                     <Zoom>
-                        <button className="close-modal" aria-hidden="true" onClick={this.closeModal}>x</button>
+                        {/* <button className="close-modal" aria-hidden="true" onClick={this.closeModal}>x</button> */}
                         <div className="course-details">
+                        <button className="close-modal" aria-hidden="true" onClick={this.closeModal}>x</button>
                             <img src={course.image} alt={course.title} className="course-detail-image"></img>
                             <div className="course-details-description">
                                 <p className="modal-course-title">

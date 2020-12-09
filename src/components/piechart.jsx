@@ -24,7 +24,7 @@ export default class MyPiechart extends Component {
             center={[50, 50]}
             labelPosition={60}
             labelStyle={{
-                fontSize: "20%",
+                fontSize: "15%",
                 fontColor: "FFFFFA",
                 fontWeight: "800",
               }}
