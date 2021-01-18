@@ -380,6 +380,7 @@ export default class BoardUser extends Component {
             </div>
           </Modal>
         )}
+             <Footer/>
       </div>
     );
   }

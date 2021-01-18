@@ -52,65 +52,59 @@ const useRowStyles = makeStyles({
 
 
   function Row(props) {
-    const { row, orders } = props;
+    const { row, users } = props;
     const [open, setOpen] = React.useState(false);
-
-function colorTheRole(role){
-    if(role==="ROLE_ADMIN"||role==="ROLE_MODERATOR")
-        return {color:'red'};
-    return {color:'blue'};    
-} 
   
     return (
       <React.Fragment>
         <StyledTableRow>
           <StyledTableCell align="center">
-          {row.role!=='ROLE_ADMIN'&&row.role!=='ROLE_MODERATOR'&&<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>}
+            </IconButton>
           </StyledTableCell>
-          <StyledTableCell component="th" scope="row">{row.user_id}</StyledTableCell>
-          <StyledTableCell align="left">{row.username}</StyledTableCell>
-          <StyledTableCell align="left">{row.email}</StyledTableCell>
-          <StyledTableCell style={colorTheRole(row.role)} align="left">{row.role.substring(5)}</StyledTableCell>
+          <StyledTableCell component="th" scope="row">{row.order_id}</StyledTableCell>
+          <StyledTableCell align="left">{row.date}</StyledTableCell>
+          <StyledTableCell align="left">{row.total_price_for_courses}</StyledTableCell>
+          <StyledTableCell align="left">{row.courses.map(course => "(" + course + ") ")}</StyledTableCell>
         </StyledTableRow>
         <StyledTableRow>
           <StyledTableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            {row.role!=='ROLE_ADMIN'&&row.role!=='ROLE_MODERATOR'&&<Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
-                  Order history
+                  User data
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <StyledTableRow>
-                      <StyledTableCell>Date</StyledTableCell>
-                      <StyledTableCell>Order ID</StyledTableCell>
-                      <StyledTableCell align="right">Total paid (DKK)</StyledTableCell>
+                      <StyledTableCell>User ID</StyledTableCell>
+                      <StyledTableCell>Username</StyledTableCell>
+                      <StyledTableCell>Email</StyledTableCell>
                     </StyledTableRow>
                   </TableHead>
 
                   <TableBody>
-                  {orders.map(order => (
-                    row.user_id===order.user_id&&
-                      <StyledTableRow key={order.order_id}>
-                      <StyledTableCell component="th" scope="row">{order.date}</StyledTableCell>
-                      <StyledTableCell>{order.order_id}</StyledTableCell>
-                      <StyledTableCell align="right">{order.total_price_for_courses}</StyledTableCell>
+                  {users.map(user => (
+                    user.user_id===row.user_id&&
+                      <StyledTableRow key={user.user_id}>
+                      <StyledTableCell>{user.user_id}</StyledTableCell>
+                      <StyledTableCell component="th" scope="row">{user.username}</StyledTableCell>
+                      <StyledTableCell>{user.email}</StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
 
                 </Table>
               </Box>
-            </Collapse>}
+            </Collapse>
           </StyledTableCell>
         </StyledTableRow>
       </React.Fragment>
     );
   }
 
-export default class CollapsibleTable extends Component {
+export default class CollapsibleTable2 extends Component {
 
 
     constructor(props) {
@@ -140,16 +134,11 @@ export default class CollapsibleTable extends Component {
 
         onSort = (column) => (e) => {
           const direction = this.state.sort.column ? (this.state.sort.direction === 'asc' ? 'desc' : 'asc') : 'desc';
-          const sortedData = this.state.users.sort((a, b) => {
-            let nameA="";
-            let nameB="";
-            if(column!=="user_id"){
-              nameA = a[column].toUpperCase(); // ignore upper and lowercase
-              nameB = b[column].toUpperCase(); // ignore upper and lowercase
-            }else{
-              nameA = a[column];
-              nameB = b[column];
-            }  
+          const sortedData = this.state.orders.sort((a, b) => {
+          
+            const nameA = a[column];
+            const nameB = b[column];
+            
               if (nameA < nameB) {
                 return -1;
               }
@@ -165,7 +154,7 @@ export default class CollapsibleTable extends Component {
           }
           
           this.setState({
-            users: sortedData,
+            orders: sortedData,
             sort: {
               column,
               direction,
@@ -211,15 +200,15 @@ export default class CollapsibleTable extends Component {
                     <TableHead>
                       <TableRow >
                         <StyledTableCell/>
-                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('user_id')}>User ID</StyledTableCell>
-                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('username')}>Username</StyledTableCell>
-                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('email')}>Email</StyledTableCell>
-                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('role')}>System Role</StyledTableCell>
+                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('order_id')}>Order ID</StyledTableCell>
+                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('order_date')}>Date</StyledTableCell>
+                        <StyledTableCell style={classes.row} align="left" onClick={this.onSort('total_price_for_courses')}>Total price(DKK)</StyledTableCell>
+                        <StyledTableCell align="left" >Items</StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody >
-                      {users.length>0 && users.map((row) => (
-                        <Row key={row.user_id} row={row} orders={orders}/>
+                      {orders.length>0 && orders.map((row) => (
+                        <Row key={row.order_id} row={row} users={users}/>
                         
                       ))}
                     </TableBody>
