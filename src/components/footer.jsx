@@ -27,7 +27,7 @@ export default class Footer extends Component {
                         <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-1" ><img src="./phone.png" style={this.styles.image}></img> +45 50227000</li>
                         <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-1" > CVR: 37874620</li>
                         <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-1" ><img src="./address.png" style={this.styles.image}></img> Store Mølle Vej 2, 2300 Copenhagen</li>
-                        <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-1" >© 2020 Copyright:
+                        <li style={this.styles.list} className="list-inline-item footer-copyright text-center py-1" >© 2021 Copyright:
                             <a className="social-icon text-xs-center" target="_blank" href="https://vrnova.dk/"> vrnova.dk</a>
                         </li>
                 </nav>
